@@ -69,6 +69,79 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MSL、TTL和RTT简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/23/MSL、TTL和RTT简介/" class="article-date">
+  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络/">网络</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、MSL是Maximum Segment Lifetime英文的缩写，中文可以译为“报文最大生存时间”，他是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为tcp报文（segment）是ip数据报（datagram）的数据部分，具体称谓请参见《数据在网络各层中的称呼》一文，</p>
+<p>2、而ip头中有一个TTL域，TTL是time to live的缩写，中文可以译为“生存时间”，这个生存时间是由源主机设置初始值但不是存的具体时间，而是存储了一个ip数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减1，当此值为0则数据报将被丢弃，同时发送ICMP报文通知源主机。RFC 793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分钟等。</p>
+<p>​     2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第3次握手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态时两端的端口不能使用，要等到2MSL时间结束才可继续使用。当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
+<p>​    TTL与MSL是有关系的但不是简单的相等的关系，MSL要大于等于TTL。</p>
+<p> 3、 RTT是客户到服务器往返所花时间（round-trip time，简称RTT），TCP含有动态估算RTT的算法。TCP还持续估算一个给定连接的RTT，这是因为RTT受网络传输拥塞程序的变化而变化</p>
+<p>4、 2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第3次握 手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个 ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态 时两端的端口不能使用，要等到2MSL时间结束才可继续使用。当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置 SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。对于TCP中的各种控制字段，接下来进行具体说明。</p>
+<p>二、TCP控制字段标志：URG、ACK、PSH、RST、SYN、FIN</p>
+<p>在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG.<br>其中，对于我们日常的分析有用的就是前面的五个字段。</p>
+<p>它们的含义是：</p>
+<p>URG:Urget pointer is valid (紧急指针字段值有效)</p>
+<p>SYN: 表示建立连接</p>
+<p>FIN: 表示关闭连接</p>
+<p>ACK: 表示响应</p>
+<p>PSH: 表示有 DATA数据传输</p>
+<p>RST: 表示连接重置。</p>
+<p>​       其中，ACK是可能与SYN，FIN等同时使用的，比如SYN和ACK可能同时为1，它表示的就是建立连接之后的响应，如果只是单个的一个SYN，它表 示的只是建立连接。TCP的几次握手就是通过这样的ACK表现出来的。但SYN与FIN是不会同时为1的，因为前者表示的是建立连接，而后者表示的是断开 连接。RST一般是在FIN之后才会出现为1的情况，表示的是连接重置。一般地，当出现FIN包或RST包时，我们便认为客户端与服务器端断开了连接；而 当出现SYN和SYN＋ACK包时，我们认为客户端与服务器建立了一个连接。PSH为1的情况，一般只出现在 DATA内容不为0的包中，也就是说PSH为1表示的是有真正的TCP数据包内容被传递。</p>
+<p>​      TCP产生 RST响应的情况（属于硬错误）:</p>
+<p>​       四次握手不是关闭 TCP连接的唯一方法. 有时,如果主机需要尽快关闭连接(或连接超时,端口或主机不可达)，RST (Reset)包将被发送. 注意在，由于RST包不是TCP连接中的必须部分, 可以只发送RST包(即不带ACK标记). 但在正常的TCP连接中RST包可以带ACK确认标记</p>
+<ol>
+<li><p>syn发送到服务器主机，但是目的端口并未运行。则产生一个ECONRFUSED错误。客户端立即返回。比如telnet 192.168.1.55 8889，条件：55主机在局域网上并且可达（也可以换成可以到达的网络ip地址），但是8889这个端口并未使用（可能服务器已经关闭），则服务器（对 方主机tcp内核）发送一个rst相应给客户端，于是客户端立即关闭。 注意一下，如果输入的网络ip不可达的话，客户端将会持续发送syn，最后产生一个etimeout的错误，大概75秒左右。这个时候客户端的默认网关 (192.168.1.1 211.2.2.2)因为找不到下一路由，路由器（或者再过几跳的路由器）会产生一个EHOSTUNREACH响应给客户端（注 意，ENETUNREACH和EHOSTUNREACH通常被认为是一个错误，因为ENETUNREACH一般当作已过时），由于这是个软错误（有可能是 网络暂时不通造成的）。客户端会重发syn直到超时。</p>
+<pre><code>所以会有 telnet 192.168.1.55 8888  主机存在，但是端口未开，ECONRFUSED错误，立刻返回
+         telnet 192.168.1.56 *     主机不存在，UNROUTETOHOST错误，立刻返回
+         telnet 211.1.1.5    *     主机不存在，etimeout错误
+</code></pre></li>
+<li><p>最简单的情况，服务器主动发送rst给客户端关闭连接。客户端read write直接返回rst错误。</p>
+</li>
+<li><p>服务器收到一个不存在的连接返回rst响应。比如，服务器重启之后，先前的一个已连接的客户端毫不之情的情况下,这就是半闭连接（跟半开连接最大的不同是，半闭连接是不能使用的，半开连接可以使用）。</p>
+<pre><code>此时,如果客户端read的话（接收缓冲无数据）产生一个EPEERRST错误
+        如果客户端write的话且发送数据小于发送缓冲区剩余容量时，第一次write成功，第二次write或者read的时候就会产生一个 EPEERRST的错误。因为write发送数据是直接把要发送的数据拷贝到内核的tcp发送缓冲区就立刻返回成功的。当然拷贝之前会先检查一下tcp连 接有无错误。所以第二次发送或者接收的时候，发现连接上已经有了EPEERRST的错误，所以就返回错误（话说回来，第一次发送的数据实际上根本就没有发 送成功，对方根本就没接受它）
+</code></pre></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjvdlvthk00001vzbyxvqq7yf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSL/">MSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RTT/">RTT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TTL/">TTL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
@@ -128,83 +201,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjvdkwob40000tazbfbqn8a1d" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjvdlvtht00011vzb8f38bfvi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MSL、TTL和RTT简介" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/23/MSL、TTL和RTT简介/" class="article-date">
-  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/网络/">网络</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MSL、TTL和RTT简介"><a href="#MSL、TTL和RTT简介" class="headerlink" title="MSL、TTL和RTT简介"></a>MSL、TTL和RTT简介</h1><p>1、MSL是Maximum Segment Lifetime英文的缩写，中文可以译为“报文最大生存时间”，他是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为tcp报文（segment）是ip数据报（datagram）的数据部分，具体称谓请参见《数据在网络各层中的称呼》一文，</p>
-<p>2、而ip头中有一个TTL域，TTL是time to live的缩写，中文可以译为“生存时间”，这个生存时间是由源主机设置初始值但不是存的具体时间，而是存储了一个ip数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减1，当此值为0则数据报将被丢弃，同时发送ICMP报文通知源主机。RFC 793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分钟等。</p>
-<p>​     2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第3次握手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态时两端的端口不能使用，要等到2MSL时间结束才可继续使用。当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
-<p>​    TTL与MSL是有关系的但不是简单的相等的关系，MSL要大于等于TTL。</p>
-<p> 3、 RTT是客户到服务器往返所花时间（round-trip time，简称RTT），TCP含有动态估算RTT的算法。TCP还持续估算一个给定连接的RTT，这是因为RTT受网络传输拥塞程序的变化而变化</p>
-<p>4、 2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第3次握 手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个 ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态 时两端的端口不能使用，要等到2MSL时间结束才可继续使用。当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置 SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。对于TCP中的各种控制字段，接下来进行具体说明。</p>
-<p>二、TCP控制字段标志：URG、ACK、PSH、RST、SYN、FIN</p>
-<p>在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG.<br>其中，对于我们日常的分析有用的就是前面的五个字段。</p>
-<p>它们的含义是：</p>
-<p>URG:Urget pointer is valid (紧急指针字段值有效)</p>
-<p>SYN: 表示建立连接</p>
-<p>FIN: 表示关闭连接</p>
-<p>ACK: 表示响应</p>
-<p>PSH: 表示有 DATA数据传输</p>
-<p>RST: 表示连接重置。</p>
-<p>​       其中，ACK是可能与SYN，FIN等同时使用的，比如SYN和ACK可能同时为1，它表示的就是建立连接之后的响应，如果只是单个的一个SYN，它表 示的只是建立连接。TCP的几次握手就是通过这样的ACK表现出来的。但SYN与FIN是不会同时为1的，因为前者表示的是建立连接，而后者表示的是断开 连接。RST一般是在FIN之后才会出现为1的情况，表示的是连接重置。一般地，当出现FIN包或RST包时，我们便认为客户端与服务器端断开了连接；而 当出现SYN和SYN＋ACK包时，我们认为客户端与服务器建立了一个连接。PSH为1的情况，一般只出现在 DATA内容不为0的包中，也就是说PSH为1表示的是有真正的TCP数据包内容被传递。</p>
-<p>​      TCP产生 RST响应的情况（属于硬错误）:</p>
-<p>​       四次握手不是关闭 TCP连接的唯一方法. 有时,如果主机需要尽快关闭连接(或连接超时,端口或主机不可达)，RST (Reset)包将被发送. 注意在，由于RST包不是TCP连接中的必须部分, 可以只发送RST包(即不带ACK标记). 但在正常的TCP连接中RST包可以带ACK确认标记</p>
-<ol>
-<li><p>syn发送到服务器主机，但是目的端口并未运行。则产生一个ECONRFUSED错误。客户端立即返回。比如telnet 192.168.1.55 8889，条件：55主机在局域网上并且可达（也可以换成可以到达的网络ip地址），但是8889这个端口并未使用（可能服务器已经关闭），则服务器（对 方主机tcp内核）发送一个rst相应给客户端，于是客户端立即关闭。 注意一下，如果输入的网络ip不可达的话，客户端将会持续发送syn，最后产生一个etimeout的错误，大概75秒左右。这个时候客户端的默认网关 (192.168.1.1 211.2.2.2)因为找不到下一路由，路由器（或者再过几跳的路由器）会产生一个EHOSTUNREACH响应给客户端（注 意，ENETUNREACH和EHOSTUNREACH通常被认为是一个错误，因为ENETUNREACH一般当作已过时），由于这是个软错误（有可能是 网络暂时不通造成的）。客户端会重发syn直到超时。</p>
-<pre><code>所以会有 telnet 192.168.1.55 8888  主机存在，但是端口未开，ECONRFUSED错误，立刻返回
-         telnet 192.168.1.56 *     主机不存在，UNROUTETOHOST错误，立刻返回
-         telnet 211.1.1.5    *     主机不存在，etimeout错误
-</code></pre></li>
-<li><p>最简单的情况，服务器主动发送rst给客户端关闭连接。客户端read write直接返回rst错误。</p>
-</li>
-<li><p>服务器收到一个不存在的连接返回rst响应。比如，服务器重启之后，先前的一个已连接的客户端毫不之情的情况下,这就是半闭连接（跟半开连接最大的不同是，半闭连接是不能使用的，半开连接可以使用）。</p>
-<pre><code>此时,如果客户端read的话（接收缓冲无数据）产生一个EPEERRST错误
-        如果客户端write的话且发送数据小于发送缓冲区剩余容量时，第一次write成功，第二次write或者read的时候就会产生一个 EPEERRST的错误。因为write发送数据是直接把要发送的数据拷贝到内核的tcp发送缓冲区就立刻返回成功的。当然拷贝之前会先检查一下tcp连 接有无错误。所以第二次发送或者接收的时候，发现连接上已经有了EPEERRST的错误，所以就返回错误（话说回来，第一次发送的数据实际上根本就没有发 送成功，对方根本就没接受它）
-</code></pre></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjvdkwobd0001tazbkwngfq58" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSL/">MSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RTT/">RTT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TTL/">TTL</a></li></ul>
 
     </footer>
   </div>
@@ -262,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjvdkwocf001gtazbawq2bhhv" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjvdlvtj7001i1vzb9lrxo0ka" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li></ul>
@@ -302,14 +302,14 @@
       
         <p><strong>dyld_shared_cache_extract_dylibs failed</strong></p>
 <p>设备重新设置信任,在<code>Xcode</code>- <code>Window</code>- <code>Devices and Simulators</code> 中打开</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g1akh5dpt4j30v60jqdqo.jpg" alt="image-20190321175658114"></p>
+<p><img src="../image/2019050700001.jpg" alt="image"></p>
 <p>然后选中 对应的设备 右键 <code>Unpair Device</code>  对设备重新信任.</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1akj5k64dj31400iswn5.jpg" alt="image-20190321175856067"></p>
+<p><img src="../image/2019050700002.jpg" alt="image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjvdkwobt000ftazbmm3e7knd" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjvdlvtif000e1vzbexpkm0f8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XCode报错/">XCode报错</a></li></ul>
@@ -377,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjvdkwobh0004tazb24oewugu" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjvdlvthz00041vzbgfgpda6n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSProxy/">NSProxy</a></li></ul>
@@ -505,7 +505,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjvdkwobj0005tazbll38lmyn" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjvdlvti600061vzb3wjrxiib" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactNative/">ReactNative</a></li></ul>
@@ -555,7 +555,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/13/轮播图/" data-id="cjvdkwobz000ktazbknbuveld" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/07/13/轮播图/" data-id="cjvdlvtim000j1vzbc3dz0pqg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/轮播图/">轮播图</a></li></ul>
@@ -635,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjvdkwobp000btazb7enwl54w" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjvdlvtic000a1vzbarv63smh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/私有库/">私有库</a></li></ul>
@@ -744,7 +744,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/01/23/NSURLSession/" data-id="cjvdkwobl0006tazbk5n84wr0" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/01/23/NSURLSession/" data-id="cjvdlvti200051vzby7q5jvw4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li></ul>
@@ -879,7 +879,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2017/04/29/本地app发布下载/" data-id="cjvdkwobv000htazbcsdlksuj" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2017/04/29/本地app发布下载/" data-id="cjvdlvtii000f1vzbqt9xrjk7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app发布/">app发布</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS资料/">iOS资料</a></li></ul>
@@ -948,11 +948,11 @@
       <ul>
         
           <li>
-            <a href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
+            <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
           </li>
         
           <li>
-            <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
+            <a href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
           </li>
         
           <li>
