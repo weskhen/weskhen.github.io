@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>React Native 方案预研 | 不想写代码</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="XXX React Native 方案1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改">
+<meta name="keywords" content="ReactNative">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native 方案预研">
+<meta property="og:url" content="http://weskhen.xyz/2018/07/23/React Native/index.html">
+<meta property="og:site_name" content="不想写代码">
+<meta property="og:description" content="XXX React Native 方案1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g19d0tdcuzj30h80iemyf.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g19d0lm30nj30ej0mwdh8.jpg">
+<meta property="og:updated_time" content="2019-05-07T05:46:26.765Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Native 方案预研">
+<meta name="twitter:description" content="XXX React Native 方案1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg">
+  
+    <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不想写代码</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">苟活着</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/help.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://weskhen.xyz"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-React Native" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/23/React Native/" class="article-date">
+  <time datetime="2018-07-22T16:00:00.000Z" itemprop="datePublished">2018-07-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React Native 方案预研
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="XXX-React-Native-方案"><a href="#XXX-React-Native-方案" class="headerlink" title="XXX React Native 方案"></a>XXX React Native 方案</h1><h2 id="1-RN跳转Native的路由"><a href="#1-RN跳转Native的路由" class="headerlink" title="1. RN跳转Native的路由"></a>1. RN跳转Native的路由</h2><p>路由在项目中主要作用有:</p>
+<ol>
+<li>降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密</li>
+<li>大前端页面跳转的一致性.</li>
+<li>可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改后配置表也能实现动态的改变映射目标。</li>
+</ol>
+<h3 id="路由的定义"><a href="#路由的定义" class="headerlink" title="路由的定义"></a>路由的定义</h3><p>路由的定义有很多种,为了兼容项目之前的路由定义,rn路由定义如下:</p>
+<p>jsonStirng = {“methodName”:”methodName”,”data”:{} }</p>
+<p>方法名:<code>methodName</code>  路由的方法名,如Notification_callNativeEvent, 通知模块, 调用原生通知</p>
+<p>参数:<code>data</code> 是一个map结构,用于react向native传的参数.</p>
+<p>忽略:methodName格式: “moduleName_action”</p>
+<h3 id="和js与native路由的比较"><a href="#和js与native路由的比较" class="headerlink" title="和js与native路由的比较:"></a>和js与native路由的比较:</h3><ul>
+<li>js与native中有<code>callbackId</code>,但是这里没有了, 因为react调用native有个promise的返回体,请求和返回是一一对应的.</li>
+</ul>
+<p>react发出encode后的jsonStirng, native获取jsonStirng后decode,根据规则解析出对应的部分.</p>
+<p>数据传输的流程图如下:</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg" alt="image-20190320165306011"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g19d0tdcuzj30h80iemyf.jpg" alt="image-20190320165334729"></p>
+<h2 id="2-Native进入RN或者H5"><a href="#2-Native进入RN或者H5" class="headerlink" title="2. Native进入RN或者H5"></a>2. Native进入RN或者H5</h2><p>比如在首页点击Banner跳转，可以跳转H5也可以跳转到RN，可以通过解析后台下发的Url来决定跳转的目标。<br>确定跳转RN的协议定位为 <code>react://module/acion?params</code>,其中<br><code>react://</code>确定跳转的是RN页面，<code>module/action</code>表示跳转的模块和对应的action，<code>params</code>是传入的参数。<br>流程图参考 <code>RN的降级</code></p>
+<h2 id="3-RN的降级"><a href="#3-RN的降级" class="headerlink" title="3. RN的降级"></a>3. RN的降级</h2><p>在react-native页面中捕获异常,捕获到异常我们会记录异常灰度，并对业务进行降级跳转到H5页面.  RN页面和H5页面跳转机制以及后台可配置方案:</p>
+<p>针对后端控制的跳转rn页面,服务器下发路由地址{firstUrl:  secondUrl: }  优先字段和备选字段 (选择跳转rn页面还是h5页面)。 <code>流程图</code> </p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g19d0lm30nj30ej0mwdh8.jpg" alt="image-20190320165322408"></p>
+<p>上图中的加载失败的原因有多种: </p>
+<ul>
+<li><p>module注册为空,选用h5</p>
+</li>
+<li><p>业务场景严重问题,选用h5</p>
+</li>
+</ul>
+<p>在实际业务中,降级方案可以放到后面,因为有热更新机制, 大部分问题可以及时修复且更新….</p>
+<h2 id="4-热更新功能"><a href="#4-热更新功能" class="headerlink" title="4. 热更新功能"></a>4. 热更新功能</h2><p>热更新是RN的非常重要的一个功能特性,<code>Code-Push</code>,我们在之前的版本中已经集成并开始使用了.这边就不阐述了.</p>
+<p>接下来:我们会开发维护起自己的codepush服务地址,更好的控制rn版本.如测试环境Code-Push登录: <a href="http://10.0.0.115:3001/" target="_blank" rel="noopener">http://10.0.0.115:3001/</a> </p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h4><ul>
+<li>苹果不允许应用内有弹框提示更新</li>
+</ul>
+<h2 id="5-RN的业务基础组件建立"><a href="#5-RN的业务基础组件建立" class="headerlink" title="5. RN的业务基础组件建立"></a>5. RN的业务基础组件建立</h2><p>因为安卓和iOS两个平台的差异性, 有些UI组件的特性不一致,需要区分开来判断,RN自己提供的组件库还无法满足我们的实际的业务需求,所有我们需要自己来进行封装,以方便业务开发.</p>
+<p>计划:随着业务开发迭代,逐渐形成xhx自己的一套RN组件库.</p>
+<h2 id="6-RN在项目中的应用场景"><a href="#6-RN在项目中的应用场景" class="headerlink" title="6. RN在项目中的应用场景"></a>6. RN在项目中的应用场景</h2><p>由于RN在使用的时候,会占据一定的内存空间, 不推荐使用在全局静态的地方,因为安卓机app使用内存受限,如果RN的功能模块常驻后台,会影响其他功能的使用.</p>
+<p>RN在原生app中入口:</p>
+<ul>
+<li>固定入口的跳转</li>
+<li>服务器下发的url识别跳转, 如点击首页banner,识别url属于rn的路由地址.</li>
+</ul>
+<p>功能、页面 走路由,组件走模块定义:</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录:"></a>附录:</h2><p>三端基本类型对应:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">JS</th>
+<th style="text-align:center">iOS</th>
+<th style="text-align:right">android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:center">NSString</td>
+<td style="text-align:right">String</td>
+</tr>
+<tr>
+<td style="text-align:left">number</td>
+<td style="text-align:center">NSNumber</td>
+<td style="text-align:right">Number</td>
+</tr>
+<tr>
+<td style="text-align:left">float</td>
+<td style="text-align:center">float/CGFloat</td>
+<td style="text-align:right">float</td>
+</tr>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:center">double</td>
+<td style="text-align:right">double</td>
+</tr>
+<tr>
+<td style="text-align:left">object</td>
+<td style="text-align:center">NSDictionary</td>
+<td style="text-align:right">ReadableMap</td>
+</tr>
+<tr>
+<td style="text-align:left">array</td>
+<td style="text-align:center">NSArray</td>
+<td style="text-align:right">ReadableArray</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjvdkwobj0005tazbll38lmyn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactNative/">ReactNative</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/23/NSProxy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          NSProxy简介
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/13/轮播图/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">定义轮播图</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/ReactNative/">ReactNative</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSL/">MSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSProxy/">NSProxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTT/">RTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TTL/">TTL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XCode报错/">XCode报错</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app发布/">app发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS资料/">iOS资料</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/私有库/">私有库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播图/">轮播图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/MSL/" style="font-size: 10px;">MSL</a> <a href="/tags/NSNumberFormatter/" style="font-size: 10px;">NSNumberFormatter</a> <a href="/tags/NSProxy/" style="font-size: 10px;">NSProxy</a> <a href="/tags/NSURLSession/" style="font-size: 10px;">NSURLSession</a> <a href="/tags/RN-Bug/" style="font-size: 10px;">RN-Bug</a> <a href="/tags/RTT/" style="font-size: 10px;">RTT</a> <a href="/tags/ReactNative/" style="font-size: 10px;">ReactNative</a> <a href="/tags/TTL/" style="font-size: 10px;">TTL</a> <a href="/tags/XCode报错/" style="font-size: 10px;">XCode报错</a> <a href="/tags/app发布/" style="font-size: 10px;">app发布</a> <a href="/tags/iOS资料/" style="font-size: 10px;">iOS资料</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/代码规范/" style="font-size: 10px;">代码规范</a> <a href="/tags/私有库/" style="font-size: 10px;">私有库</a> <a href="/tags/轮播图/" style="font-size: 10px;">轮播图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/23/react源码修改记录/">react源码修改记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/21/xcode报错/">Xcode 工程编译报错</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/23/NSProxy/">NSProxy简介</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wesk痕<br>
+      Powered by <a href="http://weskhen.xyz" target="_blank">Wesk</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="不想写代码">
 <meta name="twitter:description" content="证明我一下,我还活着...">
   
-    <link rel="alternate" href="/atom.xml" title="不想写代码" type="application/atom+xml">
+    <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -56,7 +56,7 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/help.xml" title="RSS Feed"></a>
         
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
@@ -69,12 +69,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/05/07/hello-world/" class="article-date">
-  <time datetime="2019-05-07T01:43:05.168Z" itemprop="datePublished">2019-05-07</time>
+    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
+  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -83,7 +87,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/07/hello-world/">Hello World</a>
+      <a class="article-title" href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
     </h1>
   
 
@@ -91,22 +95,660 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <ul>
+<li>NSNumber</li>
+</ul>
+<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
+<ul>
+<li><p>NSNumberFormatter</p>
+<p>数字格式类，用于定义数字的格式</p>
+</li>
+</ul>
+<p>NSNumberFormatter的使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
+<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>setFormatWidth设置字符宽度</p>
+<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
+<p>zeroSymbol: 零的样式</p>
+<p>paddingPosition:填充位置</p>
+<p>positiveSuffix: </p>
+<p>maximumIntegerDigits:整数最多位数</p>
+<p>minimumIntegerDigits:整数最少位数</p>
+<p>maximumFractionDigits:小数位最多位数</p>
+<p>minimumFractionDigits:小数位最少位数</p>
+<p>groupingSize:数字分割的尺寸</p>
+<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
+<p>maximumSignificantDigits:最大有效数字个数</p>
+<p>minimumSignificantDigits:最少有效数字个数</p>
+<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
+<p>方法:setPositiveFormat</p>
+<p>自定义输出格式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjvdkwob40000tazbfbqn8a1d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-MSL、TTL和RTT简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/23/MSL、TTL和RTT简介/" class="article-date">
+  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络/">网络</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MSL、TTL和RTT简介"><a href="#MSL、TTL和RTT简介" class="headerlink" title="MSL、TTL和RTT简介"></a>MSL、TTL和RTT简介</h1><p>1、MSL是Maximum Segment Lifetime英文的缩写，中文可以译为“报文最大生存时间”，他是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为tcp报文（segment）是ip数据报（datagram）的数据部分，具体称谓请参见《数据在网络各层中的称呼》一文，</p>
+<p>2、而ip头中有一个TTL域，TTL是time to live的缩写，中文可以译为“生存时间”，这个生存时间是由源主机设置初始值但不是存的具体时间，而是存储了一个ip数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减1，当此值为0则数据报将被丢弃，同时发送ICMP报文通知源主机。RFC 793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分钟等。</p>
+<p>​     2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第3次握手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态时两端的端口不能使用，要等到2MSL时间结束才可继续使用。当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
+<p>​    TTL与MSL是有关系的但不是简单的相等的关系，MSL要大于等于TTL。</p>
+<p> 3、 RTT是客户到服务器往返所花时间（round-trip time，简称RTT），TCP含有动态估算RTT的算法。TCP还持续估算一个给定连接的RTT，这是因为RTT受网络传输拥塞程序的变化而变化</p>
+<p>4、 2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第3次握 手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个 ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态 时两端的端口不能使用，要等到2MSL时间结束才可继续使用。当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置 SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。对于TCP中的各种控制字段，接下来进行具体说明。</p>
+<p>二、TCP控制字段标志：URG、ACK、PSH、RST、SYN、FIN</p>
+<p>在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG.<br>其中，对于我们日常的分析有用的就是前面的五个字段。</p>
+<p>它们的含义是：</p>
+<p>URG:Urget pointer is valid (紧急指针字段值有效)</p>
+<p>SYN: 表示建立连接</p>
+<p>FIN: 表示关闭连接</p>
+<p>ACK: 表示响应</p>
+<p>PSH: 表示有 DATA数据传输</p>
+<p>RST: 表示连接重置。</p>
+<p>​       其中，ACK是可能与SYN，FIN等同时使用的，比如SYN和ACK可能同时为1，它表示的就是建立连接之后的响应，如果只是单个的一个SYN，它表 示的只是建立连接。TCP的几次握手就是通过这样的ACK表现出来的。但SYN与FIN是不会同时为1的，因为前者表示的是建立连接，而后者表示的是断开 连接。RST一般是在FIN之后才会出现为1的情况，表示的是连接重置。一般地，当出现FIN包或RST包时，我们便认为客户端与服务器端断开了连接；而 当出现SYN和SYN＋ACK包时，我们认为客户端与服务器建立了一个连接。PSH为1的情况，一般只出现在 DATA内容不为0的包中，也就是说PSH为1表示的是有真正的TCP数据包内容被传递。</p>
+<p>​      TCP产生 RST响应的情况（属于硬错误）:</p>
+<p>​       四次握手不是关闭 TCP连接的唯一方法. 有时,如果主机需要尽快关闭连接(或连接超时,端口或主机不可达)，RST (Reset)包将被发送. 注意在，由于RST包不是TCP连接中的必须部分, 可以只发送RST包(即不带ACK标记). 但在正常的TCP连接中RST包可以带ACK确认标记</p>
+<ol>
+<li><p>syn发送到服务器主机，但是目的端口并未运行。则产生一个ECONRFUSED错误。客户端立即返回。比如telnet 192.168.1.55 8889，条件：55主机在局域网上并且可达（也可以换成可以到达的网络ip地址），但是8889这个端口并未使用（可能服务器已经关闭），则服务器（对 方主机tcp内核）发送一个rst相应给客户端，于是客户端立即关闭。 注意一下，如果输入的网络ip不可达的话，客户端将会持续发送syn，最后产生一个etimeout的错误，大概75秒左右。这个时候客户端的默认网关 (192.168.1.1 211.2.2.2)因为找不到下一路由，路由器（或者再过几跳的路由器）会产生一个EHOSTUNREACH响应给客户端（注 意，ENETUNREACH和EHOSTUNREACH通常被认为是一个错误，因为ENETUNREACH一般当作已过时），由于这是个软错误（有可能是 网络暂时不通造成的）。客户端会重发syn直到超时。</p>
+<pre><code>所以会有 telnet 192.168.1.55 8888  主机存在，但是端口未开，ECONRFUSED错误，立刻返回
+         telnet 192.168.1.56 *     主机不存在，UNROUTETOHOST错误，立刻返回
+         telnet 211.1.1.5    *     主机不存在，etimeout错误
+</code></pre></li>
+<li><p>最简单的情况，服务器主动发送rst给客户端关闭连接。客户端read write直接返回rst错误。</p>
+</li>
+<li><p>服务器收到一个不存在的连接返回rst响应。比如，服务器重启之后，先前的一个已连接的客户端毫不之情的情况下,这就是半闭连接（跟半开连接最大的不同是，半闭连接是不能使用的，半开连接可以使用）。</p>
+<pre><code>此时,如果客户端read的话（接收缓冲无数据）产生一个EPEERRST错误
+        如果客户端write的话且发送数据小于发送缓冲区剩余容量时，第一次write成功，第二次write或者read的时候就会产生一个 EPEERRST的错误。因为write发送数据是直接把要发送的数据拷贝到内核的tcp发送缓冲区就立刻返回成功的。当然拷贝之前会先检查一下tcp连 接有无错误。所以第二次发送或者接收的时候，发现连接上已经有了EPEERRST的错误，所以就返回错误（话说回来，第一次发送的数据实际上根本就没有发 送成功，对方根本就没接受它）
+</code></pre></li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/05/07/hello-world/" data-id="cjvd6t1pm0000vjzbzrly2kpb" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjvdkwobd0001tazbkwngfq58" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSL/">MSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RTT/">RTT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TTL/">TTL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react源码修改记录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/23/react源码修改记录/" class="article-date">
+  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/ReactNative/">ReactNative</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/23/react源码修改记录/">react源码修改记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>RCTImageLoader.m文件</p>
+<p>函数- (BOOL)canHandleRequest:(NSURLRequest *)request</p>
+<p>原代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)canHandleRequest:(NSURLRequest *)request</span><br><span class="line">&#123;</span><br><span class="line">    NSURL *requestURL = request.URL;</span><br><span class="line"></span><br><span class="line">    // If the data being loaded is a video, return NO</span><br><span class="line">    // Even better may be to implement this on the RCTImageURLLoader that would try to load it,</span><br><span class="line">    // but we&apos;d have to run the logic both in RCTPhotoLibraryImageLoader and</span><br><span class="line">    // RCTAssetsLibraryRequestHandler. Once we drop iOS7 though, we&apos;d drop</span><br><span class="line">    // RCTAssetsLibraryRequestHandler and can move it there.</span><br><span class="line">    static NSRegularExpression *videoRegex = nil;</span><br><span class="line">    if (!videoRegex) &#123;</span><br><span class="line">      NSError *error = nil;</span><br><span class="line">      videoRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;(?:&amp;|^)ext=MOV(?:&amp;|$)&quot;</span><br><span class="line">                                                             options:NSRegularExpressionCaseInsensitive</span><br><span class="line">                                                               error:&amp;error];</span><br><span class="line">      if (error) &#123;</span><br><span class="line">        RCTLogError(@&quot;%@&quot;, error);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    NSString *query = requestURL.query;</span><br><span class="line">	...</span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>问题:在异步多线程下<code>static NSRegularExpression *videoRegex;</code>中的videoRegex会存在2+次生成,函数firstMatchInString:options:range执行过程中出现videoRegex被重置nil的异常情况,导致发生crash.所以需要对videoRegex生成的方法严格只执行一次!  利用<strong>dispatch_once_t</strong></p>
+<p>修改后的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)canHandleRequest:(NSURLRequest *)request</span><br><span class="line">&#123;</span><br><span class="line">    NSURL *requestURL = request.URL;</span><br><span class="line"></span><br><span class="line">    // If the data being loaded is a video, return NO</span><br><span class="line">    // Even better may be to implement this on the RCTImageURLLoader that would try to load it,</span><br><span class="line">    // but we&apos;d have to run the logic both in RCTPhotoLibraryImageLoader and</span><br><span class="line">    // RCTAssetsLibraryRequestHandler. Once we drop iOS7 though, we&apos;d drop</span><br><span class="line">    // RCTAssetsLibraryRequestHandler and can move it there.</span><br><span class="line">    static NSRegularExpression *videoRegex = nil;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        NSError *error = nil;</span><br><span class="line">        videoRegex = [NSRegularExpression  regularExpressionWithPattern:@&quot;(?:&amp;|^)ext=MOV(?:&amp;|$)&quot;</span><br><span class="line">                                                                options:NSRegularExpressionCaseInsensitive</span><br><span class="line">                                                                  error:&amp;error];</span><br><span class="line">        if (error) &#123;</span><br><span class="line">            RCTLogError(@&quot;%@&quot;, error);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    NSString *query = requestURL.query;</span><br><span class="line">	...</span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>RCTSRWebSocket.m</p>
+<p>在debug联调模式下出现了如下图所示的crash</p>
+<p><img src="./图片/react源码修改记录01.png" alt="image1"></p>
+<p>修改后:</p>
+<p>整个文件如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line">@implementation RCTSRWebSocket</span><br><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  BOOL _cleanupScheduled;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">- (void)_failWithError:(NSError *)error;</span><br><span class="line">&#123;</span><br><span class="line">  dispatch_async(_workQueue, ^&#123;</span><br><span class="line">    if (self.readyState != RCTSR_CLOSED) &#123;</span><br><span class="line">      self-&gt;_failed = YES;</span><br><span class="line">      [self _performDelegateBlock:^&#123;</span><br><span class="line">        if ([self.delegate respondsToSelector:@selector(webSocket:didFailWithError:)]) &#123;</span><br><span class="line">          [self.delegate webSocket:self didFailWithError:error];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;];</span><br><span class="line"></span><br><span class="line">      self.readyState = RCTSR_CLOSED;</span><br><span class="line">      </span><br><span class="line">      RCTSRLog(@&quot;Failing with error %@&quot;, error.localizedDescription);</span><br><span class="line"></span><br><span class="line">      [self _disconnect];</span><br><span class="line">      [self _scheduleCleanup];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode;</span><br><span class="line">&#123;</span><br><span class="line">  if (_secure &amp;&amp; !_pinnedCertFound &amp;&amp; (eventCode == NSStreamEventHasBytesAvailable || eventCode == NSStreamEventHasSpaceAvailable)) &#123;</span><br><span class="line">    NSArray *sslCerts = _urlRequest.RCTSR_SSLPinnedCertificates;</span><br><span class="line">    if (sslCerts) &#123;</span><br><span class="line">      SecTrustRef secTrust = (__bridge SecTrustRef)[aStream propertyForKey:(__bridge id)kCFStreamPropertySSLPeerTrust];</span><br><span class="line">      if (secTrust) &#123;</span><br><span class="line">        NSInteger numCerts = SecTrustGetCertificateCount(secTrust);</span><br><span class="line">        for (NSInteger i = 0; i &lt; numCerts &amp;&amp; !_pinnedCertFound; i++) &#123;</span><br><span class="line">          SecCertificateRef cert = SecTrustGetCertificateAtIndex(secTrust, i);</span><br><span class="line">          NSData *certData = CFBridgingRelease(SecCertificateCopyData(cert));</span><br><span class="line"></span><br><span class="line">          for (id ref in sslCerts) &#123;</span><br><span class="line">            SecCertificateRef trustedCert = (__bridge SecCertificateRef)ref;</span><br><span class="line">            NSData *trustedCertData = CFBridgingRelease(SecCertificateCopyData(trustedCert));</span><br><span class="line"></span><br><span class="line">            if ([trustedCertData isEqualToData:certData]) &#123;</span><br><span class="line">              _pinnedCertFound = YES;</span><br><span class="line">              break;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      if (!_pinnedCertFound) &#123;</span><br><span class="line">        dispatch_async(_workQueue, ^&#123;</span><br><span class="line">          [self _failWithError:[NSError errorWithDomain:RCTSRWebSocketErrorDomain code:23556 userInfo:@&#123;NSLocalizedDescriptionKey: [NSString stringWithFormat:@&quot;Invalid server cert&quot;]&#125;]];</span><br><span class="line">        &#125;);</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  // _workQueue cannot be NULL</span><br><span class="line">  if (!_workQueue) &#123; return; &#125;</span><br><span class="line">  __weak typeof(self) weakSelf = self;</span><br><span class="line">  dispatch_async(_workQueue, ^&#123;</span><br><span class="line">    typeof(self) strongSelf = weakSelf;</span><br><span class="line">    if (!strongSelf) &#123; return; &#125;</span><br><span class="line">    [strongSelf safeHandleEvent:eventCode stream:aStream];</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)safeHandleEvent:(NSStreamEvent)eventCode stream:(NSStream *)aStream</span><br><span class="line">&#123;</span><br><span class="line">  switch (eventCode) &#123;</span><br><span class="line">    case NSStreamEventOpenCompleted: &#123;</span><br><span class="line">      RCTSRLog(@&quot;NSStreamEventOpenCompleted %@&quot;, aStream);</span><br><span class="line">      if (self.readyState &gt;= RCTSR_CLOSING) &#123;</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">      assert(self-&gt;_readBuffer);</span><br><span class="line">      </span><br><span class="line">      if (self.readyState == RCTSR_CONNECTING &amp;&amp; aStream == self-&gt;_inputStream) &#123;</span><br><span class="line">        [self didConnect];</span><br><span class="line">      &#125;</span><br><span class="line">      [self _pumpWriting];</span><br><span class="line">      [self _pumpScanner];</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    case NSStreamEventErrorOccurred: &#123;</span><br><span class="line">      RCTSRLog(@&quot;NSStreamEventErrorOccurred %@ %@&quot;, aStream, [aStream.streamError copy]);</span><br><span class="line">      // TODO: specify error better!</span><br><span class="line">      [self _failWithError:aStream.streamError];</span><br><span class="line">      self-&gt;_readBufferOffset = 0;</span><br><span class="line">      self-&gt;_readBuffer.length = 0;</span><br><span class="line">      break;</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    case NSStreamEventEndEncountered: &#123;</span><br><span class="line">      [self _pumpScanner];</span><br><span class="line">      RCTSRLog(@&quot;NSStreamEventEndEncountered %@&quot;, aStream);</span><br><span class="line">      if (aStream.streamError) &#123;</span><br><span class="line">        [self _failWithError:aStream.streamError];</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        dispatch_async(self-&gt;_workQueue, ^&#123;</span><br><span class="line">          if (self.readyState != RCTSR_CLOSED) &#123;</span><br><span class="line">            self.readyState = RCTSR_CLOSED;</span><br><span class="line">            [self _scheduleCleanup];</span><br><span class="line">          &#125;</span><br><span class="line">          </span><br><span class="line">          if (!self-&gt;_sentClose &amp;&amp; !self-&gt;_failed) &#123;</span><br><span class="line">            self-&gt;_sentClose = YES;</span><br><span class="line">            // If we get closed in this state it&apos;s probably not clean because we should be sending this when we send messages</span><br><span class="line">            [self _performDelegateBlock:^&#123;</span><br><span class="line">              if ([self.delegate respondsToSelector:@selector(webSocket:didCloseWithCode:reason:wasClean:)]) &#123;</span><br><span class="line">                [self.delegate webSocket:self didCloseWithCode:RCTSRStatusCodeGoingAway reason:@&quot;Stream end encountered&quot; wasClean:NO];</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;];</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    case NSStreamEventHasBytesAvailable: &#123;</span><br><span class="line">      RCTSRLog(@&quot;NSStreamEventHasBytesAvailable %@&quot;, aStream);</span><br><span class="line">      const int bufferSize = 2048;</span><br><span class="line">      uint8_t buffer[bufferSize];</span><br><span class="line">      </span><br><span class="line">      while (self-&gt;_inputStream.hasBytesAvailable) &#123;</span><br><span class="line">        NSInteger bytes_read = [self-&gt;_inputStream read:buffer maxLength:bufferSize];</span><br><span class="line">        </span><br><span class="line">        if (bytes_read &gt; 0) &#123;</span><br><span class="line">          [self-&gt;_readBuffer appendBytes:buffer length:bytes_read];</span><br><span class="line">        &#125; else if (bytes_read &lt; 0) &#123;</span><br><span class="line">          [self _failWithError:self-&gt;_inputStream.streamError];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (bytes_read != bufferSize) &#123;</span><br><span class="line">          break;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      [self _pumpScanner];</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    case NSStreamEventHasSpaceAvailable: &#123;</span><br><span class="line">      RCTSRLog(@&quot;NSStreamEventHasSpaceAvailable %@&quot;, aStream);</span><br><span class="line">      [self _pumpWriting];</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    default:</span><br><span class="line">      RCTSRLog(@&quot;(default) %@&quot;, aStream);</span><br><span class="line">      break;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)_scheduleCleanup</span><br><span class="line">&#123;</span><br><span class="line">  if (_cleanupScheduled) &#123;</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  _cleanupScheduled = YES;</span><br><span class="line">  </span><br><span class="line">  // Cleanup NSStream&apos;s delegate in the same RunLoop used by the streams themselves:</span><br><span class="line">  // This way we&apos;ll prevent race conditions between handleEvent and SRWebsocket&apos;s dealloc</span><br><span class="line">  NSTimer *timer = [NSTimer timerWithTimeInterval:(0.0f) target:self selector:@selector(_cleanupSelfReference:) userInfo:nil repeats:NO];</span><br><span class="line">  [[NSRunLoop RCTSR_networkRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)_cleanupSelfReference:(NSTimer *)timer</span><br><span class="line">&#123;</span><br><span class="line">  // Remove the streams, right now, from the networkRunLoop</span><br><span class="line">  [_inputStream close];</span><br><span class="line">  [_outputStream close];</span><br><span class="line">  </span><br><span class="line">  // Unschedule from RunLoop</span><br><span class="line">  for (NSArray *runLoop in [_scheduledRunloops copy]) &#123;</span><br><span class="line">    [self unscheduleFromRunLoop:runLoop[0] forMode:runLoop[1]];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  // Nuke NSStream&apos;s delegate</span><br><span class="line">  _inputStream.delegate = nil;</span><br><span class="line">  _outputStream.delegate = nil;</span><br><span class="line">  </span><br><span class="line">  // Cleanup selfRetain in the same GCD queue as usual</span><br><span class="line">  dispatch_async(_workQueue, ^&#123;</span><br><span class="line">    self-&gt;_selfRetain = nil;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjvdkwocf001gtazbawq2bhhv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-xcode报错" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/21/xcode报错/" class="article-date">
+  <time datetime="2019-02-20T16:00:00.000Z" itemprop="datePublished">2019-02-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/21/xcode报错/">Xcode 工程编译报错</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>dyld_shared_cache_extract_dylibs failed</strong></p>
+<p>设备重新设置信任,在<code>Xcode</code>- <code>Window</code>- <code>Devices and Simulators</code> 中打开</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g1akh5dpt4j30v60jqdqo.jpg" alt="image-20190321175658114"></p>
+<p>然后选中 对应的设备 右键 <code>Unpair Device</code>  对设备重新信任.</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1akj5k64dj31400iswn5.jpg" alt="image-20190321175856067"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjvdkwobt000ftazbmm3e7knd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XCode报错/">XCode报错</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-NSProxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/23/NSProxy/" class="article-date">
+  <time datetime="2019-01-22T16:00:00.000Z" itemprop="datePublished">2019-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/23/NSProxy/">NSProxy简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##NSProxy是什么?</p>
+<p><code>NSProxy</code> 是NSProxy 是一个<strong>抽象类</strong>,跟 <code>NSObject</code> 一样的基类，都遵守<code>&lt;NSObject&gt;</code>协议</p>
+<p><code>NSProxy</code>是一个抽象类，必须继承实例化其子类才能使用。</p>
+<p><code>NSProxy</code>从类名来看是代理类专门负责代理对象转发消息的。相比<code>NSObject</code>类来说<code>NSProxy</code>更轻量级，通过<code>NSProxy</code>可以帮助<code>Objective-C</code>间接的实现多重继承的功能。</p>
+<p>##消息转发机制</p>
+<p>当程序运行时调用一个没有实现的方法，会采用三个消息转发步骤如果这三个步骤都不能成功那么此时程序会抛出一个异常。</p>
+<p>1.添加方法到类对象，对于实例方法调用respondsToSelector:，对于类方法调用resolveClassMethod:。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ (BOOL)resolveClassMethod:(SEL)sel;</span><br><span class="line">- (BOOL)respondsToSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<p>2.查找forwardingTargetForSelector:方法，该方法返回一个新对象，如果返回nil那么将跳转到下一步骤。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (id)forwardingTargetForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<p>3.通过methodSignatureForSelector:方法获取一个NSMethodSignature类型的对象，调用forwardInvocation:方法。改方法传入一个封装了NSMethodSignature的NSInvocation对象。然后该对象通过invakeWithTarget:方法将消息转发给其它对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;</span><br><span class="line"></span><br><span class="line">- (void)forwardInvocation:(NSInvocation *)invocation;</span><br></pre></td></tr></table></figure>
+<p>##NSProxy 和 NSObject 的比较</p>
+<p>相比NSObject,NSProxy更轻量级,  做消息转发效率更高.</p>
+<p>NSObject寻找方法顺序：本类-&gt;(父类-)&gt;(动态方法解析)-&gt; 消息转发；<br>NSproxy顺序：本类-&gt;消息转发</p>
+<p>##NSProxy的用途</p>
+<ol>
+<li><p>AOP面向切片编程</p>
+<p>iOS中面向切片编程一般有两种方式 ，一个是直接基于runtime 的method-Swizzling.还有一种就是基于NSProxy</p>
+</li>
+<li><p>解决NSTimer, CADisplayLink等强引用target引起的无法释放问题。如NSTimer:利用消息转发来断开NSTimer对象与视图之间的强引用关系。初始化NSTimer时把触发事件的target替换成一个单独的对象，然后这个对象中NSTimer的SEL方法触发时让这个方法在当前的视图self中实现。</p>
+</li>
+<li><p>多重继承</p>
+<p>实现类似CAAnimation类族.</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjvdkwobh0004tazb24oewugu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSProxy/">NSProxy</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-React Native" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/23/React Native/" class="article-date">
+  <time datetime="2018-07-22T16:00:00.000Z" itemprop="datePublished">2018-07-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/23/React Native/">React Native 方案预研</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="XXX-React-Native-方案"><a href="#XXX-React-Native-方案" class="headerlink" title="XXX React Native 方案"></a>XXX React Native 方案</h1><h2 id="1-RN跳转Native的路由"><a href="#1-RN跳转Native的路由" class="headerlink" title="1. RN跳转Native的路由"></a>1. RN跳转Native的路由</h2><p>路由在项目中主要作用有:</p>
+<ol>
+<li>降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密</li>
+<li>大前端页面跳转的一致性.</li>
+<li>可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改后配置表也能实现动态的改变映射目标。</li>
+</ol>
+<h3 id="路由的定义"><a href="#路由的定义" class="headerlink" title="路由的定义"></a>路由的定义</h3><p>路由的定义有很多种,为了兼容项目之前的路由定义,rn路由定义如下:</p>
+<p>jsonStirng = {“methodName”:”methodName”,”data”:{} }</p>
+<p>方法名:<code>methodName</code>  路由的方法名,如Notification_callNativeEvent, 通知模块, 调用原生通知</p>
+<p>参数:<code>data</code> 是一个map结构,用于react向native传的参数.</p>
+<p>忽略:methodName格式: “moduleName_action”</p>
+<h3 id="和js与native路由的比较"><a href="#和js与native路由的比较" class="headerlink" title="和js与native路由的比较:"></a>和js与native路由的比较:</h3><ul>
+<li>js与native中有<code>callbackId</code>,但是这里没有了, 因为react调用native有个promise的返回体,请求和返回是一一对应的.</li>
+</ul>
+<p>react发出encode后的jsonStirng, native获取jsonStirng后decode,根据规则解析出对应的部分.</p>
+<p>数据传输的流程图如下:</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg" alt="image-20190320165306011"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g19d0tdcuzj30h80iemyf.jpg" alt="image-20190320165334729"></p>
+<h2 id="2-Native进入RN或者H5"><a href="#2-Native进入RN或者H5" class="headerlink" title="2. Native进入RN或者H5"></a>2. Native进入RN或者H5</h2><p>比如在首页点击Banner跳转，可以跳转H5也可以跳转到RN，可以通过解析后台下发的Url来决定跳转的目标。<br>确定跳转RN的协议定位为 <code>react://module/acion?params</code>,其中<br><code>react://</code>确定跳转的是RN页面，<code>module/action</code>表示跳转的模块和对应的action，<code>params</code>是传入的参数。<br>流程图参考 <code>RN的降级</code></p>
+<h2 id="3-RN的降级"><a href="#3-RN的降级" class="headerlink" title="3. RN的降级"></a>3. RN的降级</h2><p>在react-native页面中捕获异常,捕获到异常我们会记录异常灰度，并对业务进行降级跳转到H5页面.  RN页面和H5页面跳转机制以及后台可配置方案:</p>
+<p>针对后端控制的跳转rn页面,服务器下发路由地址{firstUrl:  secondUrl: }  优先字段和备选字段 (选择跳转rn页面还是h5页面)。 <code>流程图</code> </p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g19d0lm30nj30ej0mwdh8.jpg" alt="image-20190320165322408"></p>
+<p>上图中的加载失败的原因有多种: </p>
+<ul>
+<li><p>module注册为空,选用h5</p>
+</li>
+<li><p>业务场景严重问题,选用h5</p>
+</li>
+</ul>
+<p>在实际业务中,降级方案可以放到后面,因为有热更新机制, 大部分问题可以及时修复且更新….</p>
+<h2 id="4-热更新功能"><a href="#4-热更新功能" class="headerlink" title="4. 热更新功能"></a>4. 热更新功能</h2><p>热更新是RN的非常重要的一个功能特性,<code>Code-Push</code>,我们在之前的版本中已经集成并开始使用了.这边就不阐述了.</p>
+<p>接下来:我们会开发维护起自己的codepush服务地址,更好的控制rn版本.如测试环境Code-Push登录: <a href="http://10.0.0.115:3001/" target="_blank" rel="noopener">http://10.0.0.115:3001/</a> </p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h4><ul>
+<li>苹果不允许应用内有弹框提示更新</li>
+</ul>
+<h2 id="5-RN的业务基础组件建立"><a href="#5-RN的业务基础组件建立" class="headerlink" title="5. RN的业务基础组件建立"></a>5. RN的业务基础组件建立</h2><p>因为安卓和iOS两个平台的差异性, 有些UI组件的特性不一致,需要区分开来判断,RN自己提供的组件库还无法满足我们的实际的业务需求,所有我们需要自己来进行封装,以方便业务开发.</p>
+<p>计划:随着业务开发迭代,逐渐形成xhx自己的一套RN组件库.</p>
+<h2 id="6-RN在项目中的应用场景"><a href="#6-RN在项目中的应用场景" class="headerlink" title="6. RN在项目中的应用场景"></a>6. RN在项目中的应用场景</h2><p>由于RN在使用的时候,会占据一定的内存空间, 不推荐使用在全局静态的地方,因为安卓机app使用内存受限,如果RN的功能模块常驻后台,会影响其他功能的使用.</p>
+<p>RN在原生app中入口:</p>
+<ul>
+<li>固定入口的跳转</li>
+<li>服务器下发的url识别跳转, 如点击首页banner,识别url属于rn的路由地址.</li>
+</ul>
+<p>功能、页面 走路由,组件走模块定义:</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录:"></a>附录:</h2><p>三端基本类型对应:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">JS</th>
+<th style="text-align:center">iOS</th>
+<th style="text-align:right">android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:center">NSString</td>
+<td style="text-align:right">String</td>
+</tr>
+<tr>
+<td style="text-align:left">number</td>
+<td style="text-align:center">NSNumber</td>
+<td style="text-align:right">Number</td>
+</tr>
+<tr>
+<td style="text-align:left">float</td>
+<td style="text-align:center">float/CGFloat</td>
+<td style="text-align:right">float</td>
+</tr>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:center">double</td>
+<td style="text-align:right">double</td>
+</tr>
+<tr>
+<td style="text-align:left">object</td>
+<td style="text-align:center">NSDictionary</td>
+<td style="text-align:right">ReadableMap</td>
+</tr>
+<tr>
+<td style="text-align:left">array</td>
+<td style="text-align:center">NSArray</td>
+<td style="text-align:right">ReadableArray</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjvdkwobj0005tazbll38lmyn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactNative/">ReactNative</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-轮播图" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/13/轮播图/" class="article-date">
+  <time datetime="2018-07-12T16:00:00.000Z" itemprop="datePublished">2018-07-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/13/轮播图/">定义轮播图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###自定义轮播图</p>
+<p>昨天有个小需求,实现一条栏目轮播</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2906485-bccd2851732170f7.gif?imageMogr2/auto-orient/strip" alt="小需求.gif"></p>
+<p>时间充足,写个小demo<br>可以自己定义轮播图 提供四个方向滚动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSInteger, ViewScrollDirection) &#123;</span><br><span class="line">    /** 朝上滚 **/</span><br><span class="line">    ViewScrollDirectionUp = 0,</span><br><span class="line">    /** 朝下滚 **/</span><br><span class="line">    ViewScrollDirectionDown,</span><br><span class="line">    /** 朝左滚 **/</span><br><span class="line">    ViewScrollDirectionLeft,</span><br><span class="line">    /** 朝右滚 **/</span><br><span class="line">    ViewScrollDirectionRight</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>目前支持自定义设置滚动的视图,视图停留的时间,滚动时间,是否拖动等功能.</p>
+<p>demo比较简单 如图下图:<br><img src="https://upload-images.jianshu.io/upload_images/2906485-1aa09a2523f4ffd6.gif?imageMogr2/auto-orient/strip" alt="轮播图简易demo.gif"></p>
+<p>demo地址:<a href="https://github.com/weskhen/CarouselPlugin" target="_blank" rel="noopener">https://github.com/weskhen/CarouselPlugin</a></p>
+<p>支持pod:  <strong>pod: ‘CarouselPlugin’</strong> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2018/07/13/轮播图/" data-id="cjvdkwobz000ktazbknbuveld" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/轮播图/">轮播图</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-pod私有库的搭建使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/11/pod私有库的搭建使用/" class="article-date">
+  <time datetime="2018-06-10T16:00:00.000Z" itemprop="datePublished">2018-06-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/11/pod私有库的搭建使用/">pod私有库搭建及使用(gitee)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##pod私有库搭建及使用(gitee)</p>
+<p>pod 基础安装(必要条件,这边就不说了),建立在你能pod 文件的前提下.</p>
+<p>命令行:<figure class="highlight plain"><figcaption><span>repo list```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看当前repos下的目录: master共有库,其他文件夹(私有库).</span><br><span class="line">我们在执行`pod search xx`命令时,会在repos下查询</span><br></pre></td></tr></table></figure></p>
+<p>master</p>
+<ul>
+<li>Type: git (master)</li>
+<li>URL:  <a href="https://github.com/CocoaPods/Specs.git" target="_blank" rel="noopener">https://github.com/CocoaPods/Specs.git</a></li>
+<li>Path: /Users/weskhen/.cocoapods/repos/master</li>
+</ul>
+<p>my-repo</p>
+<ul>
+<li>Type: git (master)</li>
+<li>URL:  <a href="https://gitee.com/wesk/my-repo" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo</a></li>
+<li><p>Path: /Users/weskhen/.cocoapods/repos/my-repo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">只要安装并使用过pod的,master是一定存在的, my-repo是我的私有库,需要自己创建,怎么创建这个呢? 从上看到我使用的个人库是gitee.com. 因为这个是免费的(最多5个开发者公用).</span><br><span class="line"></span><br><span class="line">1. 首先创建一个git的账号,这里以gitee为例,创建项目,点击右上角图标“+”</span><br><span class="line">  ![gitee-createProject.png](https://upload-images.jianshu.io/upload_images/2906485-163b1c483317d31f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">  新建项目:填写各项,在 “是否开源” 选择 私有 如图:,</span><br><span class="line">  ![gitee-private.png](https://upload-images.jianshu.io/upload_images/2906485-a96a62ee358da5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line">  完成后点击“创建”.</span><br><span class="line">  这样我们能看到项目的地址了.</span><br><span class="line">  如:https://gitee.com/wesk/xxx</span><br><span class="line">  我们这个地址作为我们私有库的远程repo地址.</span><br><span class="line"></span><br><span class="line">2. git命令clone远程库到本地</span><br><span class="line">  pod repo add my-repo https://gitee.com/wesk/xxx</span><br><span class="line"></span><br><span class="line">  第一次添加会验证gitee的userName和password.</span><br></pre></td></tr></table></figure>
+<p>wujian-2:~ weskhen$ pod repo add my-repo <a href="https://gitee.com/wesk/my-repo" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo</a><br>Cloning spec repo <code>my-repo</code> from <code>https://gitee.com/wesk/my-repo</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pod repo remove xxx</span><br><span class="line">移除本地指定的远程库</span><br><span class="line">如:</span><br></pre></td></tr></table></figure>
+<p>wujian-2:~ weskhen$ pod repo remove my-repoSec<br>Removing spec repo <code>my-repoSec</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  pod repo update xxx</span><br><span class="line">  用于更新xxx 私有库的命令 多人开发的时候会用到</span><br><span class="line">  如:pod repo update my-repo</span><br><span class="line"></span><br><span class="line">3. 更新独立的项目(xx.podspec)文件 到my-repo 即组件化</span><br><span class="line">  这个流程网上应该很多了,当时做这的时候也是查阅相关资料的.这边简单说下流程相关的命令</span><br><span class="line">  1.创建编辑.podspec命令:</span><br></pre></td></tr></table></figure>
+<p> pod spec create xx</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2.将项目打成tag命令:</span><br></pre></td></tr></table></figure>
+<p>git tag -a 1.0 -m “v1.0”<br>git push origin master<br>git push origin –tag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.验证</span><br></pre></td></tr></table></figure>
+<p>pod spec lint xx.podspec</p>
+<pre><code>//补充:  如果有本地私有库源 验证时需要加入私有源和官方源
+</code></pre><p> pod spec lint KKLDBService.podspec –sources=’<a href="https://gitee.com/wesk/my-repo,https://github.com/CocoaPods/Specs.git&#39;" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo,https://github.com/CocoaPods/Specs.git&#39;</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.发布</span><br></pre></td></tr></table></figure>
+<p>pod repo push my-repo xx.podspec –allow-warnings </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> 后缀--allow-warnings 代表忽略警告</span><br><span class="line"> 后缀--use-libraries 代表使用静态库 组建若使用了.a静态库,需要加上这个.</span><br><span class="line"></span><br><span class="line">4. 项目中的使用</span><br><span class="line">    在podfile文件中 顶部添加:</span><br></pre></td></tr></table></figure>
+<p>   官方源: source ‘<a href="https://github.com/CocoaPods/Specs.git&#39;" target="_blank" rel="noopener">https://github.com/CocoaPods/Specs.git&#39;</a><br>   私有源: source ‘<a href="https://gitee.com/wesk/my-repo&#39;" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo&#39;</a></p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你也可以在具体的组件处指定源,如:</span><br></pre></td></tr></table></figure>
+<p> pod ‘xxxx’, :git =&gt;’<a href="https://gitee.com/wesk/my-repo&#39;" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo&#39;</a></p>
+ <!--或-->
+<p> pod ‘xxx’, :podspec =&gt; ‘xxxx.podspec’<br> <code>`</code><br>最后更新podfile文件即可啦</p>
+</li>
+</ul>
+<p>私有库的使用差不多就这样了,重要的是这个流程和相应的命令.若使用公司的项目,从第二步开始即可.</p>
+<p>###END</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjvdkwobp000btazb7enwl54w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/私有库/">私有库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-NSURLSession" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/23/NSURLSession/" class="article-date">
+  <time datetime="2018-01-22T16:00:00.000Z" itemprop="datePublished">2018-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/23/NSURLSession/">NSURLSession</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###NSURLSession</p>
+<p>为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:</p>
+<ol>
+<li><p>session在使用的时候,可以重用上一次tcp握手链接 </p>
+</li>
+<li><p>session和cookies联系,session单利的好处</p>
+</li>
+</ol>
+<p>####HTTP版本<br>谈以上话题之前,先来看一下HTTP版本相关的几点知识:<br>这里我把HTTP版本简单分为三类：1.1之前，1.1，2.0，针对这三类做个主要差异的介绍：</p>
+<blockquote>
+<p>HTTP 1.1之前</p>
+</blockquote>
+<ul>
+<li>不支持持久连接。一旦服务器对客户端发出响应就立即断开TCP连接</li>
+<li>无请求头跟响应头</li>
+<li>客户端的前后请求是同步的。下一个请求必须等上一个请求从服务端拿到响应后才能发出，有点类似多线程的同步机制。</li>
+</ul>
+<blockquote>
+<p> HTTP 1.1(主流版本)</p>
+</blockquote>
+<p>与1.1之前的版本相比，做了以下性能上的提升</p>
+<ul>
+<li>增加请求头跟响应头</li>
+<li>支持持久连接。客户端通过请求头中指定<strong>Connection</strong>为<strong>keep-alive</strong>告知服务端不要在完成响应后立即释放连接。HTTP是基于TCP的，在HTTP 1.1中一次TCP连接可以处理多次HTTP请求(keep-alive 有效时间内)</li>
+<li>客户端不同请求之间是异步的。下一个请求不必等到上一个请求回来后再发出，而可以连续发出请求，有点类似多线程的异步处理。</li>
+</ul>
+<blockquote>
+<p>HTTP 2.0 (趋势)</p>
+</blockquote>
+<ul>
+<li>HTTP/2采用二进制格式而非文本格式</li>
+<li>HTTP/2是完全多路复用的，而非有序并阻塞的——只需一个连接即可实现并行</li>
+<li>使用报头压缩，HTTP/2降低了开销</li>
+<li>HTTP/2让服务器可以将响应主动“推送”到客户端缓存中</li>
+<li>2.0将只用于https网址。</li>
+</ul>
+<p>我们重点关注一下当前1.1版本所做几点改变。支持持久连接有什么好处呢？HTTP是基于TCP连接的，如果连接被频繁地启动然后断开就会花费很多资源在TCP三次握手以及四次挥手上，效率低下。以请求一个网页为例，我们知道，一个html网页上的图片资源并不是直接嵌入在网页上，而只是提供url，图片仍需要额外发HTTP 请求去下载。一个网页从请求到最终加载到本地往往需要经过多个HTTP请求。在1.1版本之前请求一个网页就需要发生多次”握手-挥手”的过程，每次连接之间相互独立；而1.1及之后的版本最少只需要一次就够。<br>再来就是请求异步，其好处参考多线程异步处理，在此不展开。</p>
+<p>http1.1 请求实际步骤如下图：</p>
+<p><img src="../image/NSURLSession01.png" alt="图1 session设置了每个host最大的请求线程数为1"></p>
+<p>上图session设置了每个host最大的请求线程数为1:</p>
+<p><img src="../图片/NSURLSession02.png" alt="图2 session设置了每个host最大的请求线程数为2"></p>
+<p>上图:session设置了每个host最大的请求线程数为2</p>
+<p>我们可以看到：</p>
+<p> 1、多次请求其实只建立了1次TCP连接</p>
+<p> 2、多次请求连续可以异步发出。</p>
+<p> so,能重用上一次tcp握手链接的是因为http协议更新到http1.1后.同一个session可以在keep-alive有效时间内不断开链接.</p>
+<p>####NSURLSessionConfiguration(NSURLSession中重要的属性)</p>
+<p> 有三个方法来创建NSURLSessionConfiguration:</p>
+<ul>
+<li><p>defaultSessionConfiguration 使用全局的cache，<strong>cookie</strong>,使用硬盘来缓存数据。</p>
+<p>cookie和cache类似,都有一个默认的单例获取对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];</span><br></pre></td></tr></table></figure>
+<p>但有点不同,苹果给开发者cookie的操作权限不如cache,sharedHTTPCookieStorage只是个读属性</p>
+</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>ephemeralSessionConfiguration 临时session配置，与默认配置相比，这个配置不会将缓存、cookie等存在本地，只会存在内存里，所以当程序退出时，所有的数据都会消失,浏览器无痕模式</p>
+</li>
+<li><p>backgroundSessionConfiguration 后台session配置,需要设置唯一标识，与默认配置类似，不同的是会在后台开启另一个线程来处理网络数据,app杀进程session会断开,重新启动后,session会重新建立.</p>
+</li>
+</ul>
+<p>/<em> 是否使用蜂窝网络，默认是yes. </em>/<br>@property BOOL allowsCellularAccess;</p>
+<p>/<em><br>指定了一组默认的可以设置出站请求的数据头。这对于跨会话共享信息，如内容类型，语言，用户代理，身份认证，是很有用的。<br>例如：<br>    @{@”Accept”: @”application/json”,<br>     @”Accept-Language”: @”en”,<br>     @”Authorization”: authString,<br>     @”User-Agent”: userAgentString<br>   }
+ </em>/<br>@property (nullable, copy) NSDictionary *HTTPAdditionalHeaders;</p>
+<p>/<em><br>同时连接一个host的最大数。iOS默认是4.APP是作为一个整体来看的
+ </em>/<br>@property NSInteger HTTPMaximumConnectionsPerHost;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2018/01/23/NSURLSession/" data-id="cjvdkwobl0006tazbk5n84wr0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li></ul>
+
     </footer>
   </div>
   
@@ -120,6 +762,10 @@
   <time datetime="2017-04-28T16:00:00.000Z" itemprop="datePublished">2017-04-29</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -136,8 +782,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#mac 搭建apache https服务器 用于本地app发布</p>
-<p>先 cd <code>/Library/WebServer/Documents/</code> 这个是Mac下 web的目录 </p>
+        <p>先 cd <code>/Library/WebServer/Documents/</code> 这个是Mac下 web的目录 </p>
 <p>可以新建一个ios的文件路径 <code>sudo mkdir ios</code></p>
 <p>cd ios 文件下 开始执行以下操作</p>
 <p>a-生成私钥，命令： <code>sudo openssl genrsa -des3 -out app.key 1024</code></p>
@@ -234,10 +879,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2017/04/29/本地app发布下载/" data-id="cjvd6t1ps0001vjzbvt6yx6rg" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2017/04/29/本地app发布下载/" data-id="cjvdkwobv000htazbcsdlksuj" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS资料/">iOS资料</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app发布/">app发布</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS资料/">iOS资料</a></li></ul>
 
     </footer>
   </div>
@@ -248,18 +893,30 @@
   
 
 
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
 </section>
         
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/ReactNative/">ReactNative</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
 
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS资料/">iOS资料</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSL/">MSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSProxy/">NSProxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTT/">RTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TTL/">TTL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XCode报错/">XCode报错</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app发布/">app发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS资料/">iOS资料</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/私有库/">私有库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播图/">轮播图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
     </div>
   </div>
 
@@ -269,7 +926,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/iOS资料/" style="font-size: 10px;">iOS资料</a>
+      <a href="/tags/MSL/" style="font-size: 10px;">MSL</a> <a href="/tags/NSNumberFormatter/" style="font-size: 10px;">NSNumberFormatter</a> <a href="/tags/NSProxy/" style="font-size: 10px;">NSProxy</a> <a href="/tags/NSURLSession/" style="font-size: 10px;">NSURLSession</a> <a href="/tags/RN-Bug/" style="font-size: 10px;">RN-Bug</a> <a href="/tags/RTT/" style="font-size: 10px;">RTT</a> <a href="/tags/ReactNative/" style="font-size: 10px;">ReactNative</a> <a href="/tags/TTL/" style="font-size: 10px;">TTL</a> <a href="/tags/XCode报错/" style="font-size: 10px;">XCode报错</a> <a href="/tags/app发布/" style="font-size: 10px;">app发布</a> <a href="/tags/iOS资料/" style="font-size: 10px;">iOS资料</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/代码规范/" style="font-size: 10px;">代码规范</a> <a href="/tags/私有库/" style="font-size: 10px;">私有库</a> <a href="/tags/轮播图/" style="font-size: 10px;">轮播图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
 
@@ -278,7 +935,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
     </div>
   </div>
 
@@ -291,11 +948,23 @@
       <ul>
         
           <li>
-            <a href="/2019/05/07/hello-world/">Hello World</a>
+            <a href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
           </li>
         
           <li>
-            <a href="/2017/04/29/本地app发布下载/">mac 搭建apache https服务器 用于本地app发布</a>
+            <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/23/react源码修改记录/">react源码修改记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/21/xcode报错/">Xcode 工程编译报错</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/23/NSProxy/">NSProxy简介</a>
           </li>
         
       </ul>
@@ -311,7 +980,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2019 wesk痕<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://weskhen.xyz" target="_blank">Wesk</a>
     </div>
   </div>
 </footer>

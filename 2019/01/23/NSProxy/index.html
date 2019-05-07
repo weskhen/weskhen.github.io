@@ -5,18 +5,20 @@
   
 
   
-  <title>Tag: iOS资料 | 不想写代码</title>
+  <title>NSProxy简介 | 不想写代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="证明我一下,我还活着...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不想写代码">
-<meta property="og:url" content="http://weskhen.xyz/tags/iOS资料/index.html">
+  <meta name="description" content="##NSProxy是什么? NSProxy 是NSProxy 是一个抽象类,跟 NSObject 一样的基类，都遵守&amp;lt;NSObject&amp;gt;协议 NSProxy是一个抽象类，必须继承实例化其子类才能使用。 NSProxy从类名来看是代理类专门负责代理对象转发消息的。相比NSObject类来说NSProxy更轻量级，通过NSProxy可以帮助Objective-C间接的实现多重继承的功能。">
+<meta name="keywords" content="NSProxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSProxy简介">
+<meta property="og:url" content="http://weskhen.xyz/2019/01/23/NSProxy/index.html">
 <meta property="og:site_name" content="不想写代码">
-<meta property="og:description" content="证明我一下,我还活着...">
+<meta property="og:description" content="##NSProxy是什么? NSProxy 是NSProxy 是一个抽象类,跟 NSObject 一样的基类，都遵守&amp;lt;NSObject&amp;gt;协议 NSProxy是一个抽象类，必须继承实例化其子类才能使用。 NSProxy从类名来看是代理类专门负责代理对象转发消息的。相比NSObject类来说NSProxy更轻量级，通过NSProxy可以帮助Objective-C间接的实现多重继承的功能。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-07T05:49:24.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不想写代码">
-<meta name="twitter:description" content="证明我一下,我还活着...">
+<meta name="twitter:title" content="NSProxy简介">
+<meta name="twitter:description" content="##NSProxy是什么? NSProxy 是NSProxy 是一个抽象类,跟 NSObject 一样的基类，都遵守&amp;lt;NSObject&amp;gt;协议 NSProxy是一个抽象类，必须继承实例化其子类才能使用。 NSProxy从类名来看是代理类专门负责代理对象转发消息的。相比NSObject类来说NSProxy更轻量级，通过NSProxy可以帮助Objective-C间接的实现多重继承的功能。">
   
     <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
   
@@ -67,40 +69,92 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/29/本地app发布下载/" class="archive-article-date">
-  <time datetime="2017-04-28T16:00:00.000Z" itemprop="datePublished">Apr 29</time>
+        <section id="main"><article id="post-NSProxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/23/NSProxy/" class="article-date">
+  <time datetime="2019-01-22T16:00:00.000Z" itemprop="datePublished">2019-01-23</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/29/本地app发布下载/">mac 搭建apache https服务器 用于本地app发布</a>
+    <h1 class="article-title" itemprop="name">
+      NSProxy简介
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##NSProxy是什么?</p>
+<p><code>NSProxy</code> 是NSProxy 是一个<strong>抽象类</strong>,跟 <code>NSObject</code> 一样的基类，都遵守<code>&lt;NSObject&gt;</code>协议</p>
+<p><code>NSProxy</code>是一个抽象类，必须继承实例化其子类才能使用。</p>
+<p><code>NSProxy</code>从类名来看是代理类专门负责代理对象转发消息的。相比<code>NSObject</code>类来说<code>NSProxy</code>更轻量级，通过<code>NSProxy</code>可以帮助<code>Objective-C</code>间接的实现多重继承的功能。</p>
+<p>##消息转发机制</p>
+<p>当程序运行时调用一个没有实现的方法，会采用三个消息转发步骤如果这三个步骤都不能成功那么此时程序会抛出一个异常。</p>
+<p>1.添加方法到类对象，对于实例方法调用respondsToSelector:，对于类方法调用resolveClassMethod:。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ (BOOL)resolveClassMethod:(SEL)sel;</span><br><span class="line">- (BOOL)respondsToSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<p>2.查找forwardingTargetForSelector:方法，该方法返回一个新对象，如果返回nil那么将跳转到下一步骤。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (id)forwardingTargetForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
+<p>3.通过methodSignatureForSelector:方法获取一个NSMethodSignature类型的对象，调用forwardInvocation:方法。改方法传入一个封装了NSMethodSignature的NSInvocation对象。然后该对象通过invakeWithTarget:方法将消息转发给其它对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;</span><br><span class="line"></span><br><span class="line">- (void)forwardInvocation:(NSInvocation *)invocation;</span><br></pre></td></tr></table></figure>
+<p>##NSProxy 和 NSObject 的比较</p>
+<p>相比NSObject,NSProxy更轻量级,  做消息转发效率更高.</p>
+<p>NSObject寻找方法顺序：本类-&gt;(父类-)&gt;(动态方法解析)-&gt; 消息转发；<br>NSproxy顺序：本类-&gt;消息转发</p>
+<p>##NSProxy的用途</p>
+<ol>
+<li><p>AOP面向切片编程</p>
+<p>iOS中面向切片编程一般有两种方式 ，一个是直接基于runtime 的method-Swizzling.还有一种就是基于NSProxy</p>
+</li>
+<li><p>解决NSTimer, CADisplayLink等强引用target引起的无法释放问题。如NSTimer:利用消息转发来断开NSTimer对象与视图之间的强引用关系。初始化NSTimer时把触发事件的target替换成一个单独的对象，然后这个对象中NSTimer的SEL方法触发时让这个方法在当前的视图self中实现。</p>
+</li>
+<li><p>多重继承</p>
+<p>实现类似CAAnimation类族.</p>
+</li>
+</ol>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjvdkwobh0004tazb24oewugu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSProxy/">NSProxy</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/02/21/xcode报错/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Xcode 工程编译报错
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/23/React Native/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">React Native 方案预研</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

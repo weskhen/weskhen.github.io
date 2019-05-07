@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>NSURLSession | 不想写代码</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="###NSURLSession 为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tc">
+<meta name="keywords" content="NSURLSession">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSURLSession">
+<meta property="og:url" content="http://weskhen.xyz/2018/01/23/NSURLSession/index.html">
+<meta property="og:site_name" content="不想写代码">
+<meta property="og:description" content="###NSURLSession 为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tc">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://weskhen.xyz/2018/01/23/image/NSURLSession01.png">
+<meta property="og:image" content="http://weskhen.xyz/2018/01/23/图片/NSURLSession02.png">
+<meta property="og:updated_time" content="2019-05-07T06:24:31.082Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSURLSession">
+<meta name="twitter:description" content="###NSURLSession 为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tc">
+<meta name="twitter:image" content="http://weskhen.xyz/2018/01/23/image/NSURLSession01.png">
+  
+    <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不想写代码</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">苟活着</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/help.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://weskhen.xyz"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-NSURLSession" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/23/NSURLSession/" class="article-date">
+  <time datetime="2018-01-22T16:00:00.000Z" itemprop="datePublished">2018-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NSURLSession
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###NSURLSession</p>
+<p>为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:</p>
+<ol>
+<li><p>session在使用的时候,可以重用上一次tcp握手链接 </p>
+</li>
+<li><p>session和cookies联系,session单利的好处</p>
+</li>
+</ol>
+<p>####HTTP版本<br>谈以上话题之前,先来看一下HTTP版本相关的几点知识:<br>这里我把HTTP版本简单分为三类：1.1之前，1.1，2.0，针对这三类做个主要差异的介绍：</p>
+<blockquote>
+<p>HTTP 1.1之前</p>
+</blockquote>
+<ul>
+<li>不支持持久连接。一旦服务器对客户端发出响应就立即断开TCP连接</li>
+<li>无请求头跟响应头</li>
+<li>客户端的前后请求是同步的。下一个请求必须等上一个请求从服务端拿到响应后才能发出，有点类似多线程的同步机制。</li>
+</ul>
+<blockquote>
+<p> HTTP 1.1(主流版本)</p>
+</blockquote>
+<p>与1.1之前的版本相比，做了以下性能上的提升</p>
+<ul>
+<li>增加请求头跟响应头</li>
+<li>支持持久连接。客户端通过请求头中指定<strong>Connection</strong>为<strong>keep-alive</strong>告知服务端不要在完成响应后立即释放连接。HTTP是基于TCP的，在HTTP 1.1中一次TCP连接可以处理多次HTTP请求(keep-alive 有效时间内)</li>
+<li>客户端不同请求之间是异步的。下一个请求不必等到上一个请求回来后再发出，而可以连续发出请求，有点类似多线程的异步处理。</li>
+</ul>
+<blockquote>
+<p>HTTP 2.0 (趋势)</p>
+</blockquote>
+<ul>
+<li>HTTP/2采用二进制格式而非文本格式</li>
+<li>HTTP/2是完全多路复用的，而非有序并阻塞的——只需一个连接即可实现并行</li>
+<li>使用报头压缩，HTTP/2降低了开销</li>
+<li>HTTP/2让服务器可以将响应主动“推送”到客户端缓存中</li>
+<li>2.0将只用于https网址。</li>
+</ul>
+<p>我们重点关注一下当前1.1版本所做几点改变。支持持久连接有什么好处呢？HTTP是基于TCP连接的，如果连接被频繁地启动然后断开就会花费很多资源在TCP三次握手以及四次挥手上，效率低下。以请求一个网页为例，我们知道，一个html网页上的图片资源并不是直接嵌入在网页上，而只是提供url，图片仍需要额外发HTTP 请求去下载。一个网页从请求到最终加载到本地往往需要经过多个HTTP请求。在1.1版本之前请求一个网页就需要发生多次”握手-挥手”的过程，每次连接之间相互独立；而1.1及之后的版本最少只需要一次就够。<br>再来就是请求异步，其好处参考多线程异步处理，在此不展开。</p>
+<p>http1.1 请求实际步骤如下图：</p>
+<p><img src="../image/NSURLSession01.png" alt="图1 session设置了每个host最大的请求线程数为1"></p>
+<p>上图session设置了每个host最大的请求线程数为1:</p>
+<p><img src="../图片/NSURLSession02.png" alt="图2 session设置了每个host最大的请求线程数为2"></p>
+<p>上图:session设置了每个host最大的请求线程数为2</p>
+<p>我们可以看到：</p>
+<p> 1、多次请求其实只建立了1次TCP连接</p>
+<p> 2、多次请求连续可以异步发出。</p>
+<p> so,能重用上一次tcp握手链接的是因为http协议更新到http1.1后.同一个session可以在keep-alive有效时间内不断开链接.</p>
+<p>####NSURLSessionConfiguration(NSURLSession中重要的属性)</p>
+<p> 有三个方法来创建NSURLSessionConfiguration:</p>
+<ul>
+<li><p>defaultSessionConfiguration 使用全局的cache，<strong>cookie</strong>,使用硬盘来缓存数据。</p>
+<p>cookie和cache类似,都有一个默认的单例获取对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];</span><br></pre></td></tr></table></figure>
+<p>但有点不同,苹果给开发者cookie的操作权限不如cache,sharedHTTPCookieStorage只是个读属性</p>
+</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>ephemeralSessionConfiguration 临时session配置，与默认配置相比，这个配置不会将缓存、cookie等存在本地，只会存在内存里，所以当程序退出时，所有的数据都会消失,浏览器无痕模式</p>
+</li>
+<li><p>backgroundSessionConfiguration 后台session配置,需要设置唯一标识，与默认配置类似，不同的是会在后台开启另一个线程来处理网络数据,app杀进程session会断开,重新启动后,session会重新建立.</p>
+</li>
+</ul>
+<p>/<em> 是否使用蜂窝网络，默认是yes. </em>/<br>@property BOOL allowsCellularAccess;</p>
+<p>/<em><br>指定了一组默认的可以设置出站请求的数据头。这对于跨会话共享信息，如内容类型，语言，用户代理，身份认证，是很有用的。<br>例如：<br>    @{@”Accept”: @”application/json”,<br>     @”Accept-Language”: @”en”,<br>     @”Authorization”: authString,<br>     @”User-Agent”: userAgentString<br>   }
+ </em>/<br>@property (nullable, copy) NSDictionary *HTTPAdditionalHeaders;</p>
+<p>/<em><br>同时连接一个host的最大数。iOS默认是4.APP是作为一个整体来看的
+ </em>/<br>@property NSInteger HTTPMaximumConnectionsPerHost;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2018/01/23/NSURLSession/" data-id="cjvdkwobl0006tazbk5n84wr0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/11/pod私有库的搭建使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          pod私有库搭建及使用(gitee)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/29/本地app发布下载/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mac 搭建apache https服务器 用于本地app发布</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/ReactNative/">ReactNative</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSL/">MSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSProxy/">NSProxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTT/">RTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TTL/">TTL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XCode报错/">XCode报错</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app发布/">app发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS资料/">iOS资料</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/私有库/">私有库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播图/">轮播图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/MSL/" style="font-size: 10px;">MSL</a> <a href="/tags/NSNumberFormatter/" style="font-size: 10px;">NSNumberFormatter</a> <a href="/tags/NSProxy/" style="font-size: 10px;">NSProxy</a> <a href="/tags/NSURLSession/" style="font-size: 10px;">NSURLSession</a> <a href="/tags/RN-Bug/" style="font-size: 10px;">RN-Bug</a> <a href="/tags/RTT/" style="font-size: 10px;">RTT</a> <a href="/tags/ReactNative/" style="font-size: 10px;">ReactNative</a> <a href="/tags/TTL/" style="font-size: 10px;">TTL</a> <a href="/tags/XCode报错/" style="font-size: 10px;">XCode报错</a> <a href="/tags/app发布/" style="font-size: 10px;">app发布</a> <a href="/tags/iOS资料/" style="font-size: 10px;">iOS资料</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/代码规范/" style="font-size: 10px;">代码规范</a> <a href="/tags/私有库/" style="font-size: 10px;">私有库</a> <a href="/tags/轮播图/" style="font-size: 10px;">轮播图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/23/react源码修改记录/">react源码修改记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/21/xcode报错/">Xcode 工程编译报错</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/23/NSProxy/">NSProxy简介</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wesk痕<br>
+      Powered by <a href="http://weskhen.xyz" target="_blank">Wesk</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

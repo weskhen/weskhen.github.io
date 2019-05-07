@@ -5,18 +5,20 @@
   
 
   
-  <title>Tag: iOS资料 | 不想写代码</title>
+  <title>iOS基础 | 不想写代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="证明我一下,我还活着...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不想写代码">
-<meta property="og:url" content="http://weskhen.xyz/tags/iOS资料/index.html">
+  <meta name="description" content="###weak和assign的区别 1.修饰变量类型的区别 weak 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。 assign 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生">
+<meta name="keywords" content="面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS基础">
+<meta property="og:url" content="http://weskhen.xyz/2016/02/23/iOS基础/index.html">
 <meta property="og:site_name" content="不想写代码">
-<meta property="og:description" content="证明我一下,我还活着...">
+<meta property="og:description" content="###weak和assign的区别 1.修饰变量类型的区别 weak 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。 assign 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-07T05:52:16.512Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不想写代码">
-<meta name="twitter:description" content="证明我一下,我还活着...">
+<meta name="twitter:title" content="iOS基础">
+<meta name="twitter:description" content="###weak和assign的区别 1.修饰变量类型的区别 weak 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。 assign 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生">
   
     <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
   
@@ -67,40 +69,64 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/29/本地app发布下载/" class="archive-article-date">
-  <time datetime="2017-04-28T16:00:00.000Z" itemprop="datePublished">Apr 29</time>
+        <section id="main"><article id="post-iOS基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/23/iOS基础/" class="article-date">
+  <time datetime="2016-02-22T16:00:00.000Z" itemprop="datePublished">2016-02-23</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/29/本地app发布下载/">mac 搭建apache https服务器 用于本地app发布</a>
+    <h1 class="article-title" itemprop="name">
+      iOS基础
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###weak和assign的区别</p>
+<p><strong>1.</strong>修饰变量类型的区别<br> <strong>weak</strong> 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。<br> <strong>assign</strong> 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生野指针，所以它名字是”<strong>unsafe_</strong>”。</p>
+<p><strong>2.</strong>是否产生野指针的区别<br> <strong>weak</strong> 不会产生野指针问题。因为weak修饰的对象释放后（引用计数器值为0），指针会自动被置nil，之后再向该对象发消息也不会崩溃。 weak是安全的。<br> <strong>assign</strong> 如果修饰对象，会产生野指针问题；如果修饰基本数据类型则是安全的。修饰的对象释放后，指针不会自动被置空，此时向对象发消息会崩溃。</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2016/02/23/iOS基础/" data-id="cjvdkwobn000atazbyuidinqw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/23/objective-c项目代码规范/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          iOS内部代码规范
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
 
 </section>
         
