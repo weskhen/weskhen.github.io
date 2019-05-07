@@ -16,8 +16,8 @@
 <meta property="og:description" content="###NSURLSession 为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tc">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://weskhen.xyz/2018/01/23/image/NSURLSession01.png">
-<meta property="og:image" content="http://weskhen.xyz/2018/01/23/图片/NSURLSession02.png">
-<meta property="og:updated_time" content="2019-05-07T06:24:31.082Z">
+<meta property="og:image" content="http://weskhen.xyz/2018/01/23/image/NSURLSession02.png">
+<meta property="og:updated_time" content="2019-05-07T10:03:01.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSURLSession">
 <meta name="twitter:description" content="###NSURLSession 为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tc">
@@ -138,7 +138,7 @@
 <p>http1.1 请求实际步骤如下图：</p>
 <p><img src="../image/NSURLSession01.png" alt="图1 session设置了每个host最大的请求线程数为1"></p>
 <p>上图session设置了每个host最大的请求线程数为1:</p>
-<p><img src="../图片/NSURLSession02.png" alt="图2 session设置了每个host最大的请求线程数为2"></p>
+<p><img src="../image/NSURLSession02.png" alt="图2 session设置了每个host最大的请求线程数为2"></p>
 <p>上图:session设置了每个host最大的请求线程数为2</p>
 <p>我们可以看到：</p>
 <p> 1、多次请求其实只建立了1次TCP连接</p>
