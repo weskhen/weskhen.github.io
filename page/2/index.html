@@ -34,8 +34,11 @@
     <div id="wrap">
       <header id="header">
   <div id="banner"></div>
+  <!-- <div id="avatarImage"></div> -->
   <div id="header-outer" class="outer">
+
     <div id="header-title" class="inner">
+
       <h1 id="logo-wrap">
         <a href="/" id="logo">不想写代码</a>
       </h1>
@@ -161,16 +164,13 @@
 </tbody>
 </table>
 <p>不推荐 setLab、playBtn等等样式.</p>
-<p>####私有属性</p>
-<p>私有属性应该定义在类的实现文件.m中，不应该定义在.h文件中申明!!!</p>
+<h4 id="私有属性"><a href="#私有属性" class="headerlink" title="私有属性"></a>私有属性</h4><p>私有属性应该定义在类的实现文件.m中，不应该定义在.h文件中申明!!!</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@interface BBCourseDetailAssembleCell ()</span><br><span class="line">@property (nonatomic, strong) UILabel  *roleLabel;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>####懒加载</p>
-<p>实例化一个对象需要耗费很多资源，或者配置一次就要调用很多配置相关的方法而你又不想弄乱这些方法时，我们需要重写 getter 方法以延迟实例化，而不是在 init 方法里给对象分配内存. </p>
+<h4 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h4><p>实例化一个对象需要耗费很多资源，或者配置一次就要调用很多配置相关的方法而你又不想弄乱这些方法时，我们需要重写 getter 方法以延迟实例化，而不是在 init 方法里给对象分配内存. </p>
 <p><strong>推荐</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (UILabel *)roleLabel &#123;</span><br><span class="line">    if (!_roleLabel) &#123;</span><br><span class="line">        _roleLabel = [[UILabel alloc] init];</span><br><span class="line">        _roleLabel.textColor = kBBLiveDarkTextColor;</span><br><span class="line">        _roleLabel.textAlignment = NSTextAlignmentRight;</span><br><span class="line">        _roleLabel.text = @&quot;详细规则&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    return _roleLabel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这些属于UI绘制部分的代码,我们实际开发中更关心的是业务逻辑,把这部分代码放入到实现文件中的最后部分,并加上代码块注释区分.</p>
-<p>###方法</p>
-<ul>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
 <li>方法名与方法类型 (-/+)之间应该以空格间隔。方法段之间也应该以空格间隔（以符合 Apple 风格）。参数前应该总是有一个描述性的关键词;</li>
 <li>一个⽅法，方法行数尽可能的少(推荐少于50行);</li>
 <li>方法分布区: <ul>
@@ -193,8 +193,7 @@
 <li>业务类的:</li>
 </ul>
 <p>打包的时候有没有分</p>
-<p>###大括号、空格及换⾏行行规范</p>
-<ul>
+<h3 id="大括号、空格及换⾏行行规范"><a href="#大括号、空格及换⾏行行规范" class="headerlink" title="大括号、空格及换⾏行行规范"></a>大括号、空格及换⾏行行规范</h3><ul>
 <li><p>缩进使用4个空格，确保在Xcode偏好设置来设置。</p>
 </li>
 <li><p><code>,</code> 的前⾯不应该留有空格， , 后⾯面应该保留⼀个空格。</p>
@@ -325,8 +324,7 @@
 <p>对于封装的View，需要严格按照封装的View的用途和基类本身进行命名，规则如下：</p>
 <p>模块名（隶属于某模块的需要以模块名为前置）+封装控件用途+控件基类类名（View、TableView、CollectionView、Control等等）</p>
 <p>例如：DropDownMenuTableView</p>
-<p>##通知名的定义</p>
-<p>APP名前缀+模块名+动作+Notification</p>
+<h2 id="通知名的定义"><a href="#通知名的定义" class="headerlink" title="通知名的定义"></a>通知名的定义</h2><p>APP名前缀+模块名+动作+Notification</p>
 <p><code>BBKeyboardWillShowNotification</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/// .h文件中声明</span><br><span class="line">extern NSNotificationName const BBKeyboardWillShowNotification;</span><br><span class="line">/// .m文件中声明</span><br><span class="line">NSNotificationName const BBKeyboardWillShowNotification = @&quot;BBKeyboardWillShowNotification&quot;;</span><br></pre></td></tr></table></figure>
 <h2 id="注释规范"><a href="#注释规范" class="headerlink" title="注释规范"></a>注释规范</h2><ul>
@@ -391,13 +389,12 @@
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSAssert([[NSThread currentThread] isMainThread], @&quot;This method must be called on the main thread.&quot;);//第一个参数是条件,如果第一个参数不满足条件,就会记录并打印后面的字符串</span><br><span class="line"></span><br><span class="line">NSParameterAssert(str); //只需要一个参数,如果参数存在程序继续运行,如果参数为空,则程序停止打印日志</span><br></pre></td></tr></table></figure>
-<p>##资源信息共享</p>
-<p>建立app内用到的,不是特别重要的第三方账号信息共享, 像bugly、蒲公英、QQ和微信等三方账号信息共享. 提高工作协调效率.</p>
+<h2 id="资源信息共享"><a href="#资源信息共享" class="headerlink" title="资源信息共享"></a>资源信息共享</h2><p>建立app内用到的,不是特别重要的第三方账号信息共享, 像bugly、蒲公英、QQ和微信等三方账号信息共享. 提高工作协调效率.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2017/01/23/objective-c项目代码规范/" data-id="cjvdlvtj6001h1vzbighx3qb0" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2017/01/23/objective-c项目代码规范/" data-id="cjvfazxti001g1ezb9seeifer" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码规范/">代码规范</a></li></ul>
@@ -410,25 +407,6 @@
 
 
 
-  <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-  
   
     <article id="post-iOS基础" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -456,11 +434,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###weak和assign的区别</p>
-<p><strong>1.</strong>修饰变量类型的区别<br> <strong>weak</strong> 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。<br> <strong>assign</strong> 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生野指针，所以它名字是”<strong>unsafe_</strong>”。</p>
+        <h3 id="weak和assign的区别"><a href="#weak和assign的区别" class="headerlink" title="weak和assign的区别"></a>weak和assign的区别</h3><p><strong>1.</strong>修饰变量类型的区别<br> <strong>weak</strong> 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。<br> <strong>assign</strong> 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生野指针，所以它名字是”<strong>unsafe_</strong>”。</p>
 <p><strong>2.</strong>是否产生野指针的区别<br> <strong>weak</strong> 不会产生野指针问题。因为weak修饰的对象释放后（引用计数器值为0），指针会自动被置nil，之后再向该对象发消息也不会崩溃。 weak是安全的。<br> <strong>assign</strong> 如果修饰对象，会产生野指针问题；如果修饰基本数据类型则是安全的。修饰的对象释放后，指针不会自动被置空，此时向对象发消息会崩溃。</p>
-<p>###消息的转发流程<code>_objc_msgForward</code></p>
-<ol>
+<h3 id="消息的转发流程-objc-msgForward"><a href="#消息的转发流程-objc-msgForward" class="headerlink" title="消息的转发流程_objc_msgForward"></a>消息的转发流程<code>_objc_msgForward</code></h3><ol>
 <li><p>调用resolveInstanceMethod:方法 (或 resolveClassMethod:)。允许用户在此时为该 Class 动态添加实现。如果有实现了，则调用并返回YES，那么重新开始objc_msgSend流程。这一次对象会响应这个选择器，一般是因为它已经调用过class_addMethod。如果仍没实现，继续下面的动作。</p>
 </li>
 <li><p>调用forwardingTargetForSelector:方法，尝试找到一个能响应该消息的对象。如果获取到，则直接把消息转发给它，返回非 nil 对象。否则返回 nil ，继续下面的动作。注意，这里不要返回 self ，否则会形成死循环。</p>
@@ -476,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2016/02/23/iOS基础/" data-id="cjvdlvtia00091vzbezmr9vpe" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2016/02/23/iOS基础/" data-id="cjvfazxsp000a1ezbsi8ooqts" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
@@ -489,25 +465,6 @@
 
 
 
-  <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-  
   
 
 

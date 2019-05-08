@@ -7,18 +7,18 @@
   
   <title>iOS基础 | 不想写代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="###weak和assign的区别 1.修饰变量类型的区别 weak 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。 assign 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生">
+  <meta name="description" content="weak和assign的区别1.修饰变量类型的区别 weak 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。 assign 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生野指针，">
 <meta name="keywords" content="面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS基础">
 <meta property="og:url" content="http://weskhen.xyz/2016/02/23/iOS基础/index.html">
 <meta property="og:site_name" content="不想写代码">
-<meta property="og:description" content="###weak和assign的区别 1.修饰变量类型的区别 weak 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。 assign 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生">
+<meta property="og:description" content="weak和assign的区别1.修饰变量类型的区别 weak 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。 assign 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生野指针，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-07T12:39:00.414Z">
+<meta property="og:updated_time" content="2019-05-08T09:14:25.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS基础">
-<meta name="twitter:description" content="###weak和assign的区别 1.修饰变量类型的区别 weak 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。 assign 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生">
+<meta name="twitter:description" content="weak和assign的区别1.修饰变量类型的区别 weak 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。 assign 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生野指针，">
   
     <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
   
@@ -36,8 +36,11 @@
     <div id="wrap">
       <header id="header">
   <div id="banner"></div>
+  <!-- <div id="avatarImage"></div> -->
   <div id="header-outer" class="outer">
+
     <div id="header-title" class="inner">
+
       <h1 id="logo-wrap">
         <a href="/" id="logo">不想写代码</a>
       </h1>
@@ -95,11 +98,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###weak和assign的区别</p>
-<p><strong>1.</strong>修饰变量类型的区别<br> <strong>weak</strong> 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。<br> <strong>assign</strong> 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生野指针，所以它名字是”<strong>unsafe_</strong>”。</p>
+        <h3 id="weak和assign的区别"><a href="#weak和assign的区别" class="headerlink" title="weak和assign的区别"></a>weak和assign的区别</h3><p><strong>1.</strong>修饰变量类型的区别<br> <strong>weak</strong> 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。<br> <strong>assign</strong> 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生野指针，所以它名字是”<strong>unsafe_</strong>”。</p>
 <p><strong>2.</strong>是否产生野指针的区别<br> <strong>weak</strong> 不会产生野指针问题。因为weak修饰的对象释放后（引用计数器值为0），指针会自动被置nil，之后再向该对象发消息也不会崩溃。 weak是安全的。<br> <strong>assign</strong> 如果修饰对象，会产生野指针问题；如果修饰基本数据类型则是安全的。修饰的对象释放后，指针不会自动被置空，此时向对象发消息会崩溃。</p>
-<p>###消息的转发流程<code>_objc_msgForward</code></p>
-<ol>
+<h3 id="消息的转发流程-objc-msgForward"><a href="#消息的转发流程-objc-msgForward" class="headerlink" title="消息的转发流程_objc_msgForward"></a>消息的转发流程<code>_objc_msgForward</code></h3><ol>
 <li><p>调用resolveInstanceMethod:方法 (或 resolveClassMethod:)。允许用户在此时为该 Class 动态添加实现。如果有实现了，则调用并返回YES，那么重新开始objc_msgSend流程。这一次对象会响应这个选择器，一般是因为它已经调用过class_addMethod。如果仍没实现，继续下面的动作。</p>
 </li>
 <li><p>调用forwardingTargetForSelector:方法，尝试找到一个能响应该消息的对象。如果获取到，则直接把消息转发给它，返回非 nil 对象。否则返回 nil ，继续下面的动作。注意，这里不要返回 self ，否则会形成死循环。</p>
@@ -115,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2016/02/23/iOS基础/" data-id="cjvdlvtia00091vzbezmr9vpe" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2016/02/23/iOS基础/" data-id="cjvfazxsp000a1ezbsi8ooqts" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
