@@ -7,18 +7,18 @@
   
   <title>iOS内部代码规范 | 不想写代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] 工程前缀:BB iOS内部代码规范基础编码规范​    标准化输出代码? 用工具 ​    代码块使用 编码规范简单来说就是为了了保证写出来的代码具备三个原则:可复⽤, 易维护, 可扩展. 这其实也是⾯向对象的基本原则. 常量:常量应该以驼峰法命名，并以相关类名作为前缀，这里如果感觉类名文字太长，我们也可以约定以类名的缩写作为前缀 推荐： 1static const NSTimeInt">
+  <meta name="description" content="[TOC] 工程前缀:BB 基础编码规范​    标准化输出代码? 用工具 ​    代码块使用 编码规范简单来说就是为了了保证写出来的代码具备三个原则:可复⽤, 易维护, 可扩展. 这其实也是⾯向对象的基本原则. 常量:常量应该以驼峰法命名，并以相关类名作为前缀，这里如果感觉类名文字太长，我们也可以约定以类名的缩写作为前缀 推荐： 1static const NSTimeInterval RAC">
 <meta name="keywords" content="代码规范">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS内部代码规范">
 <meta property="og:url" content="http://weskhen.xyz/2017/01/23/objective-c项目代码规范/index.html">
 <meta property="og:site_name" content="不想写代码">
-<meta property="og:description" content="[TOC] 工程前缀:BB iOS内部代码规范基础编码规范​    标准化输出代码? 用工具 ​    代码块使用 编码规范简单来说就是为了了保证写出来的代码具备三个原则:可复⽤, 易维护, 可扩展. 这其实也是⾯向对象的基本原则. 常量:常量应该以驼峰法命名，并以相关类名作为前缀，这里如果感觉类名文字太长，我们也可以约定以类名的缩写作为前缀 推荐： 1static const NSTimeInt">
+<meta property="og:description" content="[TOC] 工程前缀:BB 基础编码规范​    标准化输出代码? 用工具 ​    代码块使用 编码规范简单来说就是为了了保证写出来的代码具备三个原则:可复⽤, 易维护, 可扩展. 这其实也是⾯向对象的基本原则. 常量:常量应该以驼峰法命名，并以相关类名作为前缀，这里如果感觉类名文字太长，我们也可以约定以类名的缩写作为前缀 推荐： 1static const NSTimeInterval RAC">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-07T05:50:29.258Z">
+<meta property="og:updated_time" content="2019-05-07T12:36:17.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS内部代码规范">
-<meta name="twitter:description" content="[TOC] 工程前缀:BB iOS内部代码规范基础编码规范​    标准化输出代码? 用工具 ​    代码块使用 编码规范简单来说就是为了了保证写出来的代码具备三个原则:可复⽤, 易维护, 可扩展. 这其实也是⾯向对象的基本原则. 常量:常量应该以驼峰法命名，并以相关类名作为前缀，这里如果感觉类名文字太长，我们也可以约定以类名的缩写作为前缀 推荐： 1static const NSTimeInt">
+<meta name="twitter:description" content="[TOC] 工程前缀:BB 基础编码规范​    标准化输出代码? 用工具 ​    代码块使用 编码规范简单来说就是为了了保证写出来的代码具备三个原则:可复⽤, 易维护, 可扩展. 这其实也是⾯向对象的基本原则. 常量:常量应该以驼峰法命名，并以相关类名作为前缀，这里如果感觉类名文字太长，我们也可以约定以类名的缩写作为前缀 推荐： 1static const NSTimeInterval RAC">
   
     <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
   
@@ -97,7 +97,7 @@
       
         <p>[TOC]</p>
 <p>工程前缀:BB</p>
-<h1 id="iOS内部代码规范"><a href="#iOS内部代码规范" class="headerlink" title="iOS内部代码规范"></a>iOS内部代码规范</h1><h2 id="基础编码规范"><a href="#基础编码规范" class="headerlink" title="基础编码规范"></a>基础编码规范</h2><p>​    标准化输出代码? 用<a href="https://seongbrave.github.io/" target="_blank" rel="noopener">工具</a></p>
+<h2 id="基础编码规范"><a href="#基础编码规范" class="headerlink" title="基础编码规范"></a>基础编码规范</h2><p>​    标准化输出代码? 用<a href="https://seongbrave.github.io/" target="_blank" rel="noopener">工具</a></p>
 <p>​    代码块使用</p>
 <p>编码规范简单来说就是为了了保证写出来的代码具备三个原则:可复⽤, 易维护, 可扩展. 这其实也是⾯向对象的基本原则.</p>
 <h3 id="常量"><a href="#常量" class="headerlink" title="常量:"></a>常量:</h3><p>常量应该以驼峰法命名，并以相关类名作为前缀，这里如果感觉类名文字太长，我们也可以约定以类名的缩写作为前缀</p>
@@ -428,7 +428,28 @@
   
 </article>
 
-</section>
+
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  </section>
         
           <aside id="sidebar">
   

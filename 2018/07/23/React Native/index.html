@@ -7,21 +7,21 @@
   
   <title>React Native 方案预研 | 不想写代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="XXX React Native 方案1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改">
+  <meta name="description" content="1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改后配置表也能实现动态的改变映射目标。">
 <meta name="keywords" content="ReactNative">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native 方案预研">
 <meta property="og:url" content="http://weskhen.xyz/2018/07/23/React Native/index.html">
 <meta property="og:site_name" content="不想写代码">
-<meta property="og:description" content="XXX React Native 方案1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改">
+<meta property="og:description" content="1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改后配置表也能实现动态的改变映射目标。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g19d0tdcuzj30h80iemyf.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g19d0lm30nj30ej0mwdh8.jpg">
-<meta property="og:updated_time" content="2019-05-07T05:46:26.765Z">
+<meta property="og:updated_time" content="2019-05-07T12:36:08.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native 方案预研">
-<meta name="twitter:description" content="XXX React Native 方案1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改">
+<meta name="twitter:description" content="1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改后配置表也能实现动态的改变映射目标。">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg">
   
     <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
@@ -99,7 +99,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="XXX-React-Native-方案"><a href="#XXX-React-Native-方案" class="headerlink" title="XXX React Native 方案"></a>XXX React Native 方案</h1><h2 id="1-RN跳转Native的路由"><a href="#1-RN跳转Native的路由" class="headerlink" title="1. RN跳转Native的路由"></a>1. RN跳转Native的路由</h2><p>路由在项目中主要作用有:</p>
+        <h2 id="1-RN跳转Native的路由"><a href="#1-RN跳转Native的路由" class="headerlink" title="1. RN跳转Native的路由"></a>1. RN跳转Native的路由</h2><p>路由在项目中主要作用有:</p>
 <ol>
 <li>降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密</li>
 <li>大前端页面跳转的一致性.</li>
@@ -212,7 +212,7 @@
   
     <a href="/2018/07/13/轮播图/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">定义轮播图</div>
+      <div class="article-nav-title">自定义轮播图</div>
     </a>
   
 </nav>
@@ -220,7 +220,28 @@
   
 </article>
 
-</section>
+
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  </section>
         
           <aside id="sidebar">
   

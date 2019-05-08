@@ -7,20 +7,20 @@
   
   <title>NSURLSession | 不想写代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="###NSURLSession 为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tc">
+  <meta name="description" content="为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tcp握手链接   session和">
 <meta name="keywords" content="NSURLSession">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NSURLSession">
 <meta property="og:url" content="http://weskhen.xyz/2018/01/23/NSURLSession/index.html">
 <meta property="og:site_name" content="不想写代码">
-<meta property="og:description" content="###NSURLSession 为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tc">
+<meta property="og:description" content="为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tcp握手链接   session和">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://weskhen.xyz/2018/01/23/image/NSURLSession01.png">
 <meta property="og:image" content="http://weskhen.xyz/2018/01/23/image/NSURLSession02.png">
-<meta property="og:updated_time" content="2019-05-07T10:03:01.108Z">
+<meta property="og:updated_time" content="2019-05-07T12:36:21.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSURLSession">
-<meta name="twitter:description" content="###NSURLSession 为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tc">
+<meta name="twitter:description" content="为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:  session在使用的时候,可以重用上一次tcp握手链接   session和">
 <meta name="twitter:image" content="http://weskhen.xyz/2018/01/23/image/NSURLSession01.png">
   
     <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
@@ -98,8 +98,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###NSURLSession</p>
-<p>为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:</p>
+        <p>为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:</p>
 <ol>
 <li><p>session在使用的时候,可以重用上一次tcp握手链接 </p>
 </li>
@@ -200,7 +199,28 @@
   
 </article>
 
-</section>
+
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  </section>
         
           <aside id="sidebar">
   

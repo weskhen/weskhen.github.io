@@ -97,7 +97,7 @@
       
         <p>[TOC]</p>
 <p>工程前缀:BB</p>
-<h1 id="iOS内部代码规范"><a href="#iOS内部代码规范" class="headerlink" title="iOS内部代码规范"></a>iOS内部代码规范</h1><h2 id="基础编码规范"><a href="#基础编码规范" class="headerlink" title="基础编码规范"></a>基础编码规范</h2><p>​    标准化输出代码? 用<a href="https://seongbrave.github.io/" target="_blank" rel="noopener">工具</a></p>
+<h2 id="基础编码规范"><a href="#基础编码规范" class="headerlink" title="基础编码规范"></a>基础编码规范</h2><p>​    标准化输出代码? 用<a href="https://seongbrave.github.io/" target="_blank" rel="noopener">工具</a></p>
 <p>​    代码块使用</p>
 <p>编码规范简单来说就是为了了保证写出来的代码具备三个原则:可复⽤, 易维护, 可扩展. 这其实也是⾯向对象的基本原则.</p>
 <h3 id="常量"><a href="#常量" class="headerlink" title="常量:"></a>常量:</h3><p>常量应该以驼峰法命名，并以相关类名作为前缀，这里如果感觉类名文字太长，我们也可以约定以类名的缩写作为前缀</p>
@@ -408,6 +408,27 @@
 </article>
 
 
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
   
     <article id="post-iOS基础" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -438,6 +459,19 @@
         <p>###weak和assign的区别</p>
 <p><strong>1.</strong>修饰变量类型的区别<br> <strong>weak</strong> 只可以修饰对象。如果修饰基本数据类型，编译器会报错-“Property with ‘weak’ attribute must be of object type”。<br> <strong>assign</strong> 可修饰对象，和基本数据类型。当需要修饰对象类型时，MRC时代使用unsafe_unretained。当然，unsafe_unretained也可能产生野指针，所以它名字是”<strong>unsafe_</strong>”。</p>
 <p><strong>2.</strong>是否产生野指针的区别<br> <strong>weak</strong> 不会产生野指针问题。因为weak修饰的对象释放后（引用计数器值为0），指针会自动被置nil，之后再向该对象发消息也不会崩溃。 weak是安全的。<br> <strong>assign</strong> 如果修饰对象，会产生野指针问题；如果修饰基本数据类型则是安全的。修饰的对象释放后，指针不会自动被置空，此时向对象发消息会崩溃。</p>
+<p>###消息的转发流程<code>_objc_msgForward</code></p>
+<ol>
+<li><p>调用resolveInstanceMethod:方法 (或 resolveClassMethod:)。允许用户在此时为该 Class 动态添加实现。如果有实现了，则调用并返回YES，那么重新开始objc_msgSend流程。这一次对象会响应这个选择器，一般是因为它已经调用过class_addMethod。如果仍没实现，继续下面的动作。</p>
+</li>
+<li><p>调用forwardingTargetForSelector:方法，尝试找到一个能响应该消息的对象。如果获取到，则直接把消息转发给它，返回非 nil 对象。否则返回 nil ，继续下面的动作。注意，这里不要返回 self ，否则会形成死循环。</p>
+</li>
+<li><p>调用methodSignatureForSelector:方法，尝试获得一个方法签名。如果获取不到，则直接调用doesNotRecognizeSelector抛出异常。如果能获取，则返回非nil：创建一个 NSlnvocation 并传给forwardInvocation:。</p>
+</li>
+<li><p>调用forwardInvocation:方法，将第3步获取到的方法签名包装成 Invocation 传入，如何处理就在这里面了，并返回非ni。</p>
+</li>
+<li><p>调用doesNotRecognizeSelector: ，默认的实现是抛出异常。如果第3步没能获得一个方法签名，执行该步骤。</p>
+</li>
+</ol>
 
       
     </div>
@@ -453,6 +487,27 @@
 </article>
 
 
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
   
 
 

@@ -5,22 +5,22 @@
   
 
   
-  <title>定义轮播图 | 不想写代码</title>
+  <title>自定义轮播图 | 不想写代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="###自定义轮播图 昨天有个小需求,实现一条栏目轮播  时间充足,写个小demo可以自己定义轮播图 提供四个方向滚动12345678910typedef NS_ENUM(NSInteger, ViewScrollDirection) &amp;#123;    /** 朝上滚 **/    ViewScrollDirectionUp = 0,    /** 朝下滚 **/    ViewScrollDir">
+  <meta name="description" content="昨天有个小需求,实现一条栏目轮播  时间充足,写个小demo可以自己定义轮播图 提供四个方向滚动12345678910typedef NS_ENUM(NSInteger, ViewScrollDirection) &amp;#123;    /** 朝上滚 **/    ViewScrollDirectionUp = 0,    /** 朝下滚 **/    ViewScrollDirectionDown">
 <meta name="keywords" content="轮播图">
 <meta property="og:type" content="article">
-<meta property="og:title" content="定义轮播图">
+<meta property="og:title" content="自定义轮播图">
 <meta property="og:url" content="http://weskhen.xyz/2018/07/13/轮播图/index.html">
 <meta property="og:site_name" content="不想写代码">
-<meta property="og:description" content="###自定义轮播图 昨天有个小需求,实现一条栏目轮播  时间充足,写个小demo可以自己定义轮播图 提供四个方向滚动12345678910typedef NS_ENUM(NSInteger, ViewScrollDirection) &amp;#123;    /** 朝上滚 **/    ViewScrollDirectionUp = 0,    /** 朝下滚 **/    ViewScrollDir">
+<meta property="og:description" content="昨天有个小需求,实现一条栏目轮播  时间充足,写个小demo可以自己定义轮播图 提供四个方向滚动12345678910typedef NS_ENUM(NSInteger, ViewScrollDirection) &amp;#123;    /** 朝上滚 **/    ViewScrollDirectionUp = 0,    /** 朝下滚 **/    ViewScrollDirectionDown">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2906485-bccd2851732170f7.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2906485-1aa09a2523f4ffd6.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2019-05-07T06:01:33.218Z">
+<meta property="og:updated_time" content="2019-05-07T12:35:44.729Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="定义轮播图">
-<meta name="twitter:description" content="###自定义轮播图 昨天有个小需求,实现一条栏目轮播  时间充足,写个小demo可以自己定义轮播图 提供四个方向滚动12345678910typedef NS_ENUM(NSInteger, ViewScrollDirection) &amp;#123;    /** 朝上滚 **/    ViewScrollDirectionUp = 0,    /** 朝下滚 **/    ViewScrollDir">
+<meta name="twitter:title" content="自定义轮播图">
+<meta name="twitter:description" content="昨天有个小需求,实现一条栏目轮播  时间充足,写个小demo可以自己定义轮播图 提供四个方向滚动12345678910typedef NS_ENUM(NSInteger, ViewScrollDirection) &amp;#123;    /** 朝上滚 **/    ViewScrollDirectionUp = 0,    /** 朝下滚 **/    ViewScrollDirectionDown">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2906485-bccd2851732170f7.gif?imageMogr2/auto-orient/strip">
   
     <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
@@ -90,7 +90,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      定义轮播图
+      自定义轮播图
     </h1>
   
 
@@ -98,8 +98,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###自定义轮播图</p>
-<p>昨天有个小需求,实现一条栏目轮播</p>
+        <p>昨天有个小需求,实现一条栏目轮播</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/2906485-bccd2851732170f7.gif?imageMogr2/auto-orient/strip" alt="小需求.gif"></p>
 <p>时间充足,写个小demo<br>可以自己定义轮播图 提供四个方向滚动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSInteger, ViewScrollDirection) &#123;</span><br><span class="line">    /** 朝上滚 **/</span><br><span class="line">    ViewScrollDirectionUp = 0,</span><br><span class="line">    /** 朝下滚 **/</span><br><span class="line">    ViewScrollDirectionDown,</span><br><span class="line">    /** 朝左滚 **/</span><br><span class="line">    ViewScrollDirectionLeft,</span><br><span class="line">    /** 朝右滚 **/</span><br><span class="line">    ViewScrollDirectionRight</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>目前支持自定义设置滚动的视图,视图停留的时间,滚动时间,是否拖动等功能.</p>
@@ -141,7 +140,28 @@
   
 </article>
 
-</section>
+
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  </section>
         
           <aside id="sidebar">
   
