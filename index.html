@@ -606,40 +606,41 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>pod 基础安装(必要条件,这边就不说了),建立在你能pod 文件的前提下.</p>
-<p>命令行:<figure class="highlight plain"><figcaption><span>repo list```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看当前repos下的目录: master共有库,其他文件夹(私有库).</span><br><span class="line">我们在执行`pod search xx`命令时,会在repos下查询</span><br></pre></td></tr></table></figure></p>
-<p>master</p>
-<ul>
-<li>Type: git (master)</li>
-<li>URL:  <a href="https://github.com/CocoaPods/Specs.git" target="_blank" rel="noopener">https://github.com/CocoaPods/Specs.git</a></li>
-<li>Path: /Users/weskhen/.cocoapods/repos/master</li>
-</ul>
-<p>my-repo</p>
-<ul>
-<li>Type: git (master)</li>
-<li>URL:  <a href="https://gitee.com/wesk/my-repo" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo</a></li>
-<li><p>Path: /Users/weskhen/.cocoapods/repos/my-repo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">只要安装并使用过pod的,master是一定存在的, my-repo是我的私有库,需要自己创建,怎么创建这个呢? 从上看到我使用的个人库是gitee.com. 因为这个是免费的(最多5个开发者公用).</span><br><span class="line"></span><br><span class="line">1. 首先创建一个git的账号,这里以gitee为例,创建项目,点击右上角图标“+”</span><br><span class="line">  ![gitee-createProject.png](https://upload-images.jianshu.io/upload_images/2906485-163b1c483317d31f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">  新建项目:填写各项,在 “是否开源” 选择 私有 如图:,</span><br><span class="line">  ![gitee-private.png](https://upload-images.jianshu.io/upload_images/2906485-a96a62ee358da5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line">  完成后点击“创建”.</span><br><span class="line">  这样我们能看到项目的地址了.</span><br><span class="line">  如:https://gitee.com/wesk/xxx</span><br><span class="line">  我们这个地址作为我们私有库的远程repo地址.</span><br><span class="line"></span><br><span class="line">2. git命令clone远程库到本地</span><br><span class="line">  pod repo add my-repo https://gitee.com/wesk/xxx</span><br><span class="line"></span><br><span class="line">  第一次添加会验证gitee的userName和password.</span><br></pre></td></tr></table></figure>
-<p>wujian-2:~ weskhen$ pod repo add my-repo <a href="https://gitee.com/wesk/my-repo" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo</a><br>Cloning spec repo <code>my-repo</code> from <code>https://gitee.com/wesk/my-repo</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pod repo remove xxx</span><br><span class="line">移除本地指定的远程库</span><br><span class="line">如:</span><br></pre></td></tr></table></figure>
-<p>wujian-2:~ weskhen$ pod repo remove my-repoSec<br>Removing spec repo <code>my-repoSec</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  pod repo update xxx</span><br><span class="line">  用于更新xxx 私有库的命令 多人开发的时候会用到</span><br><span class="line">  如:pod repo update my-repo</span><br><span class="line"></span><br><span class="line">3. 更新独立的项目(xx.podspec)文件 到my-repo 即组件化</span><br><span class="line">  这个流程网上应该很多了,当时做这的时候也是查阅相关资料的.这边简单说下流程相关的命令</span><br><span class="line">  1.创建编辑.podspec命令:</span><br></pre></td></tr></table></figure>
-<p> pod spec create xx</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2.将项目打成tag命令:</span><br></pre></td></tr></table></figure>
-<p>git tag -a 1.0 -m “v1.0”<br>git push origin master<br>git push origin –tag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.验证</span><br></pre></td></tr></table></figure>
-<p>pod spec lint xx.podspec</p>
-<pre><code>//补充:  如果有本地私有库源 验证时需要加入私有源和官方源
-</code></pre><p> pod spec lint KKLDBService.podspec –sources=’<a href="https://gitee.com/wesk/my-repo,https://github.com/CocoaPods/Specs.git&#39;" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo,https://github.com/CocoaPods/Specs.git&#39;</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.发布</span><br></pre></td></tr></table></figure>
-<p>pod repo push my-repo xx.podspec –allow-warnings </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> 后缀--allow-warnings 代表忽略警告</span><br><span class="line"> 后缀--use-libraries 代表使用静态库 组建若使用了.a静态库,需要加上这个.</span><br><span class="line"></span><br><span class="line">4. 项目中的使用</span><br><span class="line">    在podfile文件中 顶部添加:</span><br></pre></td></tr></table></figure>
-<p>   官方源: source ‘<a href="https://github.com/CocoaPods/Specs.git&#39;" target="_blank" rel="noopener">https://github.com/CocoaPods/Specs.git&#39;</a><br>   私有源: source ‘<a href="https://gitee.com/wesk/my-repo&#39;" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo&#39;</a></p>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你也可以在具体的组件处指定源,如:</span><br></pre></td></tr></table></figure>
-<p> pod ‘xxxx’, :git =&gt;’<a href="https://gitee.com/wesk/my-repo&#39;" target="_blank" rel="noopener">https://gitee.com/wesk/my-repo&#39;</a></p>
- <!--或-->
-<p> pod ‘xxx’, :podspec =&gt; ‘xxxx.podspec’<br> <code>`</code><br>最后更新podfile文件即可啦</p>
+<p>命令行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo list</span><br></pre></td></tr></table></figure>
+<p>查看当前repos下的目录: master共有库,其他文件夹(私有库).<br>我们在执行<code>pod search xx</code>命令时,会在repos下查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">master</span><br><span class="line">- Type: git (master)</span><br><span class="line">- URL:  https://github.com/CocoaPods/Specs.git</span><br><span class="line">- Path: /Users/weskhen/.cocoapods/repos/master</span><br><span class="line"></span><br><span class="line">my-repo</span><br><span class="line">- Type: git (master)</span><br><span class="line">- URL:  https://gitee.com/wesk/my-repo</span><br><span class="line">- Path: /Users/weskhen/.cocoapods/repos/my-repo</span><br></pre></td></tr></table></figure>
+<p>只要安装并使用过pod的,master是一定存在的, my-repo是我的私有库,需要自己创建,怎么创建这个呢? 从上看到我使用的个人库是gitee.com. 因为这个是免费的(最多5个开发者公用).</p>
+<ol>
+<li><p>首先创建一个git的账号,这里以gitee为例,创建项目,点击右上角图标“+”<br><img src="https://upload-images.jianshu.io/upload_images/2906485-163b1c483317d31f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitee-createProject.png"></p>
+<p>新建项目:填写各项,在 “是否开源” 选择 私有 如图:,<br><img src="https://upload-images.jianshu.io/upload_images/2906485-a96a62ee358da5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitee-private.png"><br>完成后点击“创建”.<br>这样我们能看到项目的地址了.<br>如:<a href="https://gitee.com/wesk/xxx" target="_blank" rel="noopener">https://gitee.com/wesk/xxx</a><br>我们这个地址作为我们私有库的远程repo地址.</p>
 </li>
-</ul>
+<li><p>git命令clone远程库到本地<br>pod repo add my-repo <a href="https://gitee.com/wesk/xxx" target="_blank" rel="noopener">https://gitee.com/wesk/xxx</a></p>
+<p>第一次添加会验证gitee的userName和password. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wujian-2:~ weskhen$ pod repo add my-repo https://gitee.com/wesk/my-repo</span><br><span class="line">Cloning spec repo `my-repo` from `https://gitee.com/wesk/my-repo`</span><br></pre></td></tr></table></figure>
+<p>pod repo remove xxx<br>移除本地指定的远程库<br>如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wujian-2:~ weskhen$ pod repo remove my-repoSec</span><br><span class="line">Removing spec repo `my-repoSec`</span><br></pre></td></tr></table></figure>
+<p>pod repo update xxx<br>用于更新xxx 私有库的命令 多人开发的时候会用到<br>如:pod repo update my-repo</p>
+</li>
+<li><p>更新独立的项目(xx.podspec)文件 到my-repo 即组件化<br>这个流程网上应该很多了,当时做这的时候也是查阅相关资料的.这边简单说下流程相关的命令<br>1.创建编辑.podspec命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec create xx</span><br></pre></td></tr></table></figure>
+<p>2.将项目打成tag命令: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git tag -a 1.0 -m &quot;v1.0&quot;</span><br><span class="line">git push origin master</span><br><span class="line">git push origin --tag</span><br></pre></td></tr></table></figure>
+<p>3.验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint xx.podspec</span><br><span class="line">     //补充:  如果有本地私有库源 验证时需要加入私有源和官方源</span><br><span class="line"> pod spec lint KKLDBService.podspec --sources=&apos;https://gitee.com/wesk/my-repo,https://github.com/CocoaPods/Specs.git&apos;</span><br></pre></td></tr></table></figure>
+<p>4.发布</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push my-repo xx.podspec --allow-warnings</span><br></pre></td></tr></table></figure>
+<p>后缀–allow-warnings 代表忽略警告<br>后缀–use-libraries 代表使用静态库 组建若使用了.a静态库,需要加上这个.</p>
+<ol start="4">
+<li><p>项目中的使用<br>在podfile文件中 顶部添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">官方源: source &apos;https://github.com/CocoaPods/Specs.git&apos;</span><br><span class="line">私有源: source &apos;https://gitee.com/wesk/my-repo&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>你也可以在具体的组件处指定源,如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;xxxx&apos;, :git =&gt;&apos;https://gitee.com/wesk/my-repo&apos;</span><br><span class="line">&lt;!--或--&gt;</span><br><span class="line">pod &apos;xxx&apos;, :podspec =&gt; &apos;xxxx.podspec&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>最后更新podfile文件即可啦</p>
 <p>私有库的使用差不多就这样了,重要的是这个流程和相应的命令.若使用公司的项目,从第二步开始即可.</p>
 <h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3>
       
