@@ -15,14 +15,14 @@
 <meta property="og:site_name" content="不想写代码">
 <meta property="og:description" content="1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改后配置表也能实现动态的改变映射目标。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g19d0tdcuzj30h80iemyf.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g19d0lm30nj30ej0mwdh8.jpg">
-<meta property="og:updated_time" content="2019-05-07T12:36:08.157Z">
+<meta property="og:image" content="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg">
+<meta property="og:image" content="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0tdcuzj30h80iemyf.jpg">
+<meta property="og:image" content="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0lm30nj30ej0mwdh8.jpg">
+<meta property="og:updated_time" content="2019-05-10T06:30:29.825Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native 方案预研">
 <meta name="twitter:description" content="1. RN跳转Native的路由路由在项目中主要作用有:  降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密 大前端页面跳转的一致性. 可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改后配置表也能实现动态的改变映射目标。">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg">
+<meta name="twitter:image" content="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg">
   
     <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
   
@@ -117,12 +117,12 @@
 </ul>
 <p>react发出encode后的jsonStirng, native获取jsonStirng后decode,根据规则解析出对应的部分.</p>
 <p>数据传输的流程图如下:</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg" alt="image-20190320165306011"></p>
-<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g19d0tdcuzj30h80iemyf.jpg" alt="image-20190320165334729"></p>
+<p><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg" alt="image-20190320165306011"></p>
+<p><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0tdcuzj30h80iemyf.jpg" alt="image-20190320165334729"></p>
 <h2 id="2-Native进入RN或者H5"><a href="#2-Native进入RN或者H5" class="headerlink" title="2. Native进入RN或者H5"></a>2. Native进入RN或者H5</h2><p>比如在首页点击Banner跳转，可以跳转H5也可以跳转到RN，可以通过解析后台下发的Url来决定跳转的目标。<br>确定跳转RN的协议定位为 <code>react://module/acion?params</code>,其中<br><code>react://</code>确定跳转的是RN页面，<code>module/action</code>表示跳转的模块和对应的action，<code>params</code>是传入的参数。<br>流程图参考 <code>RN的降级</code></p>
 <h2 id="3-RN的降级"><a href="#3-RN的降级" class="headerlink" title="3. RN的降级"></a>3. RN的降级</h2><p>在react-native页面中捕获异常,捕获到异常我们会记录异常灰度，并对业务进行降级跳转到H5页面.  RN页面和H5页面跳转机制以及后台可配置方案:</p>
 <p>针对后端控制的跳转rn页面,服务器下发路由地址{firstUrl:  secondUrl: }  优先字段和备选字段 (选择跳转rn页面还是h5页面)。 <code>流程图</code> </p>
-<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g19d0lm30nj30ej0mwdh8.jpg" alt="image-20190320165322408"></p>
+<p><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0lm30nj30ej0mwdh8.jpg" alt="image-20190320165322408"></p>
 <p>上图中的加载失败的原因有多种: </p>
 <ul>
 <li><p>module注册为空,选用h5</p>
@@ -191,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjvhovd740009tezb9kvhn0tq" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjvhpgb5u00062zzbd0rg7o0i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactNative/">ReactNative</a></li></ul>

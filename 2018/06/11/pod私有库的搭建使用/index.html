@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="不想写代码">
 <meta property="og:description" content="pod 基础安装(必要条件,这边就不说了),建立在你能pod 文件的前提下. 命令行: 1pod repo list 查看当前repos下的目录: master共有库,其他文件夹(私有库).我们在执行pod search xx命令时,会在repos下查询 123456789master- Type: git (master)- URL:  https://github.com/CocoaPods/">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2906485-163b1c483317d31f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2906485-a96a62ee358da5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-05-08T15:00:43.409Z">
+<meta property="og:image" content="https://github.com/weskhen/weskhen.github.io/raw/master/image/2906485-163b1c483317d31f.png?">
+<meta property="og:image" content="https://github.com/weskhen/weskhen.github.io/raw/master/image/2906485-a96a62ee358da5f7.png">
+<meta property="og:updated_time" content="2019-05-10T06:32:42.026Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pod私有库搭建及使用(gitee)">
 <meta name="twitter:description" content="pod 基础安装(必要条件,这边就不说了),建立在你能pod 文件的前提下. 命令行: 1pod repo list 查看当前repos下的目录: master共有库,其他文件夹(私有库).我们在执行pod search xx命令时,会在repos下查询 123456789master- Type: git (master)- URL:  https://github.com/CocoaPods/">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2906485-163b1c483317d31f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="https://github.com/weskhen/weskhen.github.io/raw/master/image/2906485-163b1c483317d31f.png?">
   
     <link rel="alternate" href="/help.xml" title="不想写代码" type="application/atom+xml">
   
@@ -107,8 +107,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">master</span><br><span class="line">- Type: git (master)</span><br><span class="line">- URL:  https://github.com/CocoaPods/Specs.git</span><br><span class="line">- Path: /Users/weskhen/.cocoapods/repos/master</span><br><span class="line"></span><br><span class="line">my-repo</span><br><span class="line">- Type: git (master)</span><br><span class="line">- URL:  https://gitee.com/wesk/my-repo</span><br><span class="line">- Path: /Users/weskhen/.cocoapods/repos/my-repo</span><br></pre></td></tr></table></figure>
 <p>只要安装并使用过pod的,master是一定存在的, my-repo是我的私有库,需要自己创建,怎么创建这个呢? 从上看到我使用的个人库是gitee.com. 因为这个是免费的(最多5个开发者公用).</p>
 <ol>
-<li><p>首先创建一个git的账号,这里以gitee为例,创建项目,点击右上角图标“+”<br><img src="https://upload-images.jianshu.io/upload_images/2906485-163b1c483317d31f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitee-createProject.png"></p>
-<p>新建项目:填写各项,在 “是否开源” 选择 私有 如图:,<br><img src="https://upload-images.jianshu.io/upload_images/2906485-a96a62ee358da5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitee-private.png"><br>完成后点击“创建”.<br>这样我们能看到项目的地址了.<br>如:<a href="https://gitee.com/wesk/xxx" target="_blank" rel="noopener">https://gitee.com/wesk/xxx</a><br>我们这个地址作为我们私有库的远程repo地址.</p>
+<li><p>首先创建一个git的账号,这里以gitee为例,创建项目,点击右上角图标“+”<br><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/2906485-163b1c483317d31f.png?" alt="gitee-createProject.png"></p>
+<p>新建项目:填写各项,在 “是否开源” 选择 私有 如图:,<br><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/2906485-a96a62ee358da5f7.png" alt="gitee-private.png"><br>完成后点击“创建”.<br>这样我们能看到项目的地址了.<br>如:<a href="https://gitee.com/wesk/xxx" target="_blank" rel="noopener">https://gitee.com/wesk/xxx</a><br>我们这个地址作为我们私有库的远程repo地址.</p>
 </li>
 <li><p>git命令clone远程库到本地<br>pod repo add my-repo <a href="https://gitee.com/wesk/xxx" target="_blank" rel="noopener">https://gitee.com/wesk/xxx</a></p>
 <p>第一次添加会验证gitee的userName和password. </p>
@@ -141,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjvhovd75000atezbi5e3tzvb" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjvhpgb5y000a2zzbtlyouwz3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/私有库/">私有库</a></li></ul>
