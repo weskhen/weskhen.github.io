@@ -5,20 +5,20 @@
   
 
   
-  <title>NSNumberFormatter的简单使用 | 不想写代码</title>
+  <title>无痕埋点及上报阿里云日志 | 不想写代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NSNumber  ​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化  NSNumberFormatter 数字格式类，用于定义数字的格式   NSNumberFormatter的使用: 123456NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];[formatt">
-<meta name="keywords" content="NSNumberFormatter">
+  <meta name="description" content="介绍该项目主要提供了无痕埋点的功能,有关无痕埋点 文章应该有一大堆,这边不做阐述.埋点没有覆盖全部事件,只对一些简单常用的处理了,后期需求对具体的业务扩张对象(Model) 其次,项目也提供了目前比较流行的阿里云日志上报功能, 上报格式支持json和protocol buffer格式. .protocol 文件转objc  Sls.pbobjc.h和Sls.pbobjc.m 文件的导出:  首页需">
+<meta name="keywords" content="埋点,阿里云日志">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSNumberFormatter的简单使用">
-<meta property="og:url" content="http://weskhen.xyz/2019/02/23/NSNumberFormatter/index.html">
+<meta property="og:title" content="无痕埋点及上报阿里云日志">
+<meta property="og:url" content="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/index.html">
 <meta property="og:site_name" content="不想写代码">
-<meta property="og:description" content="NSNumber  ​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化  NSNumberFormatter 数字格式类，用于定义数字的格式   NSNumberFormatter的使用: 123456NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];[formatt">
+<meta property="og:description" content="介绍该项目主要提供了无痕埋点的功能,有关无痕埋点 文章应该有一大堆,这边不做阐述.埋点没有覆盖全部事件,只对一些简单常用的处理了,后期需求对具体的业务扩张对象(Model) 其次,项目也提供了目前比较流行的阿里云日志上报功能, 上报格式支持json和protocol buffer格式. .protocol 文件转objc  Sls.pbobjc.h和Sls.pbobjc.m 文件的导出:  首页需">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-07T10:02:55.931Z">
+<meta property="og:updated_time" content="2019-05-22T11:00:19.464Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NSNumberFormatter的简单使用">
-<meta name="twitter:description" content="NSNumber  ​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化  NSNumberFormatter 数字格式类，用于定义数字的格式   NSNumberFormatter的使用: 123456NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];[formatt">
+<meta name="twitter:title" content="无痕埋点及上报阿里云日志">
+<meta name="twitter:description" content="介绍该项目主要提供了无痕埋点的功能,有关无痕埋点 文章应该有一大堆,这边不做阐述.埋点没有覆盖全部事件,只对一些简单常用的处理了,后期需求对具体的业务扩张对象(Model) 其次,项目也提供了目前比较流行的阿里云日志上报功能, 上报格式支持json和protocol buffer格式. .protocol 文件转objc  Sls.pbobjc.h和Sls.pbobjc.m 文件的导出:  首页需">
   
   
     <link rel="icon" href="/favicon.png">
@@ -67,10 +67,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-阿里云日志上传及无痕埋点" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
-  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
+    <a href="/2019/05/22/阿里云日志上传及无痕埋点/" class="article-date">
+  <time datetime="2019-05-21T16:00:00.000Z" itemprop="datePublished">2019-05-22</time>
 </a>
     
   <div class="article-category">
@@ -85,7 +85,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      NSNumberFormatter的简单使用
+      无痕埋点及上报阿里云日志
     </h1>
   
 
@@ -93,43 +93,53 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>NSNumber</li>
-</ul>
-<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
-<ul>
-<li><p>NSNumberFormatter</p>
-<p>数字格式类，用于定义数字的格式</p>
+        <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>该项目主要提供了无痕埋点的功能,有关无痕埋点 文章应该有一大堆,这边不做阐述.埋点没有覆盖全部事件,只对一些简单常用的处理了,后期需求对具体的业务扩张对象(Model)</p>
+<p>其次,项目也提供了目前比较流行的阿里云日志上报功能, 上报格式支持json和protocol buffer格式.</p>
+<h5 id="protocol-文件转objc"><a href="#protocol-文件转objc" class="headerlink" title=".protocol 文件转objc"></a>.protocol 文件转objc</h5><p>  Sls.pbobjc.h和Sls.pbobjc.m 文件的导出:</p>
+<ol>
+<li><p>首页需要安装protoc版本:</p>
+<p>可网上自行下载:如我之前的版本是protoc-3.0.0.</p>
+<p>安装proto 版本protoc-3.0.0-osx-x86_64,将该bin文件下的protoc  放入到/usr/local/bin/ </p>
 </li>
-</ul>
-<p>NSNumberFormatter的使用:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
-<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>setFormatWidth设置字符宽度</p>
-<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
-<p>zeroSymbol: 零的样式</p>
-<p>paddingPosition:填充位置</p>
-<p>positiveSuffix: </p>
-<p>maximumIntegerDigits:整数最多位数</p>
-<p>minimumIntegerDigits:整数最少位数</p>
-<p>maximumFractionDigits:小数位最多位数</p>
-<p>minimumFractionDigits:小数位最少位数</p>
-<p>groupingSize:数字分割的尺寸</p>
-<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
-<p>maximumSignificantDigits:最大有效数字个数</p>
-<p>minimumSignificantDigits:最少有效数字个数</p>
-<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
-<p>方法:setPositiveFormat</p>
-<p>自定义输出格式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
+</ol>
+<ol start="2">
+<li><p>protoc文件转objc</p>
+<ol>
+<li>cd到当前目录下,执行命令行 </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc sls.proto --objc_out=&quot;./&quot;</span><br></pre></td></tr></table></figure>
+<p>会在当前的文件下多处两个文件.</p>
+<p>可能会有警告,如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[libprotobuf WARNING google/protobuf/compiler/parser.cc:547] No syntax specified for the proto file: sls.proto. Please use &apos;syntax = &quot;proto2&quot;;&apos; or &apos;syntax = &quot;proto3&quot;;&apos; to specify a syntax version. (Defaulted to proto2 syntax.)</span><br></pre></td></tr></table></figure>
+<p>说明需要指定protoc版本,如果文件导出成功 此处可忽略.</p>
+<p>在sls.proto文件中的第一行插入 </p>
+<p><code>syntax = &quot;proto2&quot;;</code>或<code>syntax = &quot;proto3&quot;;</code></p>
+</li>
+</ol>
+<h4 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h4><p>软件架构说明</p>
+<h4 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h4><ol>
+<li>支持pod <code>pod  &#39;BuryingPoint&#39;</code></li>
+</ol>
+<h4 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h4><ol>
+<li><p>pod安装后. 在BuryingPointAliLogConst.h 中有需要修改的阿里云日志相关的配置项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - 以下需要根据阿里云配置项赋值</span><br><span class="line">static NSString * AliLogDefaultEndPoint = @&quot;&quot;; //cn-hangzhou.log.aliyuncs.com</span><br><span class="line">static NSString * AliLogDefaultProject = @&quot;&quot;;</span><br><span class="line">static NSString * AliLogDefaultAccessKeyID = @&quot;&quot;;</span><br><span class="line">static NSString * AliLogDefaultAccessKeySecret = @&quot;&quot;;</span><br><span class="line">static NSString * AliLogDefaultLogstores = @&quot;&quot;;</span><br></pre></td></tr></table></figure>
+<p>在使用前赋值.</p>
+</li>
+<li><p>埋点事件可以继承<code>BuryingPointBaseModel</code>,添加各种日志事件类型.</p>
+</li>
+<li><p>提供了上报事件的入口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/// 根据上报策略 上报埋点</span><br><span class="line">- (void)handleEventLogWithModel:(BuryingPointBaseModel *)model strategy:(BPLogUploadStrategy)strategy;</span><br><span class="line"></span><br><span class="line">/// 校验所有埋点数据立即上传</span><br><span class="line">- (void)checkUploadBuryingPointImmediately;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p> 源码地址: <a href="https://github.com/weskhen/BuryingPoint" target="_blank" rel="noopener">https://github.com/weskhen/BuryingPoint</a><br>欢迎沟通交流….</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjvz49xz90001p8zbkf57xtb3" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjvz49y0h001fp8zbyqb90usj" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/埋点/">埋点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li></ul>
 
     </footer>
   </div>
@@ -137,19 +147,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/02/23/MSL、TTL和RTT简介/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          MSL、TTL和RTT简介
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/02/23/react源码修改记录/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/02/23/MSL、TTL和RTT简介/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">react源码修改记录</div>
+      <div class="article-nav-title">MSL、TTL和RTT简介</div>
     </a>
   
 </nav>

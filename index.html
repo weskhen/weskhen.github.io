@@ -67,6 +67,89 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-阿里云日志上传及无痕埋点" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/22/阿里云日志上传及无痕埋点/" class="article-date">
+  <time datetime="2019-05-21T16:00:00.000Z" itemprop="datePublished">2019-05-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/22/阿里云日志上传及无痕埋点/">无痕埋点及上报阿里云日志</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>该项目主要提供了无痕埋点的功能,有关无痕埋点 文章应该有一大堆,这边不做阐述.埋点没有覆盖全部事件,只对一些简单常用的处理了,后期需求对具体的业务扩张对象(Model)</p>
+<p>其次,项目也提供了目前比较流行的阿里云日志上报功能, 上报格式支持json和protocol buffer格式.</p>
+<h5 id="protocol-文件转objc"><a href="#protocol-文件转objc" class="headerlink" title=".protocol 文件转objc"></a>.protocol 文件转objc</h5><p>  Sls.pbobjc.h和Sls.pbobjc.m 文件的导出:</p>
+<ol>
+<li><p>首页需要安装protoc版本:</p>
+<p>可网上自行下载:如我之前的版本是protoc-3.0.0.</p>
+<p>安装proto 版本protoc-3.0.0-osx-x86_64,将该bin文件下的protoc  放入到/usr/local/bin/ </p>
+</li>
+</ol>
+<ol start="2">
+<li><p>protoc文件转objc</p>
+<ol>
+<li>cd到当前目录下,执行命令行 </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc sls.proto --objc_out=&quot;./&quot;</span><br></pre></td></tr></table></figure>
+<p>会在当前的文件下多处两个文件.</p>
+<p>可能会有警告,如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[libprotobuf WARNING google/protobuf/compiler/parser.cc:547] No syntax specified for the proto file: sls.proto. Please use &apos;syntax = &quot;proto2&quot;;&apos; or &apos;syntax = &quot;proto3&quot;;&apos; to specify a syntax version. (Defaulted to proto2 syntax.)</span><br></pre></td></tr></table></figure>
+<p>说明需要指定protoc版本,如果文件导出成功 此处可忽略.</p>
+<p>在sls.proto文件中的第一行插入 </p>
+<p><code>syntax = &quot;proto2&quot;;</code>或<code>syntax = &quot;proto3&quot;;</code></p>
+</li>
+</ol>
+<h4 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h4><p>软件架构说明</p>
+<h4 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h4><ol>
+<li>支持pod <code>pod  &#39;BuryingPoint&#39;</code></li>
+</ol>
+<h4 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h4><ol>
+<li><p>pod安装后. 在BuryingPointAliLogConst.h 中有需要修改的阿里云日志相关的配置项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - 以下需要根据阿里云配置项赋值</span><br><span class="line">static NSString * AliLogDefaultEndPoint = @&quot;&quot;; //cn-hangzhou.log.aliyuncs.com</span><br><span class="line">static NSString * AliLogDefaultProject = @&quot;&quot;;</span><br><span class="line">static NSString * AliLogDefaultAccessKeyID = @&quot;&quot;;</span><br><span class="line">static NSString * AliLogDefaultAccessKeySecret = @&quot;&quot;;</span><br><span class="line">static NSString * AliLogDefaultLogstores = @&quot;&quot;;</span><br></pre></td></tr></table></figure>
+<p>在使用前赋值.</p>
+</li>
+<li><p>埋点事件可以继承<code>BuryingPointBaseModel</code>,添加各种日志事件类型.</p>
+</li>
+<li><p>提供了上报事件的入口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/// 根据上报策略 上报埋点</span><br><span class="line">- (void)handleEventLogWithModel:(BuryingPointBaseModel *)model strategy:(BPLogUploadStrategy)strategy;</span><br><span class="line"></span><br><span class="line">/// 校验所有埋点数据立即上传</span><br><span class="line">- (void)checkUploadBuryingPointImmediately;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p> 源码地址: <a href="https://github.com/weskhen/BuryingPoint" target="_blank" rel="noopener">https://github.com/weskhen/BuryingPoint</a><br>欢迎沟通交流….</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjvz49y0h001fp8zbyqb90usj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/埋点/">埋点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-MSL、TTL和RTT简介" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/02/23/MSL、TTL和RTT简介/" class="article-date">
@@ -128,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjvoxpypd0000hkzbwszibmar" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjvz49xz30000p8zbkfpjqvtk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSL/">MSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RTT/">RTT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TTL/">TTL</a></li></ul>
@@ -201,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjvoxpyps0005hkzb04s1k1vt" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjvz49xz90001p8zbkf57xtb3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
@@ -264,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjvoxpyqq001ihkzbotp7ausw" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjvz49y0f001ep8zbm51stwbb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li></ul>
@@ -313,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjvoxpypz000ehkzbzkudr052" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjvz49xzl000ep8zbuqw66wu6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XCode报错/">XCode报错</a></li></ul>
@@ -379,7 +462,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjvoxpypq0004hkzbvn24jhm0" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjvz49xzd0004p8zb2r48xaxm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSProxy/">NSProxy</a></li></ul>
@@ -509,7 +592,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjvoxpypt0006hkzb4mptr887" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjvz49xzg0006p8zbta2nadde" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactNative/">ReactNative</a></li></ul>
@@ -560,7 +643,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/13/轮播图/" data-id="cjvoxpyq4000jhkzbk39xlsz6" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/07/13/轮播图/" data-id="cjvz49xzm000fp8zbc86dpn56" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/轮播图/">轮播图</a></li></ul>
@@ -641,7 +724,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjvoxpypv0009hkzbhywdgh0a" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjvz49xzj000ap8zbilha40mh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/私有库/">私有库</a></li></ul>
@@ -750,147 +833,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/01/23/NSURLSession/" data-id="cjvoxpypl0001hkzbw2gk2iou" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/01/23/NSURLSession/" data-id="cjvz49xzf0005p8zb84upjkgl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-本地app发布下载" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/29/本地app发布下载/" class="article-date">
-  <time datetime="2017-04-28T16:00:00.000Z" itemprop="datePublished">2017-04-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/29/本地app发布下载/">mac 搭建apache https服务器 用于本地app发布</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>先 cd <code>/Library/WebServer/Documents/</code> 这个是Mac下 web的目录 </p>
-<p>可以新建一个ios的文件路径 <code>sudo mkdir ios</code></p>
-<p>cd ios 文件下 开始执行以下操作</p>
-<p>a-生成私钥，命令： <code>sudo openssl genrsa -des3 -out app.key 1024</code></p>
-<p>b-生成签署申请，命令： <code>sudo openssl req -new -key app.key -out app.csr</code></p>
-<p>c-生成服务器的私钥，命令： <code>sudo openssl rsa -in app.key -out server.key</code></p>
-<p>d-生成给网站服务器签署的证书，命令： <code>sudo openssl req -new -x509 -days 3650 -key server.key -out server.crt</code></p>
-<p>（这一步和a差不多，需要注意的是Common Name一定要填对）</p>
-<p>e-拷贝文件至apache目录下 <code>sudo cp server.* /etc/apache2/</code></p>
-<p>以下是具体的步骤： </p>
-<p>MacBook-Pro:apache2 weskhen$ <code>cd /Library/WebServer/Documents/</code></p>
-<p>MacBook-Pro:Documents weskhen$ <code>ls</code></p>
-<p>PoweredByMacOSX.gifindex.html.en</p>
-<p>PoweredByMacOSXLarge.gifindex.html.en~orig</p>
-<p>MacBook-Pro:Documents weskhen$ <code>sudo mkdir ios</code></p>
-<p>MacBook-Pro:Documents weskhen$ <code>ls</code></p>
-<p>PoweredByMacOSX.gifindex.html.en~orig</p>
-<p>PoweredByMacOSXLarge.gifios</p>
-<p>index.html.en</p>
-<p>MacBook-Pro:Documents weskhen$ <code>cd ios</code></p>
-<p>MacBook-Pro:ios weskhen$ <code>sudo openssl genrsa -des3 -out app.key 1024</code></p>
-<p>Generating RSA private key, 1024 bit long modulus</p>
-<p>..++++++</p>
-<p>………++++++</p>
-<p>e is 65537 (0x10001)</p>
-<p>Enter pass phrase for app.key:</p>
-<p>Verifying - Enter pass phrase for app.key:</p>
-<p>MacBook-Pro:ios weskhen$ <code>sudo openssl req -new -key app.key -out app.csr</code></p>
-<p>Enter pass phrase for app.key:</p>
-<p>You are about to be asked to enter information that will be incorporated</p>
-<p>into your certificate request.</p>
-<p>What you are about to enter is what is called a Distinguished Name or a DN.</p>
-<p>There are quite a few fields but you can leave some blank</p>
-<p>For some fields there will be a default value,</p>
-<p>If you enter ‘.’, the field will be left blank.</p>
-<p>-—-</p>
-<p>Country Name (2 letter code) [AU]:CN</p>
-<p>State or Province Name (full name) [Some-State]:ZheJiang</p>
-<p>Locality Name (eg, city) []:hangzhou</p>
-<p>Organization Name (eg, company) [Internet Widgits Pty Ltd]:wesk</p>
-<p>Organizational Unit Name (eg, section) []:weskhen</p>
-<p>Common Name (e.g. server FQDN or YOUR name) []:10.0.0.12</p>
-<p>Email Address []:<a href="mailto:wujian516411567@163.com" target="_blank" rel="noopener">wujian516411567@163.com</a></p>
-<p>Please enter the following ‘extra’ attributes</p>
-<p>to be sent with your certificate request</p>
-<p>A challenge password []:000000</p>
-<p>An optional company name []:weskhen</p>
-<p>MacBook-Pro:ios weskhen$ <code>sudo openssl rsa -in app.key -out server.key</code></p>
-<p>Enter pass phrase for app.key:</p>
-<p>writing RSA key</p>
-<p>MacBook-Pro:ios weskhen$ sudo openssl req -new -x509 -days 3650 -key server.key -out server.crt</p>
-<p>You are about to be asked to enter information that will be incorporated</p>
-<p>into your certificate request.</p>
-<p>What you are about to enter is what is called a Distinguished Name or a DN.</p>
-<p>There are quite a few fields but you can leave some blank</p>
-<p>For some fields there will be a default value,</p>
-<p>If you enter ‘.’, the field will be left blank.</p>
-<p>-—-</p>
-<p>Country Name (2 letter code) [AU]:CN</p>
-<p>State or Province Name (full name) [Some-State]:ZheJiang</p>
-<p>Locality Name (eg, city) []:hangzhou</p>
-<p>Organization Name (eg, company) [Internet Widgits Pty Ltd]:wesk</p>
-<p>Organizational Unit Name (eg, section) []:weskhen</p>
-<p>Common Name (e.g. server FQDN or YOUR name) []:<em>10.0.0.12</em></p>
-<p>Email Address []:<a href="mailto:wujian516411567@163.com" target="_blank" rel="noopener">wujian516411567@163.com</a></p>
-<p>MacBook-Pro:ios weskhen$ ls</p>
-<p>app.csrapp.keyserver.crtserver.key</p>
-<p>MacBook-Pro:ios weskhen$ <code>sudo cp server.* /etc/apache2/</code></p>
-<p>MacBook-Pro:ios weskhen$ <code>ls</code></p>
-<p>app.csr app.key server.crt server.key</p>
-<p>MacBook-Pro:apache2 weskhen$ <code>sudo apachectl configtest</code></p>
-<p>AH00112: Warning: DocumentRoot [/usr/docs/dummy-host.<a href="http://example.com" target="_blank" rel="noopener">example.com</a>] does not exist</p>
-<p>AH00112: Warning: DocumentRoot [/usr/docs/dummy-host2.<a href="http://example.com" target="_blank" rel="noopener">example.com</a>] does not exist</p>
-<p>Syntax OK</p>
-<p>MacBook-Pro:apache2 weskhen$ <code>sudo apachectl restart</code></p>
-<p>apachectl configtest //检测 当服务出现问题的时候用这一句检测一下 很有用</p>
-<p><strong>2-配置apache，开启ssl</strong></p>
-<p>编辑/etc/apache2/httpd.conf文件，去掉下面三行前面的＃号</p>
-<p>(/etc/apache2/httpd.conf和/private/etc/apache2/httpd.conf其实是同一个内容)</p>
-<p>LoadModule ssl_module libexec/apache2/mod_ssl.so</p>
-<p>Include /etc/apache2/extra/httpd-ssl.conf</p>
-<p>Include /etc/apache2/extra/httpd-vhosts.conf</p>
-<p>编辑/etc/apache2/extra/httpd-ssl.conf文件，去掉下面两行前面的＃号</p>
-<p>SSLCertificateFile “/etc/apache2/ssl/server.crt”/</p>
-<p>SSLCertificateFile “/private/etc/apache2/ssl/server.crt”</p>
-<p>SSLCertificateKeyFile “/etc/apache2/ssl/server.key”/</p>
-<p>SSLCertificateKeyFile “/private/etc/apache2/ssl/server.key”</p>
-<p>编辑/etc/apache2/extra/httpd-vhosts.conf文件，在NameVirtualHost*:80后面添加一段如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:443&gt;</span><br><span class="line">    SSLEngine on</span><br><span class="line">    SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL</span><br><span class="line">    SSLCertificateFile /etc/apache2/server.crt</span><br><span class="line">    SSLCertificateKeyFile /etc/apache2/server.key</span><br><span class="line">    ServerName 10.0.0.12 </span><br><span class="line">    DocumentRoot &quot;/Library/WebServer/Documents&quot;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
-<p>10.0.0.12是当前设备局域网内的IP地址</p>
-<p><strong>3-配置ipa下载</strong></p>
-<p>获取打包后的mainfest.plist文件 如果选择了app thinning 删除 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;;</span><br><span class="line">&lt;plist version=&quot;1.0&quot;&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">    &lt;key&gt;items&lt;/key&gt;</span><br><span class="line">    &lt;array&gt;</span><br><span class="line">        &lt;dict&gt;</span><br><span class="line">            &lt;key&gt;assets&lt;/key&gt;</span><br><span class="line">            &lt;array&gt;</span><br><span class="line">                &lt;dict&gt;</span><br><span class="line">                    &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;software-package&lt;/string&gt;</span><br><span class="line">                    &lt;key&gt;url&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;https://10.0.0.12:443/ios/amigo.ipa&lt;/string&gt;;</span><br><span class="line">                &lt;/dict&gt;</span><br><span class="line">                &lt;dict&gt;</span><br><span class="line">                    &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;display-image&lt;/string&gt;</span><br><span class="line">                    &lt;key&gt;url&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;https://o1wh05aeh.qnssl.com/image/view/app_icons/fe823ec8033348194e09c882d39604b3&lt;/string&gt;;</span><br><span class="line">                &lt;/dict&gt;</span><br><span class="line">                &lt;dict&gt;</span><br><span class="line">                    &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;full-size-image&lt;/string&gt;</span><br><span class="line">                    &lt;key&gt;url&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;https://o1wh05aeh.qnssl.com/image/view/app_icons/fe823ec8033348194e09c882d39604b3&lt;/string&gt;;</span><br><span class="line">                &lt;/dict&gt;</span><br><span class="line">            &lt;/array&gt;</span><br><span class="line">            &lt;key&gt;metadata&lt;/key&gt;</span><br><span class="line">            &lt;dict&gt;</span><br><span class="line">                &lt;key&gt;bundle-identifier&lt;/key&gt;</span><br><span class="line">                &lt;string&gt;com.xiaolian.amigo&lt;/string&gt;</span><br><span class="line">                &lt;key&gt;bundle-version&lt;/key&gt;</span><br><span class="line">                &lt;string&gt;1.0.0&lt;/string&gt;</span><br><span class="line">                &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                &lt;string&gt;software&lt;/string&gt;</span><br><span class="line">                &lt;key&gt;title&lt;/key&gt;</span><br><span class="line">                &lt;string&gt;笑联&lt;/string&gt;</span><br><span class="line">            &lt;/dict&gt;</span><br><span class="line">        &lt;/dict&gt;</span><br><span class="line">    &lt;/array&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2017/04/29/本地app发布下载/" data-id="cjvoxpyq1000fhkzbb7ukbwgv" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app发布/">app发布</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS资料/">iOS资料</a></li></ul>
 
     </footer>
   </div>
@@ -926,7 +872,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSL/">MSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSProxy/">NSProxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTT/">RTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TTL/">TTL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XCode报错/">XCode报错</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app发布/">app发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS资料/">iOS资料</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/私有库/">私有库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播图/">轮播图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSL/">MSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSProxy/">NSProxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTT/">RTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TTL/">TTL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XCode报错/">XCode报错</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app发布/">app发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS资料/">iOS资料</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/埋点/">埋点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/私有库/">私有库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播图/">轮播图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
     </div>
   </div>
 
@@ -936,7 +882,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/MSL/" style="font-size: 10px;">MSL</a> <a href="/tags/NSNumberFormatter/" style="font-size: 10px;">NSNumberFormatter</a> <a href="/tags/NSProxy/" style="font-size: 10px;">NSProxy</a> <a href="/tags/NSURLSession/" style="font-size: 10px;">NSURLSession</a> <a href="/tags/RN-Bug/" style="font-size: 10px;">RN-Bug</a> <a href="/tags/RTT/" style="font-size: 10px;">RTT</a> <a href="/tags/ReactNative/" style="font-size: 10px;">ReactNative</a> <a href="/tags/TTL/" style="font-size: 10px;">TTL</a> <a href="/tags/XCode报错/" style="font-size: 10px;">XCode报错</a> <a href="/tags/app发布/" style="font-size: 10px;">app发布</a> <a href="/tags/iOS资料/" style="font-size: 10px;">iOS资料</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/代码规范/" style="font-size: 10px;">代码规范</a> <a href="/tags/私有库/" style="font-size: 10px;">私有库</a> <a href="/tags/轮播图/" style="font-size: 10px;">轮播图</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+      <a href="/tags/MSL/" style="font-size: 10px;">MSL</a> <a href="/tags/NSNumberFormatter/" style="font-size: 10px;">NSNumberFormatter</a> <a href="/tags/NSProxy/" style="font-size: 10px;">NSProxy</a> <a href="/tags/NSURLSession/" style="font-size: 10px;">NSURLSession</a> <a href="/tags/RN-Bug/" style="font-size: 10px;">RN-Bug</a> <a href="/tags/RTT/" style="font-size: 10px;">RTT</a> <a href="/tags/ReactNative/" style="font-size: 10px;">ReactNative</a> <a href="/tags/TTL/" style="font-size: 10px;">TTL</a> <a href="/tags/XCode报错/" style="font-size: 10px;">XCode报错</a> <a href="/tags/app发布/" style="font-size: 10px;">app发布</a> <a href="/tags/iOS资料/" style="font-size: 10px;">iOS资料</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/代码规范/" style="font-size: 10px;">代码规范</a> <a href="/tags/埋点/" style="font-size: 10px;">埋点</a> <a href="/tags/私有库/" style="font-size: 10px;">私有库</a> <a href="/tags/轮播图/" style="font-size: 10px;">轮播图</a> <a href="/tags/阿里云日志/" style="font-size: 10px;">阿里云日志</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
 
@@ -945,7 +891,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
     </div>
   </div>
 
@@ -956,6 +902,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/05/22/阿里云日志上传及无痕埋点/">无痕埋点及上报阿里云日志</a>
+          </li>
         
           <li>
             <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
@@ -971,10 +921,6 @@
         
           <li>
             <a href="/2019/02/21/xcode报错/">Xcode 工程编译报错</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/23/NSProxy/">NSProxy简介</a>
           </li>
         
       </ul>
