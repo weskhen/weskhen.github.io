@@ -5,18 +5,23 @@
   
 
   
-  <title>Category: ReactNative | 面朝大海,想代码</title>
+  <title>Mac升级到新系统后, 执行pod、bundl命令行报错 | 面朝大海,想代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="证明我一下,我还活着...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="面朝大海,想代码">
-<meta property="og:url" content="http://weskhen.xyz/categories/iOS/ReactNative/index.html">
+  <meta name="description" content="更新完系统后,又遇到一些错误, 这边做个记录… 为了以后方面自己找答案 1-bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby: bad interpreter: No such file or directory 这个是由于系统升级了, 记更新cocoapods">
+<meta name="keywords" content="pod,bundler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac升级到新系统后, 执行pod、bundl命令行报错">
+<meta property="og:url" content="http://weskhen.xyz/2019/06/06/pod错误日志/index.html">
 <meta property="og:site_name" content="面朝大海,想代码">
-<meta property="og:description" content="证明我一下,我还活着...">
+<meta property="og:description" content="更新完系统后,又遇到一些错误, 这边做个记录… 为了以后方面自己找答案 1-bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby: bad interpreter: No such file or directory 这个是由于系统升级了, 记更新cocoapods">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g3rpllqte8j30v4046wf9.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g3rppstogkj310t0u0doe.jpg">
+<meta property="og:updated_time" content="2019-06-06T12:50:07.263Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="面朝大海,想代码">
-<meta name="twitter:description" content="证明我一下,我还活着...">
+<meta name="twitter:title" content="Mac升级到新系统后, 执行pod、bundl命令行报错">
+<meta name="twitter:description" content="更新完系统后,又遇到一些错误, 这边做个记录… 为了以后方面自己找答案 1-bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby: bad interpreter: No such file or directory 这个是由于系统升级了, 记更新cocoapods">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g3rpllqte8j30v4046wf9.jpg">
   
   
     <link rel="icon" href="/favicon.png">
@@ -65,42 +70,95 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/02/23/react源码修改记录/" class="archive-article-date">
-  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">Feb 23</time>
+        <section id="main"><article id="post-pod错误日志" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/06/pod错误日志/" class="article-date">
+  <time datetime="2019-06-06T12:06:41.043Z" itemprop="datePublished">2019-06-06</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/All/">All</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/23/react源码修改记录/">react源码修改记录</a>
+    <h1 class="article-title" itemprop="name">
+      Mac升级到新系统后, 执行pod、bundl命令行报错
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>更新完系统后,又遇到一些错误, 这边做个记录… 为了以后方面自己找答案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>这个是由于系统升级了,</p>
+<p>记更新cocoapods。执行命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gem update --system</span><br><span class="line"></span><br><span class="line">$ sudo gem install cocoapods -n/usr/local/bin</span><br></pre></td></tr></table></figure>
+<p>但这样的后果可能会导致pod的版本号也升上来了, 需要重新指定pod的版本号. </p>
+<p>执行bundle命令报错:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-bash: /usr/local/bin/bundle: /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>同样道理需要升级,执行命令如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gem install bundler -n /usr/local/bin</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g3rpllqte8j30v4046wf9.jpg" alt="image-20190606202825825"></p>
+<p>如果报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Could not find CFPropertyList-2.3.5 in any of the sources</span><br><span class="line"></span><br><span class="line">Run `bundle install` to install missing gems.</span><br></pre></td></tr></table></figure>
+<p>那就继续执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bundle install</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g3rppstogkj310t0u0doe.jpg" alt="bundle install命令执行截图"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="cjwknsrvq000e7azb3jhvr9hk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bundler/">bundler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/06/iOS13系统适配/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">iOS13 系统适配</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
-</section>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  </section>
         
           <aside id="sidebar">
   

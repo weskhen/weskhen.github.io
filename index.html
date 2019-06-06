@@ -67,19 +67,92 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-pod错误日志" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/06/pod错误日志/" class="article-date">
+  <time datetime="2019-06-06T12:06:41.043Z" itemprop="datePublished">2019-06-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/All/">All</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/06/pod错误日志/">Mac升级到新系统后, 执行pod、bundl命令行报错</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>更新完系统后,又遇到一些错误, 这边做个记录… 为了以后方面自己找答案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>这个是由于系统升级了,</p>
+<p>记更新cocoapods。执行命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gem update --system</span><br><span class="line"></span><br><span class="line">$ sudo gem install cocoapods -n/usr/local/bin</span><br></pre></td></tr></table></figure>
+<p>但这样的后果可能会导致pod的版本号也升上来了, 需要重新指定pod的版本号. </p>
+<p>执行bundle命令报错:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-bash: /usr/local/bin/bundle: /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>同样道理需要升级,执行命令如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gem install bundler -n /usr/local/bin</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g3rpllqte8j30v4046wf9.jpg" alt="image-20190606202825825"></p>
+<p>如果报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Could not find CFPropertyList-2.3.5 in any of the sources</span><br><span class="line"></span><br><span class="line">Run `bundle install` to install missing gems.</span><br></pre></td></tr></table></figure>
+<p>那就继续执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bundle install</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g3rppstogkj310t0u0doe.jpg" alt="bundle install命令执行截图"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="cjwknsrvq000e7azb3jhvr9hk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bundler/">bundler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-iOS13系统适配" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/06/iOS13系统适配/" class="article-date">
   <time datetime="2019-06-06T07:19:12.353Z" itemprop="datePublished">2019-06-06</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/06/iOS13系统适配/">iOS13 系统适配</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="iOS13-系统适配"><a href="#iOS13-系统适配" class="headerlink" title="iOS13 系统适配"></a>iOS13 系统适配</h2><p>很荣幸我的iPhone7支持iOS13版本, 并在苹果发布后的第一天就预装上了,系统非常流畅..当然也有很多bug…</p>
+        <p>很荣幸我的iPhone7支持iOS13版本, 并在苹果发布后的第一天就预装上了,系统非常流畅..当然也有很多bug…</p>
 <p>iOS13系统支持的机型:</p>
 <p>iPhone:  iphone SE、iPhone 6S、iPhone6S Plus、iphone 7、iphone 7s plus、iphone 8、iphone8 plus、iphone X、iphonexs、iphone xs max、iphone XR…</p>
 <p>iPad OS支持设备列表：（12.9英寸、11英寸、10.5英寸、9.7英寸）iPad Pro、（第五代、第六代）iPad、iPad mini（第五代）、iPad mini 4、iPad Air （第三代）、iPad Air 2</p>
@@ -105,6 +178,7 @@
 <p>} API_AVAILABLE(tvos(10.0)) API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos);</p>
 <h4 id="图片支持"><a href="#图片支持" class="headerlink" title="图片支持:"></a>图片支持:</h4><p>只要在<code>.xcassets</code> 中把图片拖进去后,在右侧工具栏中的最后一栏,查看<code>Appearances</code>,如图:</p>
 <p><a href><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g3rfj0hohkj31cc0k048j.jpg" alt="image-20190606144105761"></a></p>
+<p>做了一个简单的小demo, 注意下观察背景色和图片<br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g3rpzwa7cwg307g0dctbm.gif" alt="暗黑模式"></p>
 <h4 id="主动获取当前模式"><a href="#主动获取当前模式" class="headerlink" title="主动获取当前模式"></a>主动获取当前模式</h4><p>可以通过UIViewController 或 UIView 类中的traitCollection属性来获取</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// self 是UIViewController的子类</span><br><span class="line">self.traitCollection.userInterfaceStyle;</span><br><span class="line"></span><br><span class="line">self.view.traitCollection.userInterfaceStyle;</span><br></pre></td></tr></table></figure>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>在更新到iOS13后,迫不及待的打开了各个app, 发现很多app对兼容性有些问题, 如微信的首页等界面异常…支付宝中很多页面响应缓慢…,闲鱼首页搜索崩溃… UC浏览器真是个牛逼的app,在我连续点击5,6次,app一打开就crash之后,它居然可以展示了…<br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g3rj6ctd61j30ku1120uw.jpg" alt="iOS13下的UC浏览器首页"><br>不得不佩服UC的开发者🐂, 估计直接忽略了原先crash的代码块… </p>
@@ -117,9 +191,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/06/iOS13系统适配/" data-id="cjwkgb27t000alpzb13ivczaa" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/06/iOS13系统适配/" data-id="cjwknsrvm00097azb1d4eyxom" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS13/">iOS13</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/暗黑模式/">暗黑模式</a></li></ul>
+
     </footer>
   </div>
   
@@ -198,83 +274,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjwkgb28a000slpzbye59mtvw" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjwknsrw3000u7azb9rnv9i3d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/埋点/">埋点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
-  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>NSNumber</li>
-</ul>
-<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
-<ul>
-<li><p>NSNumberFormatter</p>
-<p>数字格式类，用于定义数字的格式</p>
-</li>
-</ul>
-<p>NSNumberFormatter的使用:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
-<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>setFormatWidth设置字符宽度</p>
-<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
-<p>zeroSymbol: 零的样式</p>
-<p>paddingPosition:填充位置</p>
-<p>positiveSuffix: </p>
-<p>maximumIntegerDigits:整数最多位数</p>
-<p>minimumIntegerDigits:整数最少位数</p>
-<p>maximumFractionDigits:小数位最多位数</p>
-<p>minimumFractionDigits:小数位最少位数</p>
-<p>groupingSize:数字分割的尺寸</p>
-<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
-<p>maximumSignificantDigits:最大有效数字个数</p>
-<p>minimumSignificantDigits:最少有效数字个数</p>
-<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
-<p>方法:setPositiveFormat</p>
-<p>自定义输出格式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjwkgb27j0001lpzb6l0i29as" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
 
     </footer>
   </div>
@@ -346,10 +349,83 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjwkgb27p0005lpzbs0n05df7" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjwknsrv800007azbbei0koiy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSL/">MSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RTT/">RTT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TTL/">TTL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
+  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>NSNumber</li>
+</ul>
+<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
+<ul>
+<li><p>NSNumberFormatter</p>
+<p>数字格式类，用于定义数字的格式</p>
+</li>
+</ul>
+<p>NSNumberFormatter的使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
+<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>setFormatWidth设置字符宽度</p>
+<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
+<p>zeroSymbol: 零的样式</p>
+<p>paddingPosition:填充位置</p>
+<p>positiveSuffix: </p>
+<p>maximumIntegerDigits:整数最多位数</p>
+<p>minimumIntegerDigits:整数最少位数</p>
+<p>maximumFractionDigits:小数位最多位数</p>
+<p>minimumFractionDigits:小数位最少位数</p>
+<p>groupingSize:数字分割的尺寸</p>
+<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
+<p>maximumSignificantDigits:最大有效数字个数</p>
+<p>minimumSignificantDigits:最少有效数字个数</p>
+<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
+<p>方法:setPositiveFormat</p>
+<p>自定义输出格式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjwknsrvi00047azbw7rwvv0x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
 
     </footer>
   </div>
@@ -409,7 +485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjwkgb28s001olpzblmb31fk9" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjwknsrwv00217azbj9e0wl4g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li></ul>
@@ -458,7 +534,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjwkgb27z000ilpzbleputkg1" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjwknsrvr000f7azbwhadcoc5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XCode报错/">XCode报错</a></li></ul>
@@ -524,7 +600,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjwkgb27d0000lpzb53rkwlg4" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjwknsrvd00017azb3s9ucbqa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSProxy/">NSProxy</a></li></ul>
@@ -654,7 +730,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjwkgb27q0006lpzbugsz5or3" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjwknsrvl00067azbdmqw2f9f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactNative/">ReactNative</a></li></ul>
@@ -705,91 +781,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/13/轮播图/" data-id="cjwkgb282000mlpzbpuc2s45l" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/07/13/轮播图/" data-id="cjwknsrvy000m7azb1co9683u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/轮播图/">轮播图</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-pod私有库的搭建使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/11/pod私有库的搭建使用/" class="article-date">
-  <time datetime="2018-06-10T16:00:00.000Z" itemprop="datePublished">2018-06-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/11/pod私有库的搭建使用/">pod私有库搭建及使用(gitee)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>pod 基础安装(必要条件,这边就不说了),建立在你能pod 文件的前提下.</p>
-<p>命令行:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo list</span><br></pre></td></tr></table></figure>
-<p>查看当前repos下的目录: master共有库,其他文件夹(私有库).<br>我们在执行<code>pod search xx</code>命令时,会在repos下查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">master</span><br><span class="line">- Type: git (master)</span><br><span class="line">- URL:  https://github.com/CocoaPods/Specs.git</span><br><span class="line">- Path: /Users/weskhen/.cocoapods/repos/master</span><br><span class="line"></span><br><span class="line">my-repo</span><br><span class="line">- Type: git (master)</span><br><span class="line">- URL:  https://gitee.com/wesk/my-repo</span><br><span class="line">- Path: /Users/weskhen/.cocoapods/repos/my-repo</span><br></pre></td></tr></table></figure>
-<p>只要安装并使用过pod的,master是一定存在的, my-repo是我的私有库,需要自己创建,怎么创建这个呢? 从上看到我使用的个人库是gitee.com. 因为这个是免费的(最多5个开发者公用).</p>
-<ol>
-<li><p>首先创建一个git的账号,这里以gitee为例,创建项目,点击右上角图标“+”<br><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/2906485-163b1c483317d31f.png?" alt="gitee-createProject.png"></p>
-<p>新建项目:填写各项,在 “是否开源” 选择 私有 如图:,<br><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/2906485-a96a62ee358da5f7.png" alt="gitee-private.png"><br>完成后点击“创建”.<br>这样我们能看到项目的地址了.<br>如:<a href="https://gitee.com/wesk/xxx" target="_blank" rel="noopener">https://gitee.com/wesk/xxx</a><br>我们这个地址作为我们私有库的远程repo地址.</p>
-</li>
-<li><p>git命令clone远程库到本地<br>pod repo add my-repo <a href="https://gitee.com/wesk/xxx" target="_blank" rel="noopener">https://gitee.com/wesk/xxx</a></p>
-<p>第一次添加会验证gitee的userName和password. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wujian-2:~ weskhen$ pod repo add my-repo https://gitee.com/wesk/my-repo</span><br><span class="line">Cloning spec repo `my-repo` from `https://gitee.com/wesk/my-repo`</span><br></pre></td></tr></table></figure>
-<p>pod repo remove xxx<br>移除本地指定的远程库<br>如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wujian-2:~ weskhen$ pod repo remove my-repoSec</span><br><span class="line">Removing spec repo `my-repoSec`</span><br></pre></td></tr></table></figure>
-<p>pod repo update xxx<br>用于更新xxx 私有库的命令 多人开发的时候会用到<br>如:pod repo update my-repo</p>
-</li>
-<li><p>更新独立的项目(xx.podspec)文件 到my-repo 即组件化<br>这个流程网上应该很多了,当时做这的时候也是查阅相关资料的.这边简单说下流程相关的命令<br>1.创建编辑.podspec命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec create xx</span><br></pre></td></tr></table></figure>
-<p>2.将项目打成tag命令: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git tag -a 1.0 -m &quot;v1.0&quot;</span><br><span class="line">git push origin master</span><br><span class="line">git push origin --tag</span><br></pre></td></tr></table></figure>
-<p>3.验证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint xx.podspec</span><br><span class="line">     //补充:  如果有本地私有库源 验证时需要加入私有源和官方源</span><br><span class="line"> pod spec lint KKLDBService.podspec --sources=&apos;https://gitee.com/wesk/my-repo,https://github.com/CocoaPods/Specs.git&apos;</span><br></pre></td></tr></table></figure>
-<p>4.发布</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push my-repo xx.podspec --allow-warnings</span><br></pre></td></tr></table></figure>
-<p>后缀–allow-warnings 代表忽略警告<br>后缀–use-libraries 代表使用静态库 组建若使用了.a静态库,需要加上这个.</p>
-<ol start="4">
-<li><p>项目中的使用<br>在podfile文件中 顶部添加:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">官方源: source &apos;https://github.com/CocoaPods/Specs.git&apos;</span><br><span class="line">私有源: source &apos;https://gitee.com/wesk/my-repo&apos;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>你也可以在具体的组件处指定源,如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;xxxx&apos;, :git =&gt;&apos;https://gitee.com/wesk/my-repo&apos;</span><br><span class="line">&lt;!--或--&gt;</span><br><span class="line">pod &apos;xxx&apos;, :podspec =&gt; &apos;xxxx.podspec&apos;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>最后更新podfile文件即可啦</p>
-<p>私有库的使用差不多就这样了,重要的是这个流程和相应的命令.若使用公司的项目,从第二步开始即可.</p>
-<h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjwkgb27y000flpzbz9wipooc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/私有库/">私有库</a></li></ul>
 
     </footer>
   </div>
@@ -815,7 +810,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/ReactNative/">ReactNative</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/All/">All</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/ReactNative/">ReactNative</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
     </div>
   </div>
 
@@ -825,7 +820,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSL/">MSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSProxy/">NSProxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTT/">RTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TTL/">TTL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XCode报错/">XCode报错</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app发布/">app发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS资料/">iOS资料</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/埋点/">埋点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/私有库/">私有库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播图/">轮播图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSL/">MSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSProxy/">NSProxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTT/">RTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TTL/">TTL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XCode报错/">XCode报错</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app发布/">app发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bundler/">bundler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS13/">iOS13</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS资料/">iOS资料</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/埋点/">埋点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/暗黑模式/">暗黑模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/私有库/">私有库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播图/">轮播图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
     </div>
   </div>
 
@@ -835,7 +830,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/MSL/" style="font-size: 10px;">MSL</a> <a href="/tags/NSNumberFormatter/" style="font-size: 10px;">NSNumberFormatter</a> <a href="/tags/NSProxy/" style="font-size: 10px;">NSProxy</a> <a href="/tags/NSURLSession/" style="font-size: 10px;">NSURLSession</a> <a href="/tags/RN-Bug/" style="font-size: 10px;">RN-Bug</a> <a href="/tags/RTT/" style="font-size: 10px;">RTT</a> <a href="/tags/ReactNative/" style="font-size: 10px;">ReactNative</a> <a href="/tags/TTL/" style="font-size: 10px;">TTL</a> <a href="/tags/XCode报错/" style="font-size: 10px;">XCode报错</a> <a href="/tags/app发布/" style="font-size: 10px;">app发布</a> <a href="/tags/iOS资料/" style="font-size: 10px;">iOS资料</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/代码规范/" style="font-size: 10px;">代码规范</a> <a href="/tags/埋点/" style="font-size: 10px;">埋点</a> <a href="/tags/私有库/" style="font-size: 10px;">私有库</a> <a href="/tags/轮播图/" style="font-size: 10px;">轮播图</a> <a href="/tags/阿里云日志/" style="font-size: 10px;">阿里云日志</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+      <a href="/tags/MSL/" style="font-size: 10px;">MSL</a> <a href="/tags/NSNumberFormatter/" style="font-size: 10px;">NSNumberFormatter</a> <a href="/tags/NSProxy/" style="font-size: 10px;">NSProxy</a> <a href="/tags/NSURLSession/" style="font-size: 10px;">NSURLSession</a> <a href="/tags/RN-Bug/" style="font-size: 10px;">RN-Bug</a> <a href="/tags/RTT/" style="font-size: 10px;">RTT</a> <a href="/tags/ReactNative/" style="font-size: 10px;">ReactNative</a> <a href="/tags/TTL/" style="font-size: 10px;">TTL</a> <a href="/tags/XCode报错/" style="font-size: 10px;">XCode报错</a> <a href="/tags/app发布/" style="font-size: 10px;">app发布</a> <a href="/tags/bundler/" style="font-size: 10px;">bundler</a> <a href="/tags/iOS13/" style="font-size: 10px;">iOS13</a> <a href="/tags/iOS资料/" style="font-size: 10px;">iOS资料</a> <a href="/tags/pod/" style="font-size: 20px;">pod</a> <a href="/tags/代码规范/" style="font-size: 10px;">代码规范</a> <a href="/tags/埋点/" style="font-size: 10px;">埋点</a> <a href="/tags/暗黑模式/" style="font-size: 10px;">暗黑模式</a> <a href="/tags/私有库/" style="font-size: 10px;">私有库</a> <a href="/tags/轮播图/" style="font-size: 10px;">轮播图</a> <a href="/tags/阿里云日志/" style="font-size: 10px;">阿里云日志</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
 
@@ -857,7 +852,11 @@
       <ul>
         
           <li>
-            <a href="/2019/06/06/iOS13系统适配/">(no title)</a>
+            <a href="/2019/06/06/pod错误日志/">Mac升级到新系统后, 执行pod、bundl命令行报错</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/06/iOS13系统适配/">iOS13 系统适配</a>
           </li>
         
           <li>
@@ -865,15 +864,11 @@
           </li>
         
           <li>
-            <a href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
-          </li>
-        
-          <li>
             <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
           </li>
         
           <li>
-            <a href="/2019/02/23/react源码修改记录/">react源码修改记录</a>
+            <a href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
           </li>
         
       </ul>
