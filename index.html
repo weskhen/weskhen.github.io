@@ -67,6 +67,68 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS13系统适配" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/06/iOS13系统适配/" class="article-date">
+  <time datetime="2019-06-06T07:19:12.353Z" itemprop="datePublished">2019-06-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="iOS13-系统适配"><a href="#iOS13-系统适配" class="headerlink" title="iOS13 系统适配"></a>iOS13 系统适配</h2><p>很荣幸我的iPhone7支持iOS13版本, 并在苹果发布后的第一天就预装上了,系统非常流畅..当然也有很多bug…</p>
+<p>iOS13系统支持的机型:</p>
+<p>iPhone:  iphone SE、iPhone 6S、iPhone6S Plus、iphone 7、iphone 7s plus、iphone 8、iphone8 plus、iphone X、iphonexs、iphone xs max、iphone XR…</p>
+<p>iPad OS支持设备列表：（12.9英寸、11英寸、10.5英寸、9.7英寸）iPad Pro、（第五代、第六代）iPad、iPad mini（第五代）、iPad mini 4、iPad Air （第三代）、iPad Air 2</p>
+<h3 id="暗黑模式"><a href="#暗黑模式" class="headerlink" title="暗黑模式:"></a>暗黑模式:</h3><p>大部分工作都是系统完成的</p>
+<h4 id="颜色支持"><a href="#颜色支持" class="headerlink" title="颜色支持"></a>颜色支持</h4><p>可以根据当前模式来展示:</p>
+<p>oc版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (UIColor *)setElementLightStyleColor:(UIColor *)lColor darkStyleColor:(UIColor *)dColor &#123;</span><br><span class="line">    __block UIColor *showColor = lColor;</span><br><span class="line">    if (@available(iOS 13.0, *)) &#123;</span><br><span class="line">        showColor = [UIColor colorWithDynamicProvider:^UIColor * (UITraitCollection * dynamicProvider) &#123;</span><br><span class="line">            if (dynamicProvider.userInterfaceStyle == UIUserInterfaceStyleDark) &#123;</span><br><span class="line">                return  dColor;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return lColor;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    return showColor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>swift版本</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> bgColor = <span class="type">UIColor</span> &#123; (traitCollection) -&gt; <span class="type">UIColor</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">switch</span> traitCollection.userInterfaceStyle &#123;</span><br><span class="line">    <span class="keyword">case</span> .light:</span><br><span class="line">        <span class="keyword">return</span> <span class="type">UIColor</span>.white</span><br><span class="line">    <span class="keyword">case</span> .dark:</span><br><span class="line">        <span class="keyword">return</span> <span class="type">UIColor</span>.black</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">fatalError</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@interface UIColor (DynamicColors)</p>
+<p>+ (UIColor <em>)colorWithDynamicProvider:(UIColor </em> (^)(UITraitCollection *))dynamicProvider API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);</p>
+<p>- (UIColor <em>)initWithDynamicProvider:(UIColor </em> (^)(UITraitCollection *))dynamicProvider API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);</p>
+<p>/* Resolve any color to its most fundamental form (a non-dynamic color) for a specific trait collection.</p>
+<p> */</p>
+<p>- (UIColor <em>)resolvedColorWithTraitCollection:(UITraitCollection </em>)traitCollection API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);</p>
+<p>@end</p>
+<p>UITraitCollection 类中获取到当前模式</p>
+<p>@property (nonatomic, readonly) UIUserInterfaceStyle userInterfaceStyle API_AVAILABLE(tvos(10.0)) API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos); // unspecified: UIUserInterfaceStyleUnspecified</p>
+<p>typedef NS_ENUM(NSInteger, UIUserInterfaceStyle) {</p>
+<p>​    UIUserInterfaceStyleUnspecified,</p>
+<p>​    UIUserInterfaceStyleLight,</p>
+<p>​    UIUserInterfaceStyleDark,</p>
+<p>} API_AVAILABLE(tvos(10.0)) API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos);</p>
+<h4 id="图片支持"><a href="#图片支持" class="headerlink" title="图片支持:"></a>图片支持:</h4><p>只要在<code>.xcassets</code> 中把图片拖进去后,在右侧工具栏中的最后一栏,查看<code>Appearances</code>,如图:</p>
+<p><a href><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g3rfj0hohkj31cc0k048j.jpg" alt="image-20190606144105761"></a></p>
+<h4 id="主动获取当前模式"><a href="#主动获取当前模式" class="headerlink" title="主动获取当前模式"></a>主动获取当前模式</h4><p>可以通过UIViewController 或 UIView 类中的traitCollection属性来获取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// self 是UIViewController的子类</span><br><span class="line">self.traitCollection.userInterfaceStyle;</span><br><span class="line"></span><br><span class="line">self.view.traitCollection.userInterfaceStyle;</span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>在更新到iOS13后,迫不及待的打开了各个app, 发现很多app对兼容性有些问题, 如微信的首页等界面异常…支付宝中很多页面响应缓慢…,闲鱼首页搜索崩溃… UC浏览器真是个牛逼的app,在我连续点击5,6次,app一打开就crash之后,它居然可以展示了…<br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g3rj6ctd61j30ku1120uw.jpg" alt="iOS13下的UC浏览器首页"><br>不得不佩服UC的开发者🐂, 估计直接忽略了原先crash的代码块… </p>
+<p>看了一下之前公司,一手养大的娃… 完美兼容iOS13,心中有点小兴奋…</p>
+<p>为什么会UI异常,或直接crash呢? 我猜大部分应该是开发者动了iOS私有API,来实现一些定制化需求… 因为apple不会考虑兼容这些东西,因为它本来就不想给你用,自己作死又有什么办法…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">/*!</span><br><span class="line"> * 获取当前网络类型</span><br><span class="line"> * 通过statusBar的网络subview获取具体类型</span><br><span class="line"> */</span><br><span class="line">+ (NETWORK_TYPE)getNetworkTypeFromStatusBar</span><br><span class="line">&#123;</span><br><span class="line">    UIApplication *app = [UIApplication sharedApplication];</span><br><span class="line">    NETWORK_TYPE nettype = NETWORK_TYPE_NONE;</span><br><span class="line">    //iOS11</span><br><span class="line">    if ([[app valueForKeyPath:@&quot;_statusBar&quot;] isKindOfClass:NSClassFromString(@&quot;UIStatusBar_Modern&quot;)]) &#123;</span><br><span class="line">        NSArray *views = [[[[app valueForKeyPath:@&quot;statusBar&quot;] valueForKeyPath:@&quot;statusBar&quot;] valueForKeyPath:@&quot;foregroundView&quot;] subviews];</span><br><span class="line">        for (UIView *view in views) &#123;</span><br><span class="line">            for (id child in view.subviews) &#123;</span><br><span class="line">                //wifi</span><br><span class="line">                if ([child isKindOfClass:NSClassFromString(@&quot;_UIStatusBarWifiSignalView&quot;)]) &#123;</span><br><span class="line">                    nettype = NETWORK_TYPE_WIFI;</span><br><span class="line">                &#125;</span><br><span class="line">                //2G 3G 4G</span><br><span class="line">                if ([child isKindOfClass:NSClassFromString(@&quot;_UIStatusBarStringView&quot;)]) &#123;</span><br><span class="line">                    if ([[child valueForKey:@&quot;_originalText&quot;] containsString:@&quot;2G&quot;]) &#123;</span><br><span class="line">                        nettype = NETWORK_TYPE_2G;</span><br><span class="line">                    &#125; else if ([[child valueForKey:@&quot;_originalText&quot;] containsString:@&quot;3G&quot;]) &#123;</span><br><span class="line">                        nettype = NETWORK_TYPE_3G;</span><br><span class="line">                    &#125; else if ([[child valueForKey:@&quot;_originalText&quot;] containsString:@&quot;4G&quot;]) &#123;</span><br><span class="line">                        nettype = NETWORK_TYPE_4G;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        NSArray *subviews = [[[[UIApplication sharedApplication] valueForKey:@&quot;statusBar&quot;]</span><br><span class="line">                              valueForKey:@&quot;foregroundView&quot;] subviews];</span><br><span class="line">        NSNumber *dataNetworkItemView = nil;</span><br><span class="line">        for (id subview in subviews) &#123;</span><br><span class="line">            if ([subview isKindOfClass:[NSClassFromString(@&quot;UIStatusBarDataNetworkItemView&quot;) class]]) &#123;</span><br><span class="line">                dataNetworkItemView = subview;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        NSNumber *num = [dataNetworkItemView valueForKey:@&quot;dataNetworkType&quot;];</span><br><span class="line">        nettype = [num intValue];</span><br><span class="line">    &#125;</span><br><span class="line">   return nettype;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上所示, 苹果提供的API中没有直接给出<code>_UIStatusBarWifiSignalView</code>这一类名,我们开发者自己通过反编译,或UI元素查看器中发现了这些私有的类名,利用它可以解决我们一些奇怪的需求,但代价也是有的, 所以能不使用私有API尽量不要使用,以防不测… 感觉iOS审核私有API还是有道理的…</p>
+<h3 id="so"><a href="#so" class="headerlink" title="so"></a>so</h3><p>个人感觉iOS13还是一个比较稳版本,系统很顺畅,目前有些小bug也比较正常. 很多小功能也比较吸引人,如可以定制个性化的Memoji表情,查找(查找我的朋友和查找我的iPhone)功能,照片功能升级等等…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/06/06/iOS13系统适配/" data-id="cjwkgb27t000alpzb13ivczaa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-阿里云日志上传及无痕埋点" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/22/阿里云日志上传及无痕埋点/" class="article-date">
@@ -136,10 +198,83 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjw5z607c000mjyzbau3jt5gx" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjwkgb28a000slpzbye59mtvw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/埋点/">埋点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
+  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>NSNumber</li>
+</ul>
+<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
+<ul>
+<li><p>NSNumberFormatter</p>
+<p>数字格式类，用于定义数字的格式</p>
+</li>
+</ul>
+<p>NSNumberFormatter的使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
+<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>setFormatWidth设置字符宽度</p>
+<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
+<p>zeroSymbol: 零的样式</p>
+<p>paddingPosition:填充位置</p>
+<p>positiveSuffix: </p>
+<p>maximumIntegerDigits:整数最多位数</p>
+<p>minimumIntegerDigits:整数最少位数</p>
+<p>maximumFractionDigits:小数位最多位数</p>
+<p>minimumFractionDigits:小数位最少位数</p>
+<p>groupingSize:数字分割的尺寸</p>
+<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
+<p>maximumSignificantDigits:最大有效数字个数</p>
+<p>minimumSignificantDigits:最少有效数字个数</p>
+<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
+<p>方法:setPositiveFormat</p>
+<p>自定义输出格式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjwkgb27j0001lpzb6l0i29as" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
 
     </footer>
   </div>
@@ -211,83 +346,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjw5z606k0000jyzbdzuck02z" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjwkgb27p0005lpzbs0n05df7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSL/">MSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RTT/">RTT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TTL/">TTL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
-  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>NSNumber</li>
-</ul>
-<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
-<ul>
-<li><p>NSNumberFormatter</p>
-<p>数字格式类，用于定义数字的格式</p>
-</li>
-</ul>
-<p>NSNumberFormatter的使用:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
-<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>setFormatWidth设置字符宽度</p>
-<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
-<p>zeroSymbol: 零的样式</p>
-<p>paddingPosition:填充位置</p>
-<p>positiveSuffix: </p>
-<p>maximumIntegerDigits:整数最多位数</p>
-<p>minimumIntegerDigits:整数最少位数</p>
-<p>maximumFractionDigits:小数位最多位数</p>
-<p>minimumFractionDigits:小数位最少位数</p>
-<p>groupingSize:数字分割的尺寸</p>
-<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
-<p>maximumSignificantDigits:最大有效数字个数</p>
-<p>minimumSignificantDigits:最少有效数字个数</p>
-<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
-<p>方法:setPositiveFormat</p>
-<p>自定义输出格式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjw5z606q0001jyzbjsz49593" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
 
     </footer>
   </div>
@@ -347,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjw5z6080001ojyzbss3ojxpk" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjwkgb28s001olpzblmb31fk9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li></ul>
@@ -396,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjw5z6075000ejyzb8mqf0ofy" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjwkgb27z000ilpzbleputkg1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XCode报错/">XCode报错</a></li></ul>
@@ -462,7 +524,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjw5z606v0004jyzb7yjlxwx3" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjwkgb27d0000lpzb53rkwlg4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSProxy/">NSProxy</a></li></ul>
@@ -592,7 +654,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjw5z606z0006jyzbv1rcpxnm" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjwkgb27q0006lpzbugsz5or3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactNative/">ReactNative</a></li></ul>
@@ -643,7 +705,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/13/轮播图/" data-id="cjw5z6079000jjyzb9zlpe668" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/07/13/轮播图/" data-id="cjwkgb282000mlpzbpuc2s45l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/轮播图/">轮播图</a></li></ul>
@@ -724,119 +786,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjw5z6072000ajyzbm0qykmte" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2018/06/11/pod私有库的搭建使用/" data-id="cjwkgb27y000flpzbz9wipooc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/私有库/">私有库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-NSURLSession" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/23/NSURLSession/" class="article-date">
-  <time datetime="2018-01-22T16:00:00.000Z" itemprop="datePublished">2018-01-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/23/NSURLSession/">NSURLSession</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为什么聊NSURLSession,因为公司内部分享会上,有同事分享了AFNetworking,不可避免的谈到的2.0-3.0的变动,请求类方式从NSURLConnection到NSURLsession,那谈到了为什么有这个变动?有哪些变动?怎么使用NSURLsession? 在谈一个为什么有这个变动时大家出现了分歧:</p>
-<ol>
-<li><p>session在使用的时候,可以重用上一次tcp握手链接 </p>
-</li>
-<li><p>session和cookies联系,session单利的好处</p>
-</li>
-</ol>
-<h4 id="HTTP版本"><a href="#HTTP版本" class="headerlink" title="HTTP版本"></a>HTTP版本</h4><p>谈以上话题之前,先来看一下HTTP版本相关的几点知识:<br>这里我把HTTP版本简单分为三类：1.1之前，1.1，2.0，针对这三类做个主要差异的介绍：</p>
-<blockquote>
-<p>HTTP 1.1之前</p>
-</blockquote>
-<ul>
-<li>不支持持久连接。一旦服务器对客户端发出响应就立即断开TCP连接</li>
-<li>无请求头跟响应头</li>
-<li>客户端的前后请求是同步的。下一个请求必须等上一个请求从服务端拿到响应后才能发出，有点类似多线程的同步机制。</li>
-</ul>
-<blockquote>
-<p> HTTP 1.1(主流版本)</p>
-</blockquote>
-<p>与1.1之前的版本相比，做了以下性能上的提升</p>
-<ul>
-<li>增加请求头跟响应头</li>
-<li>支持持久连接。客户端通过请求头中指定<strong>Connection</strong>为<strong>keep-alive</strong>告知服务端不要在完成响应后立即释放连接。HTTP是基于TCP的，在HTTP 1.1中一次TCP连接可以处理多次HTTP请求(keep-alive 有效时间内)</li>
-<li>客户端不同请求之间是异步的。下一个请求不必等到上一个请求回来后再发出，而可以连续发出请求，有点类似多线程的异步处理。</li>
-</ul>
-<blockquote>
-<p>HTTP 2.0 (趋势)</p>
-</blockquote>
-<ul>
-<li>HTTP/2采用二进制格式而非文本格式</li>
-<li>HTTP/2是完全多路复用的，而非有序并阻塞的——只需一个连接即可实现并行</li>
-<li>使用报头压缩，HTTP/2降低了开销</li>
-<li>HTTP/2让服务器可以将响应主动“推送”到客户端缓存中</li>
-<li>2.0将只用于https网址。</li>
-</ul>
-<p>我们重点关注一下当前1.1版本所做几点改变。支持持久连接有什么好处呢？HTTP是基于TCP连接的，如果连接被频繁地启动然后断开就会花费很多资源在TCP三次握手以及四次挥手上，效率低下。以请求一个网页为例，我们知道，一个html网页上的图片资源并不是直接嵌入在网页上，而只是提供url，图片仍需要额外发HTTP 请求去下载。一个网页从请求到最终加载到本地往往需要经过多个HTTP请求。在1.1版本之前请求一个网页就需要发生多次”握手-挥手”的过程，每次连接之间相互独立；而1.1及之后的版本最少只需要一次就够。<br>再来就是请求异步，其好处参考多线程异步处理，在此不展开。</p>
-<p>http1.1 请求实际步骤如下图：</p>
-<p><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/NSURLSession01.png" alt="图1 session设置了每个host最大的请求线程数为1"></p>
-<p>上图session设置了每个host最大的请求线程数为1:</p>
-<p><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/NSURLSession02.png" alt="图2 session设置了每个host最大的请求线程数为2"></p>
-<p>上图:session设置了每个host最大的请求线程数为2</p>
-<p>我们可以看到：</p>
-<p> 1、多次请求其实只建立了1次TCP连接</p>
-<p> 2、多次请求连续可以异步发出。</p>
-<p> so,能重用上一次tcp握手链接的是因为http协议更新到http1.1后.同一个session可以在keep-alive有效时间内不断开链接.</p>
-<h4 id="NSURLSessionConfiguration-NSURLSession中重要的属性"><a href="#NSURLSessionConfiguration-NSURLSession中重要的属性" class="headerlink" title="NSURLSessionConfiguration(NSURLSession中重要的属性)"></a>NSURLSessionConfiguration(NSURLSession中重要的属性)</h4><p> 有三个方法来创建NSURLSessionConfiguration:</p>
-<ul>
-<li><p>defaultSessionConfiguration 使用全局的cache，<strong>cookie</strong>,使用硬盘来缓存数据。</p>
-<p>cookie和cache类似,都有一个默认的单例获取对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];</span><br></pre></td></tr></table></figure>
-<p>但有点不同,苹果给开发者cookie的操作权限不如cache,sharedHTTPCookieStorage只是个读属性</p>
-</li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>ephemeralSessionConfiguration 临时session配置，与默认配置相比，这个配置不会将缓存、cookie等存在本地，只会存在内存里，所以当程序退出时，所有的数据都会消失,浏览器无痕模式</p>
-</li>
-<li><p>backgroundSessionConfiguration 后台session配置,需要设置唯一标识，与默认配置类似，不同的是会在后台开启另一个线程来处理网络数据,app杀进程session会断开,重新启动后,session会重新建立.</p>
-</li>
-</ul>
-<p>/<em> 是否使用蜂窝网络，默认是yes. </em>/<br>@property BOOL allowsCellularAccess;</p>
-<p>/<em><br>指定了一组默认的可以设置出站请求的数据头。这对于跨会话共享信息，如内容类型，语言，用户代理，身份认证，是很有用的。<br>例如：<br>    @{@”Accept”: @”application/json”,<br>     @”Accept-Language”: @”en”,<br>     @”Authorization”: authString,<br>     @”User-Agent”: userAgentString<br>   }
- </em>/<br>@property (nullable, copy) NSDictionary *HTTPAdditionalHeaders;</p>
-<p>/<em><br>同时连接一个host的最大数。iOS默认是4.APP是作为一个整体来看的
- </em>/<br>@property NSInteger HTTPMaximumConnectionsPerHost;</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/01/23/NSURLSession/" data-id="cjw5z606x0005jyzb6oi1a80g" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSURLSession/">NSURLSession</a></li></ul>
 
     </footer>
   </div>
@@ -891,7 +844,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
     </div>
   </div>
 
@@ -904,11 +857,11 @@
       <ul>
         
           <li>
-            <a href="/2019/05/22/阿里云日志上传及无痕埋点/">无痕埋点及上报阿里云日志</a>
+            <a href="/2019/06/06/iOS13系统适配/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
+            <a href="/2019/05/22/阿里云日志上传及无痕埋点/">无痕埋点及上报阿里云日志</a>
           </li>
         
           <li>
@@ -916,11 +869,11 @@
           </li>
         
           <li>
-            <a href="/2019/02/23/react源码修改记录/">react源码修改记录</a>
+            <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
           </li>
         
           <li>
-            <a href="/2019/02/21/xcode报错/">Xcode 工程编译报错</a>
+            <a href="/2019/02/23/react源码修改记录/">react源码修改记录</a>
           </li>
         
       </ul>
