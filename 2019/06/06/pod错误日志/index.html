@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g3rpllqte8j30v4046wf9.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g3rppstogkj310t0u0doe.jpg">
-<meta property="og:updated_time" content="2019-06-06T12:50:07.263Z">
+<meta property="og:updated_time" content="2019-06-08T05:47:24.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac升级到新系统后, 执行pod、bundl命令行报错">
 <meta name="twitter:description" content="更新完系统后,又遇到一些错误, 这边做个记录… 为了以后方面自己找答案 1-bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby: bad interpreter: No such file or directory 这个是由于系统升级了, 记更新cocoapods">
@@ -111,11 +111,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Could not find CFPropertyList-2.3.5 in any of the sources</span><br><span class="line"></span><br><span class="line">Run `bundle install` to install missing gems.</span><br></pre></td></tr></table></figure>
 <p>那就继续执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bundle install</span><br></pre></td></tr></table></figure></p>
 <p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g3rppstogkj310t0u0doe.jpg" alt="bundle install命令执行截图"></p>
+<p>fastlane 命令执行报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-bash: /usr/local/bin/fastlane: /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure></p>
+<p>同理重新安装</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="cjwknsrvq000e7azb3jhvr9hk" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="cjwvxizq7000byfzbe3bo23c2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bundler/">bundler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li></ul>
@@ -125,6 +127,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/06/24/shell获取函数返回字符串/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          shell获取函数返回的字符串
+        
+      </div>
+    </a>
   
   
     <a href="/2019/06/06/iOS13系统适配/" id="article-nav-older" class="article-nav-link-wrap">
@@ -166,7 +177,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/All/">All</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/ReactNative/">ReactNative</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/All/">All</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/ReactNative/">ReactNative</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
     </div>
   </div>
 
@@ -208,6 +219,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/24/shell获取函数返回字符串/">shell获取函数返回的字符串</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/06/pod错误日志/">Mac升级到新系统后, 执行pod、bundl命令行报错</a>
           </li>
         
@@ -217,10 +232,6 @@
         
           <li>
             <a href="/2019/05/22/阿里云日志上传及无痕埋点/">无痕埋点及上报阿里云日志</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
           </li>
         
           <li>

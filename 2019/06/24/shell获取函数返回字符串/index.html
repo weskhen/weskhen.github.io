@@ -5,18 +5,19 @@
   
 
   
-  <title>Tag: RTT | 面朝大海,想代码</title>
+  <title>shell获取函数返回的字符串 | 面朝大海,想代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="证明我一下,我还活着...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="面朝大海,想代码">
-<meta property="og:url" content="http://weskhen.xyz/tags/RTT/index.html">
+  <meta name="description" content="shell函数返回值只能是整数, 一般用来表示函数执行成功与否, 0表示成功,非0表示失败. 这个很重要, 有时候我们需要判断之前的shell命令是否执行成功, 可以用这个判断.  123456react-native bundle --entry-file index.js --bundle-output ../Resource/ReactNative/main.jsbundle --plat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell获取函数返回的字符串">
+<meta property="og:url" content="http://weskhen.xyz/2019/06/24/shell获取函数返回字符串/index.html">
 <meta property="og:site_name" content="面朝大海,想代码">
-<meta property="og:description" content="证明我一下,我还活着...">
+<meta property="og:description" content="shell函数返回值只能是整数, 一般用来表示函数执行成功与否, 0表示成功,非0表示失败. 这个很重要, 有时候我们需要判断之前的shell命令是否执行成功, 可以用这个判断.  123456react-native bundle --entry-file index.js --bundle-output ../Resource/ReactNative/main.jsbundle --plat">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-14T10:08:22.043Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="面朝大海,想代码">
-<meta name="twitter:description" content="证明我一下,我还活着...">
+<meta name="twitter:title" content="shell获取函数返回的字符串">
+<meta name="twitter:description" content="shell函数返回值只能是整数, 一般用来表示函数执行成功与否, 0表示成功,非0表示失败. 这个很重要, 有时候我们需要判断之前的shell命令是否执行成功, 可以用这个判断.  123456react-native bundle --entry-file index.js --bundle-output ../Resource/ReactNative/main.jsbundle --plat">
   
   
     <link rel="icon" href="/favicon.png">
@@ -65,42 +66,94 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/02/23/MSL、TTL和RTT简介/" class="archive-article-date">
-  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">Feb 23</time>
+        <section id="main"><article id="post-shell获取函数返回字符串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/24/shell获取函数返回字符串/" class="article-date">
+  <time datetime="2019-06-23T16:00:00.000Z" itemprop="datePublished">2019-06-24</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/shell/">shell</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/23/MSL、TTL和RTT简介/">MSL、TTL和RTT简介</a>
+    <h1 class="article-title" itemprop="name">
+      shell获取函数返回的字符串
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> shell函数返回值只能是整数, 一般用来表示函数执行成功与否, 0表示成功,非0表示失败.</p>
+<p>这个很重要, 有时候我们需要判断之前的shell命令是否执行成功, 可以用这个判断. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">react-native bundle --entry-file index.js --bundle-output ../Resource/ReactNative/main.jsbundle --platform ios --assets-dest ../Resource/ReactNative --dev false</span><br><span class="line">if [ $? -ne 0 ]; then</span><br><span class="line">	echo "fail"</span><br><span class="line">else</span><br><span class="line">	echo "success"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>ps:<code>-ne</code> 表示<strong>不等于</strong></p>
+<p>但有时候我们有特殊的需求, 需要获取到函数内的变量,但没有直接返回的方法, 我们只能通过曲线救国的方式.</p>
+<ol>
+<li><p>定义一个优先级大于或等于函数的变量, 也可以是全局变量, 我们用来接收函数的处理结果,在函数外能直接访问这个变量来获得函数的返回值.</p>
+<p>如下例子:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">const AppVersion=''</span><br><span class="line">function getAppVersion () &#123;</span><br><span class="line"> AppVersion=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" ./test.plist)</span><br><span class="line">&#125;</span><br><span class="line">echo $AppVersion</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用文件的读写方式, 在函数内先将对应的字符串存入文件,在需要使用的地方直接从对应的文件中读取.</p>
+<p>如下例子:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">function handleString () &#123;</span><br><span class="line">	echo "testString" &gt; a.txt</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handleString</span><br><span class="line"></span><br><span class="line">cat a.txt | while  read line do</span><br><span class="line">	echo $line</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Shell 目前获取返回字符串的方式,想到的就这两种… 能使用全局变量解决问题的尽量使用全局变量…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/06/24/shell获取函数返回字符串/" data-id="cjwvxizqg000pyfzbwdgib9um" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/06/pod错误日志/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Mac升级到新系统后, 执行pod、bundl命令行报错</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
-</section>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDEyOC8yMDY2Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  </section>
         
           <aside id="sidebar">
   
