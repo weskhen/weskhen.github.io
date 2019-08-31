@@ -79,7 +79,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="LCalendar日历控件使用"><a href="#LCalendar日历控件使用" class="headerlink" title="LCalendar日历控件使用"></a>LCalendar日历控件使用</h1><p>LCalendar 是一款简单周月切换展示的日历封装库,类似钉钉上的日历展示,但流畅度比钉钉还好, 没有钉钉在切换上会展示异常UI的BUG.</p>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: LCalendar日历控件使用</span><br><span class="line">categories: </span><br><span class="line"></span><br><span class="line">- iOS</span><br><span class="line">  tags: </span><br><span class="line">- 日历</span><br><span class="line">  comments: true</span><br></pre></td></tr></table></figure>
+<p>LCalendar 是一款简单周月切换展示的日历封装库,类似钉钉上的日历展示,但流畅度比钉钉还好, 没有钉钉在切换上会展示异常UI的BUG.</p>
 <table>
 <thead>
 <tr>
@@ -107,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/08/31/LCalendar日历控件使用/" data-id="cjzyuzxcf0000euzbuyln391k" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/08/31/LCalendar日历控件使用/" data-id="cjzyvhmoo0000wszb1wfvmztb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -119,9 +120,9 @@
 
 
   
-    <article id="post-git clone时RPC failed" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-git clone 报错" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/07/15/git clone时RPC failed/" class="article-date">
+    <a href="/2019/07/15/git clone 报错/" class="article-date">
   <time datetime="2019-07-15T06:24:04.232Z" itemprop="datePublished">2019-07-15</time>
 </a>
     
@@ -131,21 +132,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误</p>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: git clone 报错</span><br><span class="line">categories: </span><br><span class="line"></span><br><span class="line">- Git</span><br><span class="line">  tags: </span><br><span class="line">- git</span><br><span class="line">  comments: true</span><br></pre></td></tr></table></figure>
+<p>git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误</p>
 <p>原因1：缓存区溢出,大文件时比较常见</p>
 <p>解决方法：命令行输入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config http.postBuffer 524288000</span><br></pre></td></tr></table></figure>
-<p>执行上面命令如果依旧clone失败，考虑可能原因2：网络下载速度缓慢 </p>
+<p>执行上面命令如果依旧clone失败，考虑</p>
+<p>原因2：网络下载速度缓慢 </p>
 <p>解决方法：命令行输入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.lowSpeedLimit 0</span><br><span class="line"></span><br><span class="line">git config --global http.lowSpeedTime 999999</span><br></pre></td></tr></table></figure>
-<p> 如果依旧clone失败，则首先浅层clone，然后更新远程库到本地</p>
-<p>git clone –depth=1 <a href="http://gitlab.xxx.cn/yyy/zzz.git" target="_blank" rel="noopener">http://gitlab.xxx.cn/yyy/zzz.git</a></p>
+<p>如果依旧clone失败，则首先浅层clone，然后更新远程库到本地</p>
+<p>git clone –depth=1 <a href="http://gitlab.xxx.cn/mmm/nnn.git" target="_blank" rel="noopener">http://gitlab.xxx.cn/mmm/nnn.git</a></p>
 <p>git fetch –unshallow</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/07/15/git clone时RPC failed/" data-id="cjzyuzxcx000beuzb38d93p76" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/07/15/git clone 报错/" data-id="cjzyvhmpb000gwszbothwi54h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/24/shell获取函数返回字符串/" data-id="cjzyuzxdc000seuzbf23qqr2u" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/24/shell获取函数返回字符串/" data-id="cjzyvhmpj000ywszbn6326edy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -262,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="cjzyuzxde000veuzb6zkapxtu" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="cjzyvhmpi000vwszbfiuba4e2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bundler/">bundler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li></ul>
@@ -341,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/06/iOS13系统适配/" data-id="cjzyuzxd0000feuzbk3xscqdn" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/06/iOS13系统适配/" data-id="cjzyvhmp5000awszbsw5p4s8v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS13/">iOS13</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/暗黑模式/">暗黑模式</a></li></ul>
@@ -424,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjzyuzxdg0013euzbltd0e0kq" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjzyvhmpk0013wszbrnds4mw3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/埋点/">埋点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li></ul>
@@ -499,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjzyuzxck0001euzbl0x1so64" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjzyvhmou0001wszbm9uz5fhx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSL/">MSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RTT/">RTT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TTL/">TTL</a></li></ul>
@@ -572,7 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjzyuzxcm0002euzbktv8hn8o" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjzyvhmox0002wszbujkgtysi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
@@ -635,7 +638,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjzyuzxeb0026euzb6kwz5djm" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjzyvhmq40026wszb5fn09dqt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li></ul>
@@ -684,7 +687,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjzyuzxd5000keuzbc416bauo" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjzyvhmpd000kwszblcug0eig" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XCode报错/">XCode报错</a></li></ul>
@@ -759,7 +762,7 @@
           </li>
         
           <li>
-            <a href="/2019/07/15/git clone时RPC failed/">(no title)</a>
+            <a href="/2019/07/15/git clone 报错/">(no title)</a>
           </li>
         
           <li>

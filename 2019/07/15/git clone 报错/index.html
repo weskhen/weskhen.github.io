@@ -7,17 +7,17 @@
   
   <title>面朝大海,想代码</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误 原因1：缓存区溢出,大文件时比较常见 解决方法：命令行输入 1git config http.postBuffer 524288000 执行上面命令如果依旧clone失败，考虑可能原因2：网络下载速度缓慢  解决方法：命令行输">
+  <meta name="description" content="1234567title: git clone 报错categories: - Git  tags: - git  comments: true git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误 原因1：缓存区溢出,大文件时比较常见 解决方法：命令行输入 1git confi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面朝大海,想代码">
-<meta property="og:url" content="http://weskhen.xyz/2019/07/15/git clone时RPC failed/index.html">
+<meta property="og:url" content="http://weskhen.xyz/2019/07/15/git clone 报错/index.html">
 <meta property="og:site_name" content="面朝大海,想代码">
-<meta property="og:description" content="git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误 原因1：缓存区溢出,大文件时比较常见 解决方法：命令行输入 1git config http.postBuffer 524288000 执行上面命令如果依旧clone失败，考虑可能原因2：网络下载速度缓慢  解决方法：命令行输">
+<meta property="og:description" content="1234567title: git clone 报错categories: - Git  tags: - git  comments: true git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误 原因1：缓存区溢出,大文件时比较常见 解决方法：命令行输入 1git confi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-15T06:28:41.734Z">
+<meta property="og:updated_time" content="2019-08-31T01:32:30.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面朝大海,想代码">
-<meta name="twitter:description" content="git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误 原因1：缓存区溢出,大文件时比较常见 解决方法：命令行输入 1git config http.postBuffer 524288000 执行上面命令如果依旧clone失败，考虑可能原因2：网络下载速度缓慢  解决方法：命令行输">
+<meta name="twitter:description" content="1234567title: git clone 报错categories: - Git  tags: - git  comments: true git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误 原因1：缓存区溢出,大文件时比较常见 解决方法：命令行输入 1git confi">
   
   
     <link rel="icon" href="/favicon.png">
@@ -66,9 +66,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-git clone时RPC failed" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-git clone 报错" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/07/15/git clone时RPC failed/" class="article-date">
+    <a href="/2019/07/15/git clone 报错/" class="article-date">
   <time datetime="2019-07-15T06:24:04.232Z" itemprop="datePublished">2019-07-15</time>
 </a>
     
@@ -78,21 +78,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误</p>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: git clone 报错</span><br><span class="line">categories: </span><br><span class="line"></span><br><span class="line">- Git</span><br><span class="line">  tags: </span><br><span class="line">- git</span><br><span class="line">  comments: true</span><br></pre></td></tr></table></figure>
+<p>git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误</p>
 <p>原因1：缓存区溢出,大文件时比较常见</p>
 <p>解决方法：命令行输入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config http.postBuffer 524288000</span><br></pre></td></tr></table></figure>
-<p>执行上面命令如果依旧clone失败，考虑可能原因2：网络下载速度缓慢 </p>
+<p>执行上面命令如果依旧clone失败，考虑</p>
+<p>原因2：网络下载速度缓慢 </p>
 <p>解决方法：命令行输入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.lowSpeedLimit 0</span><br><span class="line"></span><br><span class="line">git config --global http.lowSpeedTime 999999</span><br></pre></td></tr></table></figure>
-<p> 如果依旧clone失败，则首先浅层clone，然后更新远程库到本地</p>
-<p>git clone –depth=1 <a href="http://gitlab.xxx.cn/yyy/zzz.git" target="_blank" rel="noopener">http://gitlab.xxx.cn/yyy/zzz.git</a></p>
+<p>如果依旧clone失败，则首先浅层clone，然后更新远程库到本地</p>
+<p>git clone –depth=1 <a href="http://gitlab.xxx.cn/mmm/nnn.git" target="_blank" rel="noopener">http://gitlab.xxx.cn/mmm/nnn.git</a></p>
 <p>git fetch –unshallow</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/07/15/git clone时RPC failed/" data-id="cjzyuzxcx000beuzb38d93p76" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/07/15/git clone 报错/" data-id="cjzyvhmpb000gwszbothwi54h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -196,7 +198,7 @@
           </li>
         
           <li>
-            <a href="/2019/07/15/git clone时RPC failed/">(no title)</a>
+            <a href="/2019/07/15/git clone 报错/">(no title)</a>
           </li>
         
           <li>
