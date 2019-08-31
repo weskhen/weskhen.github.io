@@ -67,6 +67,96 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LCalendar日历控件使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/31/LCalendar日历控件使用/" class="article-date">
+  <time datetime="2019-08-31T00:49:01.514Z" itemprop="datePublished">2019-08-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LCalendar日历控件使用"><a href="#LCalendar日历控件使用" class="headerlink" title="LCalendar日历控件使用"></a>LCalendar日历控件使用</h1><p>LCalendar 是一款简单周月切换展示的日历封装库,类似钉钉上的日历展示,但流畅度比钉钉还好, 没有钉钉在切换上会展示异常UI的BUG.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">周视图展示</th>
+<th style="text-align:center">月视图展示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g6il029is4j30lw0tawf7.jpg" alt="image-20190831085110490"></td>
+<td style="text-align:center"><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g6il01k2x3j30lu0sodgw.jpg" alt="image-20190831085146101"></td>
+</tr>
+</tbody>
+</table>
+<p>展示如上,周月视图可以通过按钮互相切换, 也可以左右滑动. 样式上也可以自定义. 可修改的属性如下:</p>
+<p>UI元素定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">/// 每一周视图的高度</span><br><span class="line">@property (nonatomic, assign) CGFloat weekDayHeight;</span><br><span class="line">/// 每个月视图显示多少周 </span><br><span class="line">@property (nonatomic, assign) NSInteger weeksToDisplay;</span><br><span class="line">/// 是否展示单周</span><br><span class="line">@property (nonatomic, assign) BOOL isShowSingleWeek;</span><br><span class="line">/// 日历背景颜色</span><br><span class="line">@property (nonatomic, strong) UIColor *calendarBgColor;</span><br><span class="line">/// 日历滚动区域的背景色</span><br><span class="line">@property (nonatomic, strong) UIColor  *calendarScollBgColor;</span><br><span class="line"></span><br><span class="line">/// 周视图和月视图 上下滑动需要改变状态的最小距离 默认20</span><br><span class="line">@property (nonatomic, assign) CGFloat calendarScollChangeMinPadding;</span><br><span class="line"></span><br><span class="line">/// 一次加载多少页数据(需是奇数)</span><br><span class="line">@property (nonatomic, assign) NSUInteger numPageLoaded;</span><br><span class="line"></span><br><span class="line">/// 日历距控件的左右两边的保留间距 左边保留间距=右边保留间距=collectionMarginPadding/2.0</span><br><span class="line">@property (nonatomic, assign) CGFloat collectionMarginPadding;</span><br><span class="line"></span><br><span class="line">/// 星期提示视图高度 默认42</span><br><span class="line">@property (nonatomic, assign) CGFloat weekTipHeight;</span><br><span class="line">/// 星期提示文案颜色 (日、一、二、三...)</span><br><span class="line">@property (nonatomic, strong) UIColor  *weekTipColor;</span><br><span class="line"></span><br><span class="line">/// 底部箭头视图的高度 默认36</span><br><span class="line">@property (nonatomic, assign) CGFloat bottomArrowViewHeight;</span><br><span class="line"></span><br><span class="line">#pragma mark - itemCell 颜色属性</span><br><span class="line">/// 自定义Item对应的cell 必须是LCalendarBaseCell的子类 默认为空</span><br><span class="line">@property (nonatomic, strong) Class calendarCellClass;</span><br><span class="line"></span><br><span class="line">// 颜色选中优先级(选中&gt;今日&gt;当月/其他月)</span><br><span class="line">/// 日历item中的日期在当前月显示的颜色</span><br><span class="line">@property (nonatomic, strong) UIColor  *itemCurrentMonthColor;</span><br><span class="line">/// 日历月视图下 item中的日期在其他月显示的颜色</span><br><span class="line">@property (nonatomic, strong) UIColor  *itemOtherMonthColor;</span><br><span class="line">/// 日历item中的日期在当日(未选中)显示的颜色</span><br><span class="line">@property (nonatomic, strong) UIColor  *itemTodayColor;</span><br><span class="line">/// 日历item中的日期在选中显示的颜色</span><br><span class="line">@property (nonatomic, strong) UIColor  *itemSelectedColor;</span><br><span class="line"></span><br><span class="line">/// 日历item中的日期在选中背景圆显示的颜色</span><br><span class="line">@property (nonatomic, strong) UIColor  *itemCircleBgColor;</span><br><span class="line"></span><br><span class="line">/// 日历副标题颜色</span><br><span class="line">@property (nonatomic, strong) UIColor  *itemTipColor;</span><br></pre></td></tr></table></figure>
+<p>日历控件对外暴露的API:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/// 展示周视图</span><br><span class="line">- (void)showSignleWeekView;</span><br><span class="line"></span><br><span class="line">/// 展示月视图</span><br><span class="line">- (void)showMonthView;</span><br><span class="line"></span><br><span class="line">/// 上一页</span><br><span class="line">- (void)loadPreviousPage;</span><br><span class="line"></span><br><span class="line">/// 下一页</span><br><span class="line">- (void)loadNextPage;</span><br><span class="line"></span><br><span class="line">/// 展示View指定的日期</span><br><span class="line">- (void)loadAssignDayViewWithDate:(NSDate *)date;</span><br></pre></td></tr></table></figure>
+<p>功能比较简单,不详细说了,添一张gif,有兴趣可直接看<a href="https://github.com/weskhen/LCalendar" target="_blank" rel="noopener">demo</a></p>
+<p><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/日历录制.gif" alt="日历视图简单使用"></p>
+<p>项目使用支持pod.</p>
+<p><code>pod LCalendar</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/08/31/LCalendar日历控件使用/" data-id="cjzyuzxcf0000euzbuyln391k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-git clone时RPC failed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/15/git clone时RPC failed/" class="article-date">
+  <time datetime="2019-07-15T06:24:04.232Z" itemprop="datePublished">2019-07-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>git clone时报RPC failed; curl 18 transfer closed with outstanding read data remaining 错误</p>
+<p>原因1：缓存区溢出,大文件时比较常见</p>
+<p>解决方法：命令行输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config http.postBuffer 524288000</span><br></pre></td></tr></table></figure>
+<p>执行上面命令如果依旧clone失败，考虑可能原因2：网络下载速度缓慢 </p>
+<p>解决方法：命令行输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.lowSpeedLimit 0</span><br><span class="line"></span><br><span class="line">git config --global http.lowSpeedTime 999999</span><br></pre></td></tr></table></figure>
+<p> 如果依旧clone失败，则首先浅层clone，然后更新远程库到本地</p>
+<p>git clone –depth=1 <a href="http://gitlab.xxx.cn/yyy/zzz.git" target="_blank" rel="noopener">http://gitlab.xxx.cn/yyy/zzz.git</a></p>
+<p>git fetch –unshallow</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/07/15/git clone时RPC failed/" data-id="cjzyuzxcx000beuzb38d93p76" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-shell获取函数返回字符串" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/24/shell获取函数返回字符串/" class="article-date">
@@ -113,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/24/shell获取函数返回字符串/" data-id="cjwvxizqg000pyfzbwdgib9um" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/24/shell获取函数返回字符串/" data-id="cjzyuzxdc000seuzbf23qqr2u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="cjwvxizq7000byfzbe3bo23c2" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="cjzyuzxde000veuzb6zkapxtu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bundler/">bundler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li></ul>
@@ -251,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/06/iOS13系统适配/" data-id="cjwvxizq5000ayfzb6wqn4lg6" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/06/iOS13系统适配/" data-id="cjzyuzxd0000feuzbk3xscqdn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS13/">iOS13</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/暗黑模式/">暗黑模式</a></li></ul>
@@ -334,83 +424,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjwvxizqm000zyfzbshlkw5jz" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="cjzyuzxdg0013euzbltd0e0kq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/埋点/">埋点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
-  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>NSNumber</li>
-</ul>
-<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
-<ul>
-<li><p>NSNumberFormatter</p>
-<p>数字格式类，用于定义数字的格式</p>
-</li>
-</ul>
-<p>NSNumberFormatter的使用:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
-<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>setFormatWidth设置字符宽度</p>
-<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
-<p>zeroSymbol: 零的样式</p>
-<p>paddingPosition:填充位置</p>
-<p>positiveSuffix: </p>
-<p>maximumIntegerDigits:整数最多位数</p>
-<p>minimumIntegerDigits:整数最少位数</p>
-<p>maximumFractionDigits:小数位最多位数</p>
-<p>minimumFractionDigits:小数位最少位数</p>
-<p>groupingSize:数字分割的尺寸</p>
-<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
-<p>maximumSignificantDigits:最大有效数字个数</p>
-<p>minimumSignificantDigits:最少有效数字个数</p>
-<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
-<p>方法:setPositiveFormat</p>
-<p>自定义输出格式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjwvxizpt0001yfzbogjskuii" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
 
     </footer>
   </div>
@@ -482,10 +499,83 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjwvxizq10006yfzbddf6pfgs" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="cjzyuzxck0001euzbl0x1so64" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSL/">MSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RTT/">RTT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TTL/">TTL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
+  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>NSNumber</li>
+</ul>
+<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
+<ul>
+<li><p>NSNumberFormatter</p>
+<p>数字格式类，用于定义数字的格式</p>
+</li>
+</ul>
+<p>NSNumberFormatter的使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
+<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>setFormatWidth设置字符宽度</p>
+<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
+<p>zeroSymbol: 零的样式</p>
+<p>paddingPosition:填充位置</p>
+<p>positiveSuffix: </p>
+<p>maximumIntegerDigits:整数最多位数</p>
+<p>minimumIntegerDigits:整数最少位数</p>
+<p>maximumFractionDigits:小数位最多位数</p>
+<p>minimumFractionDigits:小数位最少位数</p>
+<p>groupingSize:数字分割的尺寸</p>
+<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
+<p>maximumSignificantDigits:最大有效数字个数</p>
+<p>minimumSignificantDigits:最少有效数字个数</p>
+<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
+<p>方法:setPositiveFormat</p>
+<p>自定义输出格式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="cjzyuzxcm0002euzbktv8hn8o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
 
     </footer>
   </div>
@@ -545,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjwvxizrf0023yfzbon6tab38" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="cjzyuzxeb0026euzb6kwz5djm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li></ul>
@@ -594,206 +684,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjwvxizqd000myfzbi68md368" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="cjzyuzxd5000keuzbc416bauo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XCode报错/">XCode报错</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-NSProxy" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/23/NSProxy/" class="article-date">
-  <time datetime="2019-01-22T16:00:00.000Z" itemprop="datePublished">2019-01-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/23/NSProxy/">NSProxy简介</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="NSProxy是什么"><a href="#NSProxy是什么" class="headerlink" title="NSProxy是什么?"></a>NSProxy是什么?</h2><p><code>NSProxy</code> 是NSProxy 是一个<strong>抽象类</strong>,跟 <code>NSObject</code> 一样的基类，都遵守<code>&lt;NSObject&gt;</code>协议</p>
-<p><code>NSProxy</code>是一个抽象类，必须继承实例化其子类才能使用。</p>
-<p><code>NSProxy</code>从类名来看是代理类专门负责代理对象转发消息的。相比<code>NSObject</code>类来说<code>NSProxy</code>更轻量级，通过<code>NSProxy</code>可以帮助<code>Objective-C</code>间接的实现多重继承的功能。</p>
-<h2 id="消息转发机制"><a href="#消息转发机制" class="headerlink" title="消息转发机制"></a>消息转发机制</h2><p>当程序运行时调用一个没有实现的方法，会采用三个消息转发步骤如果这三个步骤都不能成功那么此时程序会抛出一个异常。</p>
-<p>1.添加方法到类对象，对于实例方法调用respondsToSelector:，对于类方法调用resolveClassMethod:。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ (BOOL)resolveClassMethod:(SEL)sel;</span><br><span class="line">- (BOOL)respondsToSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<p>2.查找forwardingTargetForSelector:方法，该方法返回一个新对象，如果返回nil那么将跳转到下一步骤。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (id)forwardingTargetForSelector:(SEL)aSelector;</span><br></pre></td></tr></table></figure>
-<p>3.通过methodSignatureForSelector:方法获取一个NSMethodSignature类型的对象，调用forwardInvocation:方法。改方法传入一个封装了NSMethodSignature的NSInvocation对象。然后该对象通过invakeWithTarget:方法将消息转发给其它对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;</span><br><span class="line"></span><br><span class="line">- (void)forwardInvocation:(NSInvocation *)invocation;</span><br></pre></td></tr></table></figure>
-<h2 id="NSProxy-和-NSObject-的比较"><a href="#NSProxy-和-NSObject-的比较" class="headerlink" title="NSProxy 和 NSObject 的比较"></a>NSProxy 和 NSObject 的比较</h2><p>相比NSObject,NSProxy更轻量级,  做消息转发效率更高.</p>
-<p>NSObject寻找方法顺序：本类-&gt;(父类-)&gt;(动态方法解析)-&gt; 消息转发；<br>NSproxy顺序：本类-&gt;消息转发</p>
-<h2 id="NSProxy的用途"><a href="#NSProxy的用途" class="headerlink" title="NSProxy的用途"></a>NSProxy的用途</h2><ol>
-<li><p>AOP面向切片编程</p>
-<p>iOS中面向切片编程一般有两种方式 ，一个是直接基于runtime 的method-Swizzling.还有一种就是基于NSProxy</p>
-</li>
-<li><p>解决NSTimer, CADisplayLink等强引用target引起的无法释放问题。如NSTimer:利用消息转发来断开NSTimer对象与视图之间的强引用关系。初始化NSTimer时把触发事件的target替换成一个单独的对象，然后这个对象中NSTimer的SEL方法触发时让这个方法在当前的视图self中实现。</p>
-</li>
-<li><p>多重继承</p>
-<p>实现类似CAAnimation类族.</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/01/23/NSProxy/" data-id="cjwvxizpm0000yfzbb30mp7nf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSProxy/">NSProxy</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-React Native" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/23/React Native/" class="article-date">
-  <time datetime="2018-07-22T16:00:00.000Z" itemprop="datePublished">2018-07-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/23/React Native/">React Native 方案预研</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-RN跳转Native的路由"><a href="#1-RN跳转Native的路由" class="headerlink" title="1. RN跳转Native的路由"></a>1. RN跳转Native的路由</h2><p>路由在项目中主要作用有:</p>
-<ol>
-<li>降低App页面之间的耦合性。随着项目越来越复杂，各个组件和页面之间的跳转也变得越来越复杂，他们之间的跳转逻辑也变的越来越紧密，这就造成了各个模块的相互依赖越来越紧密</li>
-<li>大前端页面跳转的一致性.</li>
-<li>可以通过动态下发配置表来配置App的跳转逻辑。这样iOS和Android两边只要共用一套配置文件，通过下发修改后配置表也能实现动态的改变映射目标。</li>
-</ol>
-<h3 id="路由的定义"><a href="#路由的定义" class="headerlink" title="路由的定义"></a>路由的定义</h3><p>路由的定义有很多种,为了兼容项目之前的路由定义,rn路由定义如下:</p>
-<p>jsonStirng = {“methodName”:”methodName”,”data”:{} }</p>
-<p>方法名:<code>methodName</code>  路由的方法名,如Notification_callNativeEvent, 通知模块, 调用原生通知</p>
-<p>参数:<code>data</code> 是一个map结构,用于react向native传的参数.</p>
-<p>忽略:methodName格式: “moduleName_action”</p>
-<h3 id="和js与native路由的比较"><a href="#和js与native路由的比较" class="headerlink" title="和js与native路由的比较:"></a>和js与native路由的比较:</h3><ul>
-<li>js与native中有<code>callbackId</code>,但是这里没有了, 因为react调用native有个promise的返回体,请求和返回是一一对应的.</li>
-</ul>
-<p>react发出encode后的jsonStirng, native获取jsonStirng后decode,根据规则解析出对应的部分.</p>
-<p>数据传输的流程图如下:</p>
-<p><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0bqpy4j30mu0ruabk.jpg" alt="image-20190320165306011"></p>
-<p><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0tdcuzj30h80iemyf.jpg" alt="image-20190320165334729"></p>
-<h2 id="2-Native进入RN或者H5"><a href="#2-Native进入RN或者H5" class="headerlink" title="2. Native进入RN或者H5"></a>2. Native进入RN或者H5</h2><p>比如在首页点击Banner跳转，可以跳转H5也可以跳转到RN，可以通过解析后台下发的Url来决定跳转的目标。<br>确定跳转RN的协议定位为 <code>react://module/acion?params</code>,其中<br><code>react://</code>确定跳转的是RN页面，<code>module/action</code>表示跳转的模块和对应的action，<code>params</code>是传入的参数。<br>流程图参考 <code>RN的降级</code></p>
-<h2 id="3-RN的降级"><a href="#3-RN的降级" class="headerlink" title="3. RN的降级"></a>3. RN的降级</h2><p>在react-native页面中捕获异常,捕获到异常我们会记录异常灰度，并对业务进行降级跳转到H5页面.  RN页面和H5页面跳转机制以及后台可配置方案:</p>
-<p>针对后端控制的跳转rn页面,服务器下发路由地址{firstUrl:  secondUrl: }  优先字段和备选字段 (选择跳转rn页面还是h5页面)。 <code>流程图</code> </p>
-<p><img src="https://github.com/weskhen/weskhen.github.io/raw/master/image/006tKfTcly1g19d0lm30nj30ej0mwdh8.jpg" alt="image-20190320165322408"></p>
-<p>上图中的加载失败的原因有多种: </p>
-<ul>
-<li><p>module注册为空,选用h5</p>
-</li>
-<li><p>业务场景严重问题,选用h5</p>
-</li>
-</ul>
-<p>在实际业务中,降级方案可以放到后面,因为有热更新机制, 大部分问题可以及时修复且更新….</p>
-<h2 id="4-热更新功能"><a href="#4-热更新功能" class="headerlink" title="4. 热更新功能"></a>4. 热更新功能</h2><p>热更新是RN的非常重要的一个功能特性,<code>Code-Push</code>,我们在之前的版本中已经集成并开始使用了.这边就不阐述了.</p>
-<p>接下来:我们会开发维护起自己的codepush服务地址,更好的控制rn版本.如测试环境Code-Push登录: <a href="http://10.0.0.115:3001/" target="_blank" rel="noopener">http://10.0.0.115:3001/</a> </p>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h4><ul>
-<li>苹果不允许应用内有弹框提示更新</li>
-</ul>
-<h2 id="5-RN的业务基础组件建立"><a href="#5-RN的业务基础组件建立" class="headerlink" title="5. RN的业务基础组件建立"></a>5. RN的业务基础组件建立</h2><p>因为安卓和iOS两个平台的差异性, 有些UI组件的特性不一致,需要区分开来判断,RN自己提供的组件库还无法满足我们的实际的业务需求,所有我们需要自己来进行封装,以方便业务开发.</p>
-<p>计划:随着业务开发迭代,逐渐形成xhx自己的一套RN组件库.</p>
-<h2 id="6-RN在项目中的应用场景"><a href="#6-RN在项目中的应用场景" class="headerlink" title="6. RN在项目中的应用场景"></a>6. RN在项目中的应用场景</h2><p>由于RN在使用的时候,会占据一定的内存空间, 不推荐使用在全局静态的地方,因为安卓机app使用内存受限,如果RN的功能模块常驻后台,会影响其他功能的使用.</p>
-<p>RN在原生app中入口:</p>
-<ul>
-<li>固定入口的跳转</li>
-<li>服务器下发的url识别跳转, 如点击首页banner,识别url属于rn的路由地址.</li>
-</ul>
-<p>功能、页面 走路由,组件走模块定义:</p>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录:"></a>附录:</h2><p>三端基本类型对应:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">JS</th>
-<th style="text-align:center">iOS</th>
-<th style="text-align:right">android</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">string</td>
-<td style="text-align:center">NSString</td>
-<td style="text-align:right">String</td>
-</tr>
-<tr>
-<td style="text-align:left">number</td>
-<td style="text-align:center">NSNumber</td>
-<td style="text-align:right">Number</td>
-</tr>
-<tr>
-<td style="text-align:left">float</td>
-<td style="text-align:center">float/CGFloat</td>
-<td style="text-align:right">float</td>
-</tr>
-<tr>
-<td style="text-align:left">double</td>
-<td style="text-align:center">double</td>
-<td style="text-align:right">double</td>
-</tr>
-<tr>
-<td style="text-align:left">object</td>
-<td style="text-align:center">NSDictionary</td>
-<td style="text-align:right">ReadableMap</td>
-</tr>
-<tr>
-<td style="text-align:left">array</td>
-<td style="text-align:center">NSArray</td>
-<td style="text-align:right">ReadableArray</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2018/07/23/React Native/" data-id="cjwvxizpy0004yfzb08rse96o" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactNative/">ReactNative</a></li></ul>
 
     </footer>
   </div>
@@ -848,7 +742,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
     </div>
   </div>
 
@@ -861,6 +755,14 @@
       <ul>
         
           <li>
+            <a href="/2019/08/31/LCalendar日历控件使用/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/15/git clone时RPC failed/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/24/shell获取函数返回字符串/">shell获取函数返回的字符串</a>
           </li>
         
@@ -870,14 +772,6 @@
         
           <li>
             <a href="/2019/06/06/iOS13系统适配/">iOS13 系统适配</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/22/阿里云日志上传及无痕埋点/">无痕埋点及上报阿里云日志</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
           </li>
         
       </ul>
