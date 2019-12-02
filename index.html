@@ -109,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/08/31/LCalendar日历控件使用/" data-id="ck3ooipct0001x4zbzdveeeqr" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/08/31/LCalendar日历控件使用/" data-id="ck3opbfkp0000vwzbwiigifud" class="article-share-link">Share</a>
       
       
     </footer>
@@ -149,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/07/15/git clone 报错/" data-id="ck3ooipdb000ex4zbqn4z47xn" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/07/15/git clone 报错/" data-id="ck3opbfle000bvwzbhn5uwjj2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/24/shell获取函数返回字符串/" data-id="ck3ooipdo000xx4zbjfj9c0pi" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/24/shell获取函数返回字符串/" data-id="ck3opbflu000rvwzbohfm6chj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -266,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="ck3ooipdi000mx4zbuyt9pnfq" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/06/pod错误日志/" data-id="ck3opbfls000lvwzb8e155qjp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bundler/">bundler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li></ul>
@@ -345,7 +345,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/06/06/iOS13系统适配/" data-id="ck3ooipd8000ax4zbs41958fe" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/06/06/iOS13系统适配/" data-id="ck3opbflg000cvwzb89r5lwo8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS13/">iOS13</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/暗黑模式/">暗黑模式</a></li></ul>
@@ -428,10 +428,83 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="ck3ooipdu0014x4zb4wair45a" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/05/22/阿里云日志上传及无痕埋点/" data-id="ck3opbfm10012vwzbmf5z4m9x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/埋点/">埋点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云日志/">阿里云日志</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
+  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>NSNumber</li>
+</ul>
+<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
+<ul>
+<li><p>NSNumberFormatter</p>
+<p>数字格式类，用于定义数字的格式</p>
+</li>
+</ul>
+<p>NSNumberFormatter的使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
+<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>setFormatWidth设置字符宽度</p>
+<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
+<p>zeroSymbol: 零的样式</p>
+<p>paddingPosition:填充位置</p>
+<p>positiveSuffix: </p>
+<p>maximumIntegerDigits:整数最多位数</p>
+<p>minimumIntegerDigits:整数最少位数</p>
+<p>maximumFractionDigits:小数位最多位数</p>
+<p>minimumFractionDigits:小数位最少位数</p>
+<p>groupingSize:数字分割的尺寸</p>
+<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
+<p>maximumSignificantDigits:最大有效数字个数</p>
+<p>minimumSignificantDigits:最少有效数字个数</p>
+<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
+<p>方法:setPositiveFormat</p>
+<p>自定义输出格式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="ck3opbfkz0001vwzbad1oyht4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
 
     </footer>
   </div>
@@ -503,83 +576,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="ck3ooipcl0000x4zbvm2qztnh" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/MSL、TTL和RTT简介/" data-id="ck3opbfl30002vwzbhdq3d9rn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSL/">MSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RTT/">RTT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TTL/">TTL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-NSNumberFormatter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/23/NSNumberFormatter/" class="article-date">
-  <time datetime="2019-02-22T16:00:00.000Z" itemprop="datePublished">2019-02-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/23/NSNumberFormatter/">NSNumberFormatter的简单使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>NSNumber</li>
-</ul>
-<p>​    数字类，iOS专门封装起来用于数字的处理，可以用string、double、float初始化</p>
-<ul>
-<li><p>NSNumberFormatter</p>
-<p>数字格式类，用于定义数字的格式</p>
-</li>
-</ul>
-<p>NSNumberFormatter的使用:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];</span><br><span class="line">[formatter setFormatterBehavior:NSFoundationVersionNumber10_4];</span><br><span class="line">[formatter setNumberStyle:NSNumberFormatterScientificStyle];</span><br><span class="line">[formatter setFormatWidth:9]; // set width</span><br><span class="line">[formatter setPaddingCharacter:@&quot;x&quot;]; // bu</span><br><span class="line">NSString *convertNumber = [formatter stringFromNumber:number];</span><br></pre></td></tr></table></figure>
-<p>setFormatterBehavior这个设置和版本有关系，一般不用设置，不用这个函数也可以；<br>setNumberStyle设置文本显示的格式，是个枚举类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) &#123;</span><br><span class="line">    NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle, //无格式</span><br><span class="line">    NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle, // 十进制格式</span><br><span class="line">    NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle, // 当前系统货币格式(如果是中文就是¥)</span><br><span class="line">    NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle, // 百分数格式</span><br><span class="line">    NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle, //科学技术法格式</span><br><span class="line">    NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle, // 阿拉伯数字转换为文字的格式,例如“23” becomes “twenty-three” “23”变为 二三</span><br><span class="line">    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle, //中文:第12,3456 英文:12,3456th</span><br><span class="line">    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,// USD 123,456.02</span><br><span class="line">    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,// 123,456.02美元</span><br><span class="line">    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,//// US$123,456.02</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>setFormatWidth设置字符宽度</p>
-<p>setPaddingCharacter设置填充字幕：比如你设置的宽度为9，结果数字只有3位，其它的6位用这个函数设置的字母填充。</p>
-<p>zeroSymbol: 零的样式</p>
-<p>paddingPosition:填充位置</p>
-<p>positiveSuffix: </p>
-<p>maximumIntegerDigits:整数最多位数</p>
-<p>minimumIntegerDigits:整数最少位数</p>
-<p>maximumFractionDigits:小数位最多位数</p>
-<p>minimumFractionDigits:小数位最少位数</p>
-<p>groupingSize:数字分割的尺寸</p>
-<p>secondaryGroupingSize:除了groupingSize决定的尺寸外,其他数字位分割的尺寸</p>
-<p>maximumSignificantDigits:最大有效数字个数</p>
-<p>minimumSignificantDigits:最少有效数字个数</p>
-<p>roundingIncrement:舍入值,比如以10为进位值,那么156就进位为160,154进位为150</p>
-<p>方法:setPositiveFormat</p>
-<p>自定义输出格式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原始的数字为677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@&quot;.00;”]//输出：677789.98</span><br><span class="line">[numberFormatter setPositiveFormat:@“0%;”]//输出：67778998%</span><br><span class="line">[numberFormatter setPositiveFormat:@“0.00%;”]//输出：67778998.00%</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/NSNumberFormatter/" data-id="ck3ooipcz0004x4zbif7nxd7d" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSNumberFormatter/">NSNumberFormatter</a></li></ul>
 
     </footer>
   </div>
@@ -639,7 +639,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="ck3ooipe80025x4zbpsgspp2d" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/23/react源码修改记录/" data-id="ck3opbfmg0024vwzbd0egstln" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RN-Bug/">RN-Bug</a></li></ul>
@@ -688,7 +688,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="ck3ooipdl000qx4zbedg8nj53" class="article-share-link">Share</a>
+      <a data-url="http://weskhen.xyz/2019/02/21/xcode报错/" data-id="ck3opbflt000nvwzby5ccql7a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XCode报错/">XCode报错</a></li></ul>
